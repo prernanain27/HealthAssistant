@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "365352225771",
+    "project_id": "firebase-healthassistant"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365352225771:android:291e05a1a093c9ff",
+        "android_client_info": {
+          "package_name": "example.healthassistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "365352225771-fs8nkhr5p1f7pm7f0oe2rbrdhnfu6shi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "example.healthassistant",
+            "certificate_hash": "d82772aeec813faf05e1179264e23b3dab8c4b33"
+          }
+        },
+        {
+          "client_id": "365352225771-6tqil5oo4o100lrp9mf2061vclouseqe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnI7aHgETebGv10vEzT5gXYvCVm02RoTM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
