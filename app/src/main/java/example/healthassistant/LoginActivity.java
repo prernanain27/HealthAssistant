@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
@@ -17,11 +19,13 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import static android.R.attr.data;
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private static final int REQUEST_CODE = 122;
     private SignInButton google_login;
-    private TextView name;
+    private EditText userName;
+    private EditText password;
+    private Button newUser;
     private GoogleApiClient googleApiClient;
     private GoogleSignInOptions signInOptions;
 
@@ -31,10 +35,20 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         setContentView(R.layout.activity_main);
 
         signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-
         googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions).build();
         google_login = (SignInButton) findViewById(R.id.Google_sign_in);
-        name = (TextView) findViewById(R.id.name);
+        newUser = (Button) findViewById(R.id.new_user);
+        password = (EditText) findViewById(R.id.password);
+        userName = (EditText) findViewById(R.id.user_name);
+
+        newUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this , NewUserData.class);
+                startActivity(intent);
+            }
+        });
+
 
         google_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             GoogleSignInResult user = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             GoogleSignInAccount profile_data = user.getSignInAccount();
 
-            name.setText(profile_data.getDisplayName());
+          //  name.setText(profile_data.getDisplayName());
             String email = profile_data.getEmail();
 
         }
