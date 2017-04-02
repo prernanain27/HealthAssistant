@@ -17,12 +17,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Name"
+        android:text="E-mail"
         android:layout_weight="1"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/user_name"
+            android:id="@+id/email"
             android:layout_weight="2"/>
     </LinearLayout>
 
@@ -39,7 +39,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/password"
-            android:layout_weight="2"/>
+            android:layout_weight="2"
+            android:inputType="textPassword"/>
     </LinearLayout>
 
 
@@ -57,4 +58,10 @@
         android:layout_gravity="center"
         android:text="New User?"
         android:id="@+id/new_user"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Log-In"
+        android:id="@+id/logIn"/>
 </LinearLayout>

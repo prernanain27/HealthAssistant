@@ -15,7 +15,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewUserData"></activity>
+        <activity android:name=".NewUserData" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".PHR" />
+        <activity android:name=".Fragment1" />
+        <activity android:name=".Fragment2" />
+        <activity android:name=".Fragment3"></activity>
     </application>
 
 </manifest>
