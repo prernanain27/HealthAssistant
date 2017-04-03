@@ -126,8 +126,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             GoogleSignInResult user = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             GoogleSignInAccount profile_data = user.getSignInAccount();
 
-            String email = profile_data.getEmail().toString();
-            User.setEmail(email);
+            //String email = profile_data.getEmail().toString();
+           // User.setEmail(email);
             Intent i = new Intent(this, HomeScreen.class);
             startActivity(i);
            // addData(email,"");
