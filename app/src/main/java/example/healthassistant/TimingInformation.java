@@ -38,7 +38,7 @@ import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_SEX;
 //import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_SLEEP_TIME;
 import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_WAKE_UP_TIME;
 
-public class Fragment3 extends Fragment {
+public class TimingInformation extends Fragment {
 
     private EditText wakeUp;
     private EditText breakFast;

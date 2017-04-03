@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 
-public class Fragment2 extends Fragment implements NumberPicker.OnValueChangeListener{
+public class DetailedInformation extends Fragment implements NumberPicker.OnValueChangeListener{
     private EditText feet;
     private EditText inches;
     private Spinner bloodSign;

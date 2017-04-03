@@ -19,7 +19,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 
 
-public class Fragment1 extends Fragment  {
+public class PersonalInformation extends Fragment  {
     private EditText name;
     private TextView dob;
     private Spinner sex;
