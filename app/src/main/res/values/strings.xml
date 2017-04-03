@@ -31,4 +31,10 @@
         <item>-</item>
 
     </string-array>
+
+    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_add_prescription__ap">AddPrescription_AP</string>
 </resources>

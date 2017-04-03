@@ -21,7 +21,27 @@
         <activity android:name=".PHR" />
         <activity android:name=".PersonalInformation" />
         <activity android:name=".DetailedInformation" />
-        <activity android:name=".TimingInformation"></activity>
+        <activity android:name=".TimingInformation" />
+        <activity
+            android:name=".HomeScreen"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_home_screen"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/FullscreenTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="example.healthassistant.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".AddPrescription_AP"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_add_prescription__ap"
+            android:parentActivityName=".HomeScreen"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="example.healthassistant.HomeScreen" />
+        </activity>
     </application>
 
 </manifest>

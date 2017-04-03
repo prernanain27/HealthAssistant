@@ -3,6 +3,7 @@ package example.healthassistant;
 import android.app.Fragment;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
@@ -178,8 +179,10 @@ public class TimingInformation extends Fragment {
         try {
 
             long result = mDb.insert(DbContract.DbEntryPHR.TABLE_NAME, null, cv);
-            if(result!=-1)
+            if(result!=-1){
                 Toast.makeText(getActivity(), "Inserted successfully", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(getActivity(),HomeScreen.class);
+            startActivity(i);}
             else
                 Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
         }

@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         newUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this , NewUserData.class);
+                Intent intent = new Intent(LoginActivity.this , PHR.class);
                 startActivity(intent);
             }
         });
@@ -128,7 +128,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
             String email = profile_data.getEmail().toString();
             User.setEmail(email);
-            addData(email,"");
+            Intent i = new Intent(this, HomeScreen.class);
+            startActivity(i);
+           // addData(email,"");
 
 
         }
