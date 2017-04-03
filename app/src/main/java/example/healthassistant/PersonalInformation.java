@@ -33,7 +33,7 @@ public class PersonalInformation extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle
             savedInstanceState) {
-        //----inflate the layout for this fragment --
+        //----inflate the layout for this fragment v --
         View view = inflater.inflate(R.layout.activity_fragment1,container, false);
 
         return view;
