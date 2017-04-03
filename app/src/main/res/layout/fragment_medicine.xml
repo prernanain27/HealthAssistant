@@ -57,7 +57,7 @@
         <TextView
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="Medicine Form"
+            android:text="Medicine Time"
             android:textSize="17sp"
             android:paddingTop="8dp"/>
         <Spinner

@@ -45,8 +45,23 @@ public class DbHelper extends SQLiteOpenHelper {
                 DbContract.DbEntryPHR.COLUMN_GYM_TIME + " TEXT  , "+
                 DbContract.DbEntryPHR.COLUMN_DINNER_TIME + " TEXT  , "+");";
                 //DbContract.DbEntryPHR.COLUMN_SLEEP_TIME + "TEXT  "+
+
+        final String SQL_CREATE_PRESCRIPTION= "CREATE TABLE "+
+                DbContract.DbEntryPrescription.TABLE_NAME + "("+
+                DbContract.DbEntryPrescription._ID +" INTEGER PRIMARY KEY AUTOINCREMENT , "+
+                DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_DISEASE + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_MED_NAME + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_MED_DOSE + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_MED_TYPE + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_MED_TIME + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_DURATION + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_DURATION_TYPE + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_MED_TOTAL + "TEXT  "+ ");";
+
         db.execSQL(SQL_CREATE_TABLE);
         db.execSQL(SQL_CREATE_PHR);
+        db.execSQL(SQL_CREATE_PRESCRIPTION);
     }
 
     @Override

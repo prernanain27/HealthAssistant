@@ -36,6 +36,17 @@ public class DbContract {
         public static final String COLUMN_DINNER_TIME = "dinner_time";
         //public static final String COLUMN_SLEEP_TIME = "sleep_time";
     }
-
+    public static final class DbEntryPrescription implements BaseColumns {
+        public static final String TABLE_NAME = "prescription";
+        public static final String COLUMN_PRESCRIPTION_NAME = "prescription_name";
+        public static final String COLUMN_DISEASE = "disease";
+        public static final String COLUMN_MED_NAME = "med_name";
+        public static final String COLUMN_MED_DOSE = "med_dose";
+        public static final String COLUMN_MED_TYPE = "med_type";
+        public static final String COLUMN_MED_TIME = "med_time";
+        public static final String COLUMN_MED_TOTAL = "med_total";
+        public static final String COLUMN_DURATION = "duration";
+        public static final String COLUMN_DURATION_TYPE = "duration_type";
+    }
 
 }

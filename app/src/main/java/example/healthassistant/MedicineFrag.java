@@ -12,13 +12,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * to handle interaction events.
- * Use the {@link MedicineFrag#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MedicineFrag extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,14 +28,7 @@ public class MedicineFrag extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MedicineFrag.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static MedicineFrag newInstance(String param1, String param2) {
         MedicineFrag fragment = new MedicineFrag();
@@ -77,14 +63,14 @@ public class MedicineFrag extends Fragment {
 
         Spinner doseDropdown = (Spinner) getActivity().findViewById(R.id.spinner1);
 
-        String[] doseItems = new String[]{"Tablet", "Syrup", "Drops"};
+        String[] doseItems = new String[]{"Tablet","Capsule","Syrup", "Drops"};
         ArrayAdapter<String> doseAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, doseItems);
         doseDropdown.setAdapter(doseAdapter);
 
-        Spinner medFormDropdown = (Spinner) getActivity().findViewById(R.id.spinner2);
-        String[] medFormItems = new String[]{"Tablet","Capsule","Syrup", "Drops"};
-        ArrayAdapter<String> medFormAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, medFormItems);
-        medFormDropdown.setAdapter(medFormAdapter);
+        Spinner medTimeDropdown = (Spinner) getActivity().findViewById(R.id.spinner2);
+        String[] medTimeItems = new String[]{"Before Breakfast","After Breakfast","Before Lunch","After Lunch","Before Dinner","After Dinner"};
+        ArrayAdapter<String> medTimeAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, medTimeItems);
+        medTimeDropdown.setAdapter(medTimeAdapter);
 
         Spinner durationDropdown = (Spinner)getActivity().findViewById(R.id.spinner3);
         String[] durationItems = new String[]{"Days", "Months"};
