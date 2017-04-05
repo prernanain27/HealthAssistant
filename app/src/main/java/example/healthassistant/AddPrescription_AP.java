@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -87,7 +88,7 @@ public class AddPrescription_AP extends AppCompatActivity {
     }
 
     public void addData(){
-        DbHelper db = new DbHelper(getApplicationContext());
+        SQLiteOpenHelper db = new DbHelper(getApplicationContext());
         mDb = db.getWritableDatabase();
         ContentValues cv = new ContentValues();
 

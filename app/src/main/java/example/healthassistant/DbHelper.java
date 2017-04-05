@@ -3,6 +3,7 @@ package example.healthassistant;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by prernaa on 3/29/2017.
@@ -61,7 +62,15 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL(SQL_CREATE_TABLE);
 //        db.execSQL(SQL_CREATE_PHR);
-        db.execSQL(SQL_CREATE_PRESCRIPTION);
+
+        //kept try catch to see if the table is being created or not
+        try {
+            db.execSQL(SQL_CREATE_PRESCRIPTION);
+            Log.d("Create Table"," Prescription Successful");
+        }
+        catch (Exception e){
+            Log.d("There is issue"," in creating table");
+        }
     }
 
     @Override
