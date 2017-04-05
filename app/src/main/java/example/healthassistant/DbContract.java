@@ -15,6 +15,7 @@ public class DbContract {
     }
     public static final class DbEntryPHR implements BaseColumns {
         public static final String TABLE_NAME = "PHR";
+        public static final String COLUMN_ID = "_id";
         public static final String COLUMN_Email = "email";
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_SEX = "sex";
@@ -38,6 +39,7 @@ public class DbContract {
     }
     public static final class DbEntryPrescription implements BaseColumns {
         public static final String TABLE_NAME = "Prescription";
+        public static final String COLUMN_ID = "_id";
         public static final String COLUMN_PRESCRIPTION_NAME = "prescription_name";
         public static final String COLUMN_DISEASE = "disease";
         public static final String COLUMN_MED_NAME = "med_name";
