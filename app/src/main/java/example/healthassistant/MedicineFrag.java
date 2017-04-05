@@ -3,11 +3,13 @@ package example.healthassistant;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.app.Fragment;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -17,10 +19,19 @@ public class MedicineFrag extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    EditText medName;
+    EditText medDose;
+    EditText medTotal;
+    EditText duration;
+    Spinner doseDropdown;
+    Spinner medTimeDropdown;
+    Spinner durationDropdown;
+    Prescription prescription = new Prescription();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    public Medicine med = new Medicine();
 
    // private OnFragmentInteractionListener mListener;
 
@@ -61,26 +72,53 @@ public class MedicineFrag extends Fragment {
 
         super.onActivityCreated(savedInstanceState);
 
-        Spinner doseDropdown = (Spinner) getActivity().findViewById(R.id.spinner1);
+        doseDropdown = (Spinner) getActivity().findViewById(R.id.spinner1);
 
         String[] doseItems = new String[]{"Tablet","Capsule","Syrup", "Drops"};
         ArrayAdapter<String> doseAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, doseItems);
         doseDropdown.setAdapter(doseAdapter);
 
-        Spinner medTimeDropdown = (Spinner) getActivity().findViewById(R.id.spinner2);
+        medTimeDropdown = (Spinner) getActivity().findViewById(R.id.spinner2);
         String[] medTimeItems = new String[]{"Before Breakfast","After Breakfast","Before Lunch","After Lunch","Before Dinner","After Dinner"};
         ArrayAdapter<String> medTimeAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, medTimeItems);
         medTimeDropdown.setAdapter(medTimeAdapter);
 
-        Spinner durationDropdown = (Spinner)getActivity().findViewById(R.id.spinner3);
+        durationDropdown = (Spinner)getActivity().findViewById(R.id.spinner3);
         String[] durationItems = new String[]{"Days", "Months"};
         ArrayAdapter<String> durationAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, durationItems);
         durationDropdown.setAdapter(durationAdapter);
 
-        EditText medName = (EditText) getActivity().findViewById(R.id.medName);
-        EditText medDoze = (EditText) getActivity().findViewById(R.id.dose);
-        EditText medTotal = (EditText) getActivity().findViewById(R.id.medTotal);
-        EditText duration = (EditText) getActivity().findViewById(R.id.duration);
+         medName = (EditText) getActivity().findViewById(R.id.medName);
+         medDose = (EditText) getActivity().findViewById(R.id.dose);
+         medTotal = (EditText) getActivity().findViewById(R.id.medTotal);
+         duration = (EditText) getActivity().findViewById(R.id.duration);
+
+//        String doseTxt = doseDropdown.getSelectedItem().toString();
+//        String medTimeTxt = medTimeDropdown.getSelectedItem().toString();
+//        String durationTxt = durationDropdown.getSelectedItem().toString();
+        Log.d("MedicineName", medName.getText().toString());
+
+        Button saveMed = (Button) getActivity().findViewById(R.id.saveMedicine);
+        saveMed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if((medName.getText().toString()!="") || (medDose.getText().toString()) != "") {
+                    med.setMedName(medName.getText().toString());
+                    med.setMedDose(medDose.getText().toString());
+                    med.setMedDuration(duration.getText().toString());
+                    med.setMedTotal(medTotal.getText().toString());
+                    med.setMedType(doseDropdown.getSelectedItem().toString());
+                    med.setMedTime(medTimeDropdown.getSelectedItem().toString());
+                    med.setDurationType(durationDropdown.getSelectedItem().toString());
+
+                    prescription.medicineArrayList.add(med);
+
+                    Log.d("MedicineFrag", med.getMedName());
+                    Log.d("DoseItems",doseDropdown.toString());
+                }
+            }
+        });
 
     }
     // TODO: Rename method, update argument and hook method into UI event

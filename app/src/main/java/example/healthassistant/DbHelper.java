@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class DbHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "health.db";
+    private static final String DATABASE_NAME = "healthdemo.db";
     private static final int DATABASE_VERSION = 1;
     public DbHelper(Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
@@ -60,7 +60,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 DbContract.DbEntryPrescription.COLUMN_MED_TOTAL + "TEXT  "+ ");";
 
         db.execSQL(SQL_CREATE_TABLE);
-        db.execSQL(SQL_CREATE_PHR);
+//        db.execSQL(SQL_CREATE_PHR);
         db.execSQL(SQL_CREATE_PRESCRIPTION);
     }
 
@@ -68,6 +68,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryPHR.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryPrescription.TABLE_NAME);
         onCreate(db);
     }
 }

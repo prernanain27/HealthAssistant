@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Prescription {
     private static String prescriptionName = "";
     private static String disease = "";
-    private static ArrayList <Medicine> medicineArrayList = null;
+    public static ArrayList <Medicine> medicineArrayList = new ArrayList<Medicine>();
 
     public static String getPrescriptionName() {
         return prescriptionName;
