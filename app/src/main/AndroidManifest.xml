@@ -42,6 +42,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="example.healthassistant.HomeScreen" />
         </activity>
+        <activity
+            android:name=".ViewPrescription"
+            android:label="Prescription"
+            android:parentActivityName=".HomeScreen"></activity>
     </application>
 
 </manifest>

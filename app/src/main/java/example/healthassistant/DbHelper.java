@@ -44,7 +44,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 DbContract.DbEntryPHR.COLUMN_BREAKFAST_TIME + " TEXT  , "+
                 DbContract.DbEntryPHR.COLUMN_LUNCH_TIME + " TEXT  , "+
                 DbContract.DbEntryPHR.COLUMN_GYM_TIME + " TEXT  , "+
-                DbContract.DbEntryPHR.COLUMN_DINNER_TIME + " TEXT  , "+");";
+                DbContract.DbEntryPHR.COLUMN_DINNER_TIME + " TEXT  "+");";
                 //DbContract.DbEntryPHR.COLUMN_SLEEP_TIME + "TEXT  "+
 
         final String SQL_CREATE_PRESCRIPTION= "CREATE TABLE "+
@@ -57,8 +57,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 DbContract.DbEntryPrescription.COLUMN_MED_TYPE + " TEXT  , "+
                 DbContract.DbEntryPrescription.COLUMN_MED_TIME + " TEXT  , "+
                 DbContract.DbEntryPrescription.COLUMN_DURATION + " TEXT  , "+
-                DbContract.DbEntryPrescription.COLUMN_DURATION_TYPE + " TEXT  , "+
-                DbContract.DbEntryPrescription.COLUMN_MED_TOTAL + "TEXT  "+ ");";
+                DbContract.DbEntryPrescription.COLUMN_DURATION_TYPE + " TEXT "+");";
+//                DbContract.DbEntryPrescription.COLUMN_MED_TOTAL + "TEXT  "+ ");";
 
         db.execSQL(SQL_CREATE_TABLE);
 //        db.execSQL(SQL_CREATE_PHR);

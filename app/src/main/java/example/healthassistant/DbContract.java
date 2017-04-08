@@ -48,7 +48,7 @@ public class DbContract {
         public static final String COLUMN_MED_TIME = "med_time";
         public static final String COLUMN_DURATION = "duration";
         public static final String COLUMN_DURATION_TYPE = "duration_type";
-        public static final String COLUMN_MED_TOTAL = "med_total";
+//        public static final String COLUMN_MED_TOTAL = "med_total";
     }
 
 }
