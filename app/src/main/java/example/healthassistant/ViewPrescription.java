@@ -56,9 +56,6 @@ public class ViewPrescription extends AppCompatActivity {
 
     private void populateListView() {
         try {
-//            imgData = new ImageData(getApplicationContext());
-//            if(imgData != null) {
-
                 Cursor cursor = getAllRows();
                 Log.d("PopulateListView", cursor.getString(1));
                 String[] fromFieldNames = new String[]{DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME};

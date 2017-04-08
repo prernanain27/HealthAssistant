@@ -58,7 +58,7 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
-        SimpleAdapter simpleAdpt = new SimpleAdapter(this, homeList, android.R.layout.simple_list_item_1,
+        SimpleAdapter simpleAdpt = new SimpleAdapter(this, homeList,android.R.layout.simple_expandable_list_item_1,
                 new String[] {"listItem"}, new int[] {android.R.id.text1});
 
         lv.setAdapter(simpleAdpt);
