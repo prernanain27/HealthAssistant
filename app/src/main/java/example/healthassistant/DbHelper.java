@@ -3,13 +3,14 @@ package example.healthassistant;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by prernaa on 3/29/2017.
  */
 
 public class DbHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "health.db";
+    private static final String DATABASE_NAME = "healthdemo.db";
     private static final int DATABASE_VERSION = 1;
     public DbHelper(Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
@@ -24,7 +25,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 DbContract.DbEntry.COLUMN_PASSWORD + "TEXT  "+ ");";
         final String SQL_CREATE_PHR = "CREATE TABLE "+
                 DbContract.DbEntryPHR.TABLE_NAME + "("+
-                DbContract.DbEntryPHR._ID +" INTEGER PRIMARY KEY AUTOINCREMENT , "+
+                DbContract.DbEntryPHR.COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , "+
                 DbContract.DbEntryPHR.COLUMN_NAME + " TEXT  , "+
                 DbContract.DbEntryPHR.COLUMN_Email + " TEXT , "+
                 DbContract.DbEntryPHR.COLUMN_SEX + " TEXT  , "+
@@ -45,14 +46,38 @@ public class DbHelper extends SQLiteOpenHelper {
                 DbContract.DbEntryPHR.COLUMN_GYM_TIME + " TEXT  , "+
                 DbContract.DbEntryPHR.COLUMN_DINNER_TIME + " TEXT  , "+");";
                 //DbContract.DbEntryPHR.COLUMN_SLEEP_TIME + "TEXT  "+
+
+        final String SQL_CREATE_PRESCRIPTION= "CREATE TABLE "+
+                DbContract.DbEntryPrescription.TABLE_NAME + "("+
+                DbContract.DbEntryPrescription.COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , "+
+                DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_DISEASE + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_MED_NAME + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_MED_DOSE + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_MED_TYPE + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_MED_TIME + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_DURATION + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_DURATION_TYPE + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_MED_TOTAL + "TEXT  "+ ");";
+
         db.execSQL(SQL_CREATE_TABLE);
-        db.execSQL(SQL_CREATE_PHR);
+//        db.execSQL(SQL_CREATE_PHR);
+
+        //kept try catch to see if the table is being created or not
+        try {
+            db.execSQL(SQL_CREATE_PRESCRIPTION);
+            Log.d("Create Table"," Prescription Successful");
+        }
+        catch (Exception e){
+            Log.d("There is issue"," in creating table");
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryPHR.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryPrescription.TABLE_NAME);
         onCreate(db);
     }
 }

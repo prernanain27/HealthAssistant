@@ -13,6 +13,8 @@ public class Medicine {
     private static String medTime = "";
     private static String medType = "";
     private static String medTotal = "";
+    private static String durationType = "";
+
 
     public static String getMedName() {
         return medName;
@@ -60,5 +62,13 @@ public class Medicine {
 
     public static void setMedTotal(String medTotal) {
         Medicine.medTotal = medTotal;
+    }
+
+    public static String getDurationType() {
+        return durationType;
+    }
+
+    public static void setDurationType(String durationType) {
+        Medicine.durationType = durationType;
     }
 }

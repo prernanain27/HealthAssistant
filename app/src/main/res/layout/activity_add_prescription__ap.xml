@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="5dp">
         <TextView
         android:layout_width="140dp"
         android:layout_height="wrap_content"
@@ -59,15 +59,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/addMed"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:text="@string/add_med"
         />
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="265dp"
+        android:layout_height="290dp"
         android:id="@+id/medFrame"
-        android:layout_margin="5dp"></FrameLayout>
+        android:layout_marginLeft="5dp"></FrameLayout>
 
 </LinearLayout>
     </ScrollView>
