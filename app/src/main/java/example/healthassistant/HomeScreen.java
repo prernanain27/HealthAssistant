@@ -58,6 +58,15 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
+        Button viewPharmLocator = (Button)findViewById(R.id.pharmacy);
+        viewPharmLocator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent viewPharmLocator = new Intent(getApplicationContext(),MapsActivity.class);
+                startActivity(viewPharmLocator);
+            }
+        });
+
         SimpleAdapter simpleAdpt = new SimpleAdapter(this, homeList,android.R.layout.simple_expandable_list_item_1,
                 new String[] {"listItem"}, new int[] {android.R.id.text1});
 
