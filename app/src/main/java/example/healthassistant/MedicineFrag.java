@@ -115,6 +115,7 @@ public class MedicineFrag extends Fragment {
                     prescription.medicineArrayList.add(med);
 
                     Log.d("MedicineFrag", med.getMedName());
+                    Log.d("Array Size",  "" + prescription.medicineArrayList.size());
                     Log.d("DoseItems",doseDropdown.toString());
                 }
             }

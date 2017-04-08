@@ -28,7 +28,7 @@ import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_
 import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_TIME;
 import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_DURATION;
 import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_DURATION_TYPE;
-import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_TOTAL;
+//import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_TOTAL;
 import static example.healthassistant.Prescription.*;
 
 
@@ -101,7 +101,7 @@ public class AddPrescription_AP extends AppCompatActivity {
             cv.put(COLUMN_MED_TIME, Prescription.medicineArrayList.get(i).getMedTime());
             cv.put(COLUMN_DURATION, Prescription.medicineArrayList.get(i).getMedDuration());
             cv.put(COLUMN_DURATION_TYPE, Prescription.medicineArrayList.get(i).getDurationType());
-            cv.put(COLUMN_MED_TOTAL, Prescription.medicineArrayList.get(i).getMedTotal());
+//            cv.put(COLUMN_MED_TOTAL, Prescription.medicineArrayList.get(i).getMedTotal());
 
             Log.d("This is row ", " " +i);
             Log.d("Presc Name",Prescription.getPrescriptionName());
@@ -119,7 +119,7 @@ public class AddPrescription_AP extends AppCompatActivity {
                 long result = mDb.insert(DbContract.DbEntryPrescription.TABLE_NAME, null, cv);
                 if (result != -1) {
                     Toast.makeText(this, "Inserted successfully", Toast.LENGTH_SHORT).show();
-                    db.close();
+
                     Intent intent = new Intent(getApplicationContext(), HomeScreen.class);
                     startActivity(intent);
                 } else
@@ -128,6 +128,7 @@ public class AddPrescription_AP extends AppCompatActivity {
                 String s = ex.getMessage();
             }
         }
+        db.close();
 
     }
 
