@@ -45,7 +45,8 @@
         <activity
             android:name=".ViewPrescription"
             android:label="Prescription"
-            android:parentActivityName=".HomeScreen"></activity>
+            android:parentActivityName=".HomeScreen" />
+        <activity android:name=".ViewMedicine"></activity>
     </application>
 
 </manifest>
