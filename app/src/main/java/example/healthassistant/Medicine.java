@@ -7,68 +7,70 @@ import java.util.Enumeration;
  */
 
 public class Medicine {
-    private static String medName = "";
-    private static String medDose = "";
-    private static String medDuration = "";
-    private static String medTime = "";
-    private static String medType = "";
-    private static String medTotal = "";
-    private static String durationType = "";
 
 
-    public static String getMedName() {
+        private  String medName = "";
+        private  String medDose = "";
+        private  String medDuration = "";
+        private  String medTime = "";
+        private  String medType = "";
+        private  String medTotal = "";
+        private  String durationType = "";
+
+
+    public String getMedName() {
         return medName;
     }
 
-    public static void setMedName(String medName) {
-        Medicine.medName = medName;
+    public void setMedName(String medName) {
+        this.medName = medName;
     }
 
-    public static String getMedDose() {
+    public String getMedDose() {
         return medDose;
     }
 
-    public static void setMedDose(String medDose) {
-        Medicine.medDose = medDose;
+    public void setMedDose(String medDose) {
+        this.medDose = medDose;
     }
 
-    public static String getMedDuration() {
+    public String getMedDuration() {
         return medDuration;
     }
 
-    public static void setMedDuration(String medDuration) {
-        Medicine.medDuration = medDuration;
+    public void setMedDuration(String medDuration) {
+        this.medDuration = medDuration;
     }
 
-    public static String getMedTime() {
+    public String getMedTime() {
         return medTime;
     }
 
-    public static void setMedTime(String medTime) {
-        Medicine.medTime = medTime;
+    public void setMedTime(String medTime) {
+        this.medTime = medTime;
     }
 
-    public static String getMedType() {
+    public String getMedType() {
         return medType;
     }
 
-    public static void setMedType(String medType) {
-        Medicine.medType = medType;
+    public void setMedType(String medType) {
+        this.medType = medType;
     }
 
-    public static String getMedTotal() {
+    public String getMedTotal() {
         return medTotal;
     }
 
-    public static void setMedTotal(String medTotal) {
-        Medicine.medTotal = medTotal;
+    public void setMedTotal(String medTotal) {
+        this.medTotal = medTotal;
     }
 
-    public static String getDurationType() {
+    public String getDurationType() {
         return durationType;
     }
 
-    public static void setDurationType(String durationType) {
-        Medicine.durationType = durationType;
+    public void setDurationType(String durationType) {
+        this.durationType = durationType;
     }
 }

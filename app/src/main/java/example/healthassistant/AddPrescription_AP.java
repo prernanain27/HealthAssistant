@@ -36,7 +36,7 @@ public class AddPrescription_AP extends AppCompatActivity {
 
     private static ArrayList<Medicine> medArray = new ArrayList<Medicine>();
     private SQLiteDatabase mDb;
-
+    Medicine medicine = new Medicine();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +64,8 @@ public class AddPrescription_AP extends AppCompatActivity {
 //                if(Prescription.getMedicineArrayList().isEmpty()){
 //                    Prescription.setMedicineArrayList(medArray);
 //                }
-                Medicine medicine;
-                Log.d("medFrag.med", Medicine.getMedName());
+                //Medicine medicine;
+                Log.d("medFrag.med", medicine.getMedName());
 
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -92,27 +92,20 @@ public class AddPrescription_AP extends AppCompatActivity {
         mDb = db.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        for(int i=0;i< Prescription.medicineArrayList.size();i++) {
+        for (Medicine temp : Prescription.medicineArrayList)
+        {
             cv.put(COLUMN_PRESCRIPTION_NAME, Prescription.getPrescriptionName());
             cv.put(COLUMN_DISEASE, Prescription.getDisease());
-            cv.put(COLUMN_MED_NAME, Prescription.medicineArrayList.get(i).getMedName());
-            cv.put(COLUMN_MED_DOSE, Prescription.medicineArrayList.get(i).getMedDose());
-            cv.put(COLUMN_MED_TYPE, Prescription.medicineArrayList.get(i).getMedType());
-            cv.put(COLUMN_MED_TIME, Prescription.medicineArrayList.get(i).getMedTime());
-            cv.put(COLUMN_DURATION, Prescription.medicineArrayList.get(i).getMedDuration());
-            cv.put(COLUMN_DURATION_TYPE, Prescription.medicineArrayList.get(i).getDurationType());
-//            cv.put(COLUMN_MED_TOTAL, Prescription.medicineArrayList.get(i).getMedTotal());
+            cv.put(COLUMN_MED_NAME, temp.getMedName());
+            cv.put(COLUMN_MED_DOSE, temp.getMedDose());
+            cv.put(COLUMN_MED_TYPE, temp.getMedType());
+            cv.put(COLUMN_MED_TIME, temp.getMedTime());
+            cv.put(COLUMN_DURATION, temp.getMedDuration());
+            cv.put(COLUMN_DURATION_TYPE, temp.getDurationType());
 
-            Log.d("This is row ", " " +i);
-            Log.d("Presc Name",Prescription.getPrescriptionName());
-            Log.d("Disease",Prescription.getDisease());
-            Log.d("Med Name",Prescription.medicineArrayList.get(i).getMedName());
-            Log.d("Dose",Prescription.medicineArrayList.get(i).getMedDose());
-            Log.d("Type",Prescription.medicineArrayList.get(i).getMedType());
-            Log.d("Time",Prescription.medicineArrayList.get(i).getMedTime());
-            Log.d("Total",Prescription.medicineArrayList.get(i).getMedTotal());
-            Log.d("Duration",Prescription.medicineArrayList.get(i).getMedDuration());
-            Log.d("Duration Type",Prescription.medicineArrayList.get(i).getDurationType());
+            Log.d("AddData:MedName",temp.getMedName());
+            Log.d("AddData:MedObject: ", temp.toString());
+
 
             try {
 

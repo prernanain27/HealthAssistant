@@ -28,7 +28,7 @@ public class MedicineFrag extends Fragment {
     Prescription prescription = new Prescription();
 
     // TODO: Rename and change types of parameters
-    public Medicine med = new Medicine();
+   // public Medicine med = new Medicine();
 
 
     public MedicineFrag() {
@@ -90,8 +90,9 @@ public class MedicineFrag extends Fragment {
         saveMed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Medicine med = new Medicine();
+                if((medName.getText().toString()!="") || (medDose.getText().toString() != "")) {
 
-                if((medName.getText().toString()!="") || (medDose.getText().toString()) != "") {
                     med.setMedName(medName.getText().toString());
                     med.setMedDose(medDose.getText().toString());
                     med.setMedDuration(duration.getText().toString());
@@ -104,10 +105,18 @@ public class MedicineFrag extends Fragment {
 
                     Log.d("MedicineFrag", med.getMedName());
                     Log.d("Array Size",  "" + prescription.medicineArrayList.size());
-                    Log.d("DoseItems",doseDropdown.toString());
+                    //Log.d("Object Name:", " " + prescription.medicineArrayList.get(0));
+
+                    //Log.d("Object Name:", " " + prescription.medicineArrayList.get());
+                    //Log.d("DoseItems",doseDropdown.toString());
+                    med = null;
                 }
             }
         });
+
+        for(Medicine temp: Prescription.medicineArrayList){
+            Log.d("Object Name:", " " + temp);
+        }
 
     }
 
