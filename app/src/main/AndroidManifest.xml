@@ -41,7 +41,6 @@
         </activity>
         <activity
             android:name=".AddPrescription_AP"
-            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_add_prescription__ap"
             android:parentActivityName=".HomeScreen"
             android:theme="@style/AppTheme">
@@ -49,12 +48,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="example.healthassistant.HomeScreen" />
         </activity>
+
         <activity
             android:name=".ViewPrescription"
             android:label="Prescription"
             android:parentActivityName=".HomeScreen" />
-        <activity android:name=".ViewMedicine"></activity>
-            android:parentActivityName=".HomeScreen" />
+
+        <activity android:name=".ViewMedicine"
+            android:label="Medicine"
+            android:parentActivityName=".ViewPrescription"
+            android:theme="@style/AppTheme"/>
+
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

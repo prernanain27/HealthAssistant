@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
@@ -51,14 +52,14 @@ public class ViewMedicine extends Activity {
         String prescriptionName = prescription.getString("prescriptionName");
         viewMedicines = getMedicineData(prescriptionName);
         Log.d("ViewMedicineOnCreate: ", " " + viewMedicines.size());
-        ArrayAdapter<Medicine> simpleAdapter = new CustomAdapter(this, R.layout.medicine_item_cv, viewMedicines);
-        medicineListView.setAdapter(simpleAdapter);
+        //ArrayAdapter<Medicine> simpleAdapter = new MedicineAdapter(this, R.layout.medicine_item_cv, viewMedicines);
+        medicineListView.setAdapter(new MedicineAdapter());
         Log.d("PrintListViewChildCount", " " + medicineListView.getChildCount());
     }
 
 
     public List<Medicine> getMedicineData(String prescriptionName) {
-        setContentView(R.layout.medicine_item_cv);
+        //setContentView(R.layout.medicine_item_cv);
 
         Log.d("ViewMedicine","Entered Get Medicine Data Method");
         String whereClause = DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME + "=?";
@@ -103,6 +104,43 @@ public class ViewMedicine extends Activity {
         }
         db.close();
         return viewMedicines;
+    }
+    private class MedicineAdapter extends BaseAdapter {
+        @Override
+        public int getCount() {
+            return viewMedicines.size();
+        }
+
+        @Override
+        public String getItem(int position) {
+            return viewMedicines.get(position).getMedName();
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return viewMedicines.get(position).hashCode();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup container) {
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.medicine_item_cv, container, false);
+            }
+
+            /*((TextView) convertView.findViewById(R.id.list_item_med_tv))
+                    .setText(getItem(position));*/
+
+            TextView tv = (TextView) convertView.findViewById(R.id.list_item_med_tv) ;
+            TextView tv1 = (TextView) convertView.findViewById(R.id.list_item_med_tv_heading) ;
+
+            tv1.setText("Medicine Name:" + "\n" + "Medicine Time:" + "\n" +
+                    "Medicine Dose:" + "\n" + "Medicine Type:");
+            tv.setText(viewMedicines.get(position).getMedName() + "\n" + viewMedicines.get(position).getMedTime() + "\n" +
+                    viewMedicines.get(position).getMedDose() + "\n" + viewMedicines.get(position).getMedType());
+            return convertView;
+        }
+
+
     }
 }
 
