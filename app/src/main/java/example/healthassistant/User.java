@@ -5,187 +5,187 @@ package example.healthassistant;
  */
 
 public class User {
-    public static String getEmail() {
-        return email;
-    }
 
-    public static void setEmail(String email) {
-        User.email = email;
-    }
+    private  String email = "";
+    private  String name = "";
+    private  String sex = "";
+    private  String dob = "";
+    private  String address = "";
+    private  String primary_contact = "";
+    private  String emergency_contact = "";
+    private  String care_taker_contact = " ";
+    private  String boold_type= "";
+    private  String blood_sign = "";
+    private  String height_feet = "";
+    private  String height_inches= "";
+    private  String eye_sign = "";
+    private  String eye_sight= "";
+    private  String wake_up_time = "";
+    private  String breakfast_time = "";
+    private  String lunch_time = "";
+    private  String gym_time = "";
+    private  String dinner_time = "";
+    private  String sleep_time = "";
 
-    private static String email = "";
-    private static String name = "";
-    private static String sex = "";
-    private static String dob = "";
-    private  static String address = "";
-    private static String primary_contact = "";
-    private static String emergency_contact = "";
-    private static String care_taker_contact = "";
-    private static String boold_type= "";
-    private static String blood_sign = "";
-    private static String height_feet = "";
-    private static String height_inches= "";
-    private static String eye_sign = "";
-    private static String eye_sight= "";
-    private static String wake_up_time = "";
-    private static String breakfast_time = "";
-    private static String lunch_time = "";
-    private static String gym_time = "";
 
-    public static String getWake_up_time() {
-        return wake_up_time;
-    }
 
-    public static void setWake_up_time(String wake_up_time) {
-        User.wake_up_time = wake_up_time;
-    }
-
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
-    public static void setName(String name) {
-        User.name = name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public static String getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public static void setSex(String sex) {
-        User.sex = sex;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
-    public static String getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public static void setDob(String dob) {
-        User.dob = dob;
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 
-    public static String getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public static void setAddress(String address) {
-        User.address = address;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public static String getPrimary_contact() {
+    public String getPrimary_contact() {
         return primary_contact;
     }
 
-    public static void setPrimary_contact(String primary_contact) {
-        User.primary_contact = primary_contact;
+    public void setPrimary_contact(String primary_contact) {
+        this.primary_contact = primary_contact;
     }
 
-    public static String getEmergency_contact() {
+    public String getEmergency_contact() {
         return emergency_contact;
     }
 
-    public static void setEmergency_contact(String emergency_contact) {
-        User.emergency_contact = emergency_contact;
+    public void setEmergency_contact(String emergency_contact) {
+        this.emergency_contact = emergency_contact;
     }
 
-    public static String getCare_taker_contact() {
+    public String getCare_taker_contact() {
         return care_taker_contact;
     }
 
-    public static void setCare_taker_contact(String care_taker_contact) {
-        User.care_taker_contact = care_taker_contact;
+    public void setCare_taker_contact(String care_taker_contact) {
+        this.care_taker_contact = care_taker_contact;
     }
 
-    public static String getBoold_type() {
+    public String getBoold_type() {
         return boold_type;
     }
 
-    public static void setBoold_type(String boold_type) {
-        User.boold_type = boold_type;
+    public void setBoold_type(String boold_type) {
+        this.boold_type = boold_type;
     }
 
-    public static String getBlood_sign() {
+    public String getBlood_sign() {
         return blood_sign;
     }
 
-    public static void setBlood_sign(String blood_sign) {
-        User.blood_sign = blood_sign;
+    public void setBlood_sign(String blood_sign) {
+        this.blood_sign = blood_sign;
     }
 
-    public static String getHeight_feet() {
+    public String getHeight_feet() {
         return height_feet;
     }
 
-    public static void setHeight_feet(String height_feet) {
-        User.height_feet = height_feet;
+    public void setHeight_feet(String height_feet) {
+        this.height_feet = height_feet;
     }
 
-    public static String getHeight_inches() {
+    public String getHeight_inches() {
         return height_inches;
     }
 
-    public static void setHeight_inches(String height_inches) {
-        User.height_inches = height_inches;
+    public void setHeight_inches(String height_inches) {
+        this.height_inches = height_inches;
     }
 
-    public static String getEye_sign() {
+    public String getEye_sign() {
         return eye_sign;
     }
 
-    public static void setEye_sign(String eye_sign) {
-        User.eye_sign = eye_sign;
+    public void setEye_sign(String eye_sign) {
+        this.eye_sign = eye_sign;
     }
 
-    public static String getEye_sight() {
+    public String getEye_sight() {
         return eye_sight;
     }
 
-    public static void setEye_sight(String eye_sight) {
-        User.eye_sight = eye_sight;
+    public void setEye_sight(String eye_sight) {
+        this.eye_sight = eye_sight;
     }
 
-    public static String getBreakfast_time() {
+    public String getWake_up_time() {
+        return wake_up_time;
+    }
+
+    public void setWake_up_time(String wake_up_time) {
+        this.wake_up_time = wake_up_time;
+    }
+
+    public String getBreakfast_time() {
         return breakfast_time;
     }
 
-    public static void setBreakfast_time(String breakfast_time) {
-        User.breakfast_time = breakfast_time;
+    public void setBreakfast_time(String breakfast_time) {
+        this.breakfast_time = breakfast_time;
     }
 
-    public static String getLunch_time() {
+    public String getLunch_time() {
         return lunch_time;
     }
 
-    public static void setLunch_time(String lunch_time) {
-        User.lunch_time = lunch_time;
+    public void setLunch_time(String lunch_time) {
+        this.lunch_time = lunch_time;
     }
 
-    public static String getGym_time() {
+    public String getGym_time() {
         return gym_time;
     }
 
-    public static void setGym_time(String gym_time) {
-        User.gym_time = gym_time;
+    public void setGym_time(String gym_time) {
+        this.gym_time = gym_time;
     }
 
-    public static String getDinner_time() {
+    public String getDinner_time() {
         return dinner_time;
     }
 
-    public static void setDinner_time(String dinner_time) {
-        User.dinner_time = dinner_time;
+    public void setDinner_time(String dinner_time) {
+        this.dinner_time = dinner_time;
     }
 
-    public static String getSleep_time() {
+    public String getSleep_time() {
         return sleep_time;
     }
 
-    public static void setSleep_time(String sleep_time) {
-        User.sleep_time = sleep_time;
+    public void setSleep_time(String sleep_time) {
+        this.sleep_time = sleep_time;
     }
 
-    private static String dinner_time = "";
-    private static String sleep_time = "";
+    public String getEmail() {
+        return email;
+    }
 
-
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

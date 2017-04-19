@@ -15,7 +15,7 @@ public class PHR extends AppCompatActivity  {
     private Button timings;
     private Button save;
     public String dateFromPicker;
-
+    User user = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class PHR extends AppCompatActivity  {
         details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(User.getName()!= "" ||User.getSex()!= ""||User.getPrimary_contact()!= ""||User.getEmergency_contact()!= ""){
+                if(user.getName()!= "" ||user.getSex()!= ""||user.getPrimary_contact()!= ""||user.getEmergency_contact()!= ""){
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 DetailedInformation detailedInformation =new DetailedInformation();
@@ -52,7 +52,7 @@ public class PHR extends AppCompatActivity  {
         timings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(User.getBlood_sign()!=""||User.getBoold_type()!=""||User.getHeight_feet()!=""||User.getHeight_inches()!=""){
+                if(user.getBlood_sign()!=""||user.getBoold_type()!=""||user.getHeight_feet()!=""||user.getHeight_inches()!=""){
                 FragmentManager fragmentManager = getFragmentManager();
                  FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 TimingInformation timingInformation =new TimingInformation();
@@ -65,9 +65,9 @@ public class PHR extends AppCompatActivity  {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(User.getName()!= "" ||User.getSex()!= ""||User.getDob()!= ""||User.getPrimary_contact()!= ""||User.getEmergency_contact()!= ""){
-                    if(User.getBlood_sign()!=""||User.getBoold_type()!=""||User.getHeight_feet()!=""||User.getHeight_inches()!=""){
-                        if(User.getWake_up_time()!=""||User.getBreakfast_time()!=""||User.getLunch_time()!=""||User.getGym_time()!=""||User.getDinner_time()!=""||User.getSleep_time()!=""){
+                if(user.getName()!= "" ||user.getSex()!= ""||user.getDob()!= ""||user.getPrimary_contact()!= ""||user.getEmergency_contact()!= ""){
+                    if(user.getBlood_sign()!=""||user.getBoold_type()!=""||user.getHeight_feet()!=""||user.getHeight_inches()!=""){
+                        if(user.getWake_up_time()!=""||user.getBreakfast_time()!=""||user.getLunch_time()!=""||user.getGym_time()!=""||user.getDinner_time()!=""||user.getSleep_time()!=""){
                             Toast.makeText(PHR.this,"Wohhoo",Toast.LENGTH_SHORT).show();
                         }
                         else Toast.makeText(PHR.this, "Fill Timings Mandatory Details",Toast.LENGTH_SHORT).show();

@@ -75,9 +75,7 @@ public class ViewPrescription extends AppCompatActivity {
         db =  new DbHelper(getApplicationContext());
         Log.d("ViewPrescription"," entered get all rows");
         mDb = db.getWritableDatabase();
-
         Cursor cursor = mDb.query(true, DbContract.DbEntryPrescription.TABLE_NAME, ALL_COLUMNS, where, null, DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME,null,null,null);
-
         if(cursor != null){
             cursor.moveToFirst();
             Log.d("GetAllRows", cursor.getString(1));

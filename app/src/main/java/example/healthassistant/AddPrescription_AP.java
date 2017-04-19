@@ -106,7 +106,6 @@ public class AddPrescription_AP extends AppCompatActivity {
             Log.d("AddData:MedName",temp.getMedName());
             Log.d("AddData:MedObject: ", temp.toString());
 
-
             try {
 
                 long result = mDb.insert(DbContract.DbEntryPrescription.TABLE_NAME, null, cv);

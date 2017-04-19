@@ -61,7 +61,7 @@ public class DbHelper extends SQLiteOpenHelper {
 //                DbContract.DbEntryPrescription.COLUMN_MED_TOTAL + "TEXT  "+ ");";
 
         db.execSQL(SQL_CREATE_TABLE);
-//        db.execSQL(SQL_CREATE_PHR);
+        db.execSQL(SQL_CREATE_PHR);
 
         //kept try catch to see if the table is being created or not
         try {
