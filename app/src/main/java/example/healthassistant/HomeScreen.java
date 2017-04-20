@@ -30,7 +30,7 @@ public class HomeScreen extends AppCompatActivity {
 
     private void initList(){
 
-        homeList.add(createList("listItem","Edit PHR"));
+        homeList.add(createList("listItem","View PHR"));
         homeList.add(createList("listItem","Add Prescription"));
 
     }
@@ -77,6 +77,10 @@ public class HomeScreen extends AppCompatActivity {
                                     int position, long id) {
                 if(position == 1){
                     Intent intent = new Intent(getApplicationContext(),AddPrescription_AP.class);
+                    startActivity(intent);
+                }
+                if(position == 0){
+                    Intent intent = new Intent(getApplicationContext(),ViewPHR.class);
                     startActivity(intent);
                 }
 

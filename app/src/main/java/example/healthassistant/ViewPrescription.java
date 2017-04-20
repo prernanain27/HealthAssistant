@@ -32,6 +32,7 @@ public class ViewPrescription extends AppCompatActivity {
             "Medicine Time"
 
     };
+
     public static final String[] ALL_COLUMNS = {
 
             DbContract.DbEntryPrescription.COLUMN_ID,
@@ -83,78 +84,7 @@ public class ViewPrescription extends AppCompatActivity {
         return  cursor;
     }
 
-   /* public String[] getMedicineData(String prescriptionName) {
-        Log.d("ViewPrescription","Entered Get Medicine Data Method");
-        String whereClause = DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME + "=?";
-        String[] whereArgs = {prescriptionName};
-        mContext = getApplicationContext();
-        mDb = db.getWritableDatabase();
-        Cursor cursor = null;
-        int i = 0;
-        try {
-            cursor = mDb.query(DbContract.DbEntryPrescription.TABLE_NAME, ALL_COLUMNS, whereClause, whereArgs, null, null, null);
-            int indexMedName = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_MED_NAME);
-            int indexMedTime = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_MED_TIME);
-            int indexMedDose = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_MED_DOSE);
-            int indexMedType = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_MED_TYPE);
-            Log.d("GetMedicineData","MedicineName Index");
-            if (cursor.getCount() > 0) {
-                while (cursor.moveToNext()) {
-                    CardView card = new CardView(mContext);
 
-                    // Set the CardView layoutParams
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                            RelativeLayout.LayoutParams.WRAP_CONTENT,
-                            RelativeLayout.LayoutParams.WRAP_CONTENT
-                    );
-                    card.setLayoutParams(params);
-
-                    // Set CardView corner radius
-                    card.setRadius(9);
-
-                    // Set cardView content padding
-                    card.setContentPadding(15, 15, 15, 15);
-
-                    // Set a background color for CardView
-                    card.setCardBackgroundColor(Color.parseColor("#FFC6D6C3"));
-
-                    // Set the CardView maximum elevation
-                    card.setMaxCardElevation(15);
-
-                    // Set CardView elevation
-                    card.setCardElevation(9);
-
-                    // Initialize a new TextView to put in CardView
-                    TextView tv = new TextView(mContext);
-                    tv.setLayoutParams(params);
-                    tv.setText(cursor.getString(indexMedName) + "\n" + cursor.getString(indexMedTime) + "\n" +
-                            cursor.getString(indexMedDose) + "\n" + cursor.getString(indexMedType));
-                    tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
-                    tv.setTextColor(Color.RED);
-
-                    // Put the TextView in CardView
-                    card.addView(tv);
-
-                    // Finally, add the CardView in root layout
-                    mRelativeLayout.addView(card);
-                    Log.d("GetMedicineData"," Inside Cursor Loop MedicineName Index: ");
-                    //medicineData[i] = cursor.getString(indexMedName);
-                   // medicineData[i+1] = cursor.getString(indexMedTime);
-                    //medicineData[i+2] = cursor.getString(indexMedDose);
-                    //medicineData[i+3] = cursor.getString(indexMedType);
-                   // Log.d("GetMedicineData", "Get Medicine Data Method: " + medicineData[0] + "\n "+ medicineData[2]);
-                }
-            }
-        } catch (Exception e) {
-            Log.d("ViewPrescription", "Get Medicine Data method: Exception Raised with a value of " + e);
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-        db.close();
-        return medicineData;
-    } */
 
     private void populateListView() {
         try {

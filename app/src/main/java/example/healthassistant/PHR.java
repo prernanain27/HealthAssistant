@@ -143,7 +143,6 @@ public class PHR extends AppCompatActivity  {
         cv.put(COLUMN_LUNCH_TIME,User.getLunch_time());
         cv.put(COLUMN_GYM_TIME,User.getGym_time());
         cv.put(COLUMN_DINNER_TIME,User.getDinner_time());
-//        cv.put(COLUMN_SLEEP_TIME,User.getSleep_time());
         Log.d("AddData PHR: ", " " + User.getName());
         try {
 

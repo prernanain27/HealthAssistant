@@ -48,17 +48,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="example.healthassistant.HomeScreen" />
         </activity>
-
         <activity
             android:name=".ViewPrescription"
             android:label="Prescription"
             android:parentActivityName=".HomeScreen" />
-
-        <activity android:name=".ViewMedicine"
+        <activity
+            android:name=".ViewMedicine"
             android:label="Medicine"
             android:parentActivityName=".ViewPrescription"
-            android:theme="@style/AppTheme"/>
-
+            android:theme="@style/AppTheme" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -74,7 +72,16 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".ViewPHR"
+            android:label="@string/title_activity_view_phr"
+            android:parentActivityName=".HomeScreen"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="example.healthassistant.HomeScreen" />
+        </activity>
     </application>
 
 </manifest>
