@@ -46,7 +46,6 @@ public class PersonalInformation extends Fragment  {
     private EditText emergency_contact;
     private EditText careTaker_contact;
     private Button save;
-//    User user = new User();
     private SQLiteDatabase mDb;
 
     @Override

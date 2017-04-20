@@ -11,7 +11,7 @@ import android.util.Log;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "healthdemo.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     public DbHelper(Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
     }
@@ -48,7 +48,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 DbContract.DbEntryPHR.COLUMN_GYM_TIME +     " TEXT  , "+
                 DbContract.DbEntryPHR.COLUMN_DINNER_TIME +  " TEXT  "+");";
                 //DbContract.DbEntryPHR.COLUMN_SLEEP_TIME + "TEXT  "+
-            Log.d("DBHelper: OnCreate: ","Create Table PHR Command: " + SQL_CREATE_PHR);
+            Log.d("DBHelper:OnCreate: ","Create Table PHR Command: " + SQL_CREATE_PHR);
 
         final String SQL_CREATE_PRESCRIPTION= "CREATE TABLE "+
                 DbContract.DbEntryPrescription.TABLE_NAME + "("+
