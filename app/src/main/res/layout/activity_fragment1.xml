@@ -23,7 +23,6 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Enter your Name"
             android:layout_weight="2"
             android:id="@+id/name"/>
     </LinearLayout>
@@ -83,7 +82,6 @@
             android:inputType="textPostalAddress"
             android:ems="10"
             android:id="@+id/address"
-            android:hint="Enter your Address"
             android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
@@ -104,7 +102,6 @@
             android:inputType="phone"
             android:ems="10"
             android:id="@+id/primaryContact"
-            android:hint="Enter your Primary Contact Number"
             android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
@@ -123,7 +120,6 @@
             android:inputType="phone"
             android:ems="10"
             android:id="@+id/emergencyContact"
-            android:hint="Enter your Emergency Contact"
             android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
@@ -143,7 +139,6 @@
             android:inputType="phone"
             android:ems="10"
             android:id="@+id/caretakerContact"
-            android:hint="Enter your Care Taker Contact"
             android:layout_weight="1"/>
     </LinearLayout>
     <Button

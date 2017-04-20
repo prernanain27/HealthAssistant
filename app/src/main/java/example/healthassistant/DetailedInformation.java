@@ -31,7 +31,7 @@ public class DetailedInformation extends Fragment implements NumberPicker.OnValu
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final User user = new User();
+//        final User user = new User();
         feet = (EditText)getActivity().findViewById(R.id.feet);
         feet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,12 +60,12 @@ public class DetailedInformation extends Fragment implements NumberPicker.OnValu
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                user.setBlood_sign(bloodSign.getSelectedItem().toString());
-                user.setBoold_type(bloodType.getSelectedItem().toString());
-                user.setHeight_feet(feet.getText().toString());
-                user.setHeight_inches(inches.getText().toString());
-                user.setEye_sign(eyeSign.getSelectedItem().toString());
-                user.setEye_sight(eyeSight.getText().toString());
+                User.setBlood_sign(bloodSign.getSelectedItem().toString());
+                User.setBoold_type(bloodType.getSelectedItem().toString());
+                User.setHeight_feet(feet.getText().toString());
+                User.setHeight_inches(inches.getText().toString());
+                User.setEye_sign(eyeSign.getSelectedItem().toString());
+                User.setEye_sight(eyeSight.getText().toString());
             }
         });
 

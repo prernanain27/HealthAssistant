@@ -46,7 +46,7 @@ public class PersonalInformation extends Fragment  {
     private EditText emergency_contact;
     private EditText careTaker_contact;
     private Button save;
-    User user;
+//    User user = new User();
     private SQLiteDatabase mDb;
 
     @Override
@@ -77,12 +77,13 @@ public class PersonalInformation extends Fragment  {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                user.setCare_taker_contact(careTaker_contact.getText().toString());
-                user.setEmergency_contact(emergency_contact.getText().toString());
-                user.setPrimary_contact(primary_contact.getText().toString());
-                user.setAddress(address.getText().toString());
-                user.setSex(sex.getSelectedItem().toString());
-                user.setName(name.getText().toString());
+
+                User.setEmergency_contact(emergency_contact.getText().toString());
+                User.setCare_taker_contact(careTaker_contact.getText().toString());
+                User.setPrimary_contact(primary_contact.getText().toString());
+                User.setAddress(address.getText().toString());
+                User.setSex(sex.getSelectedItem().toString());
+                User.setName(name.getText().toString());
             }
         });
         dob = (TextView)getActivity().findViewById(R.id.dob);

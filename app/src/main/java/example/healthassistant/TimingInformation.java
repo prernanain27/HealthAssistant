@@ -6,7 +6,9 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,17 +119,17 @@ public class TimingInformation extends Fragment {
 
             }
         });
-        final User user = new User();
+//        final User user = new User();
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                user.setWake_up_time(wakeUp.getText().toString());
-                user.setBreakfast_time(breakFast.getText().toString());
-                user.setLunch_time(lunch.getText().toString());
-                user.setGym_time(gym.getText().toString());
-                user.setDinner_time(dinner.getText().toString());
-                user.setSleep_time(sleep.getText().toString());
-                addData();
+                User.setWake_up_time(wakeUp.getText().toString());
+                User.setBreakfast_time(breakFast.getText().toString());
+                User.setLunch_time(lunch.getText().toString());
+                User.setGym_time(gym.getText().toString());
+                User.setDinner_time(dinner.getText().toString());
+                User.setSleep_time(sleep.getText().toString());
+//                addData();
 
             }
         });
@@ -152,46 +154,5 @@ public class TimingInformation extends Fragment {
 
 
     }
-    public void addData(){
-        DbHelper db = new DbHelper(getActivity());
-        User user = new User();
-        mDb = db.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(COLUMN_NAME,user.getName());
-        cv.put(COLUMN_Email,user.getEmail());
-        cv.put(COLUMN_SEX,user.getSex());
-        cv.put(COLUMN_DOB,user.getDob());
-        cv.put(COLUMN_ADDRESS,user.getAddress());
-        cv.put(COLUMN_PRIMARY_CONTACT,user.getPrimary_contact());
-        cv.put(COLUMN_EMERGENCT_CONTACT,user.getEmergency_contact());
-        cv.put(COLUMN_CARETAKER_CONTACT,user.getCare_taker_contact());
-        cv.put(COLUMN_BLOODTYPE,user.getBoold_type());
-        cv.put(COLUMN_BLOOD_SIGN,user.getBlood_sign());
-        cv.put(COLUMN_HEIGHT_FEET,user.getHeight_feet());
-        cv.put(COLUMN_HEIGHT_INCHES,user.getHeight_inches());
-        cv.put(COLUMN_EYE_SIGN,user.getEye_sign());
-        cv.put(COLUMN_EYE_SIGHT,user.getEye_sight());
-        cv.put(COLUMN_WAKE_UP_TIME,user.getWake_up_time());
-        cv.put(COLUMN_BREAKFAST_TIME,user.getBreakfast_time());
-        cv.put(COLUMN_LUNCH_TIME,user.getLunch_time());
-        cv.put(COLUMN_GYM_TIME,user.getGym_time());
-        cv.put(COLUMN_DINNER_TIME,user.getDinner_time());
-        //cv.put(COLUMN_SLEEP_TIME,User.getSleep_time());
 
-        try {
-
-            long result = mDb.insert(DbContract.DbEntryPHR.TABLE_NAME, null, cv);
-            if(result!=-1){
-                Toast.makeText(getActivity(), "Inserted successfully", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(getActivity(),HomeScreen.class);
-            startActivity(i);}
-            else
-                Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
-        }
-        catch (SQLiteException ex)
-        {
-            String s = ex.getMessage();
-        }
-
-    }
 }
