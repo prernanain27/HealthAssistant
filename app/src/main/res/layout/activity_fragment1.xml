@@ -10,39 +10,58 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="example.healthassistant.PersonalInformation"
     android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_marginTop="40dp">
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="10dp"
             android:text="Name"
-            android:layout_weight="1"/>
+            android:textColor="@color/cardview_dark_background"/>
+
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/name"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:id="@+id/name"/>
+            android:textColor="@color/cardview_dark_background"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:textColor="@color/cardview_dark_background">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Sex"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:paddingRight="10dp"
+            android:textColor="@color/cardview_dark_background"/>
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
             android:entries="@array/Sex"
             android:layout_weight="2"
-            android:id="@+id/spinnerSex"></Spinner>
+            android:gravity="center_horizontal"
+            android:id="@+id/spinnerSex"
+            android:textColor="@color/cardview_dark_background"></Spinner>
 
 
 
@@ -50,101 +69,131 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="Date of Birth"
-            android:layout_weight="1"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tap to set your Date of Birth"
-            android:id="@+id/dob"
+            android:text="DOB"
             android:layout_weight="1"
+            android:paddingRight="10dp"
+            android:textColor="@color/cardview_dark_background"/>
+        <TextView
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:text="Tap to set your DOB"
+            android:id="@+id/dob"
+            android:layout_weight="2"
+            android:paddingRight="10dp"
+            android:textColor="@color/cardview_dark_background"
             />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Primary Address"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:paddingRight="10dp"
+            android:textColor="@color/cardview_dark_background"/>
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
             android:inputType="textPostalAddress"
             android:ems="10"
             android:id="@+id/address"
-            android:layout_weight="1"/>
+            android:layout_weight="2"
+            android:paddingRight="10dp"
+            android:textColor="@color/cardview_dark_background"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Primary Contact"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:paddingRight="10dp"
+            android:textColor="@color/cardview_dark_background"/>
 
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:ems="10"
             android:id="@+id/primaryContact"
-            android:layout_weight="1"/>
+            android:layout_weight="2"
+            android:paddingRight="10dp"
+            android:textColor="@color/cardview_dark_background"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="Emergency Contact Number"
-            android:layout_weight="1"/>
+            android:text="Emergency Contact"
+            android:layout_weight="1"
+            android:paddingRight="10dp"
+            android:textColor="@color/cardview_dark_background"/>
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:ems="10"
             android:id="@+id/emergencyContact"
-            android:layout_weight="1"/>
+            android:layout_weight="2"
+            android:paddingRight="10dp"
+            android:textColor="@color/cardview_dark_background"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Care Taker's Contact"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:paddingRight="10dp"
+            android:textColor="@color/cardview_dark_background"/>
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:ems="10"
             android:id="@+id/caretakerContact"
-            android:layout_weight="1"/>
+            android:layout_weight="2"
+            android:paddingRight="10dp"
+            android:textColor="@color/cardview_dark_background"/>
     </LinearLayout>
+</LinearLayout>
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/save"
-        android:text="Save Personal Information"/>
+        android:text="Save Personal Information"
+        android:background="#ff0000"
+        android:textColor="@color/cardview_light_background"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="60dp"/>
 
 </LinearLayout>
