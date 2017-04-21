@@ -7,7 +7,6 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="example.healthassistant.TimingInformation"
     android:orientation="vertical">
 
@@ -121,9 +120,12 @@
             android:id="@+id/sleepTime"/>
     </LinearLayout>
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/save"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/cardview_light_background"
         android:text="Save Timings"/>
 
 </LinearLayout>

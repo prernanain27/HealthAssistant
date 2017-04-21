@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class DetailedInformation extends Fragment implements NumberPicker.OnValueChangeListener{
     private EditText feet;
@@ -66,6 +67,8 @@ public class DetailedInformation extends Fragment implements NumberPicker.OnValu
                 User.setHeight_inches(inches.getText().toString());
                 User.setEye_sign(eyeSign.getSelectedItem().toString());
                 User.setEye_sight(eyeSight.getText().toString());
+                Toast.makeText(getActivity().getApplicationContext(),"Information Saved",Toast.LENGTH_SHORT).show();
+
             }
         });
 

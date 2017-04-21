@@ -83,6 +83,7 @@ public class PersonalInformation extends Fragment  {
                 User.setAddress(address.getText().toString());
                 User.setSex(sex.getSelectedItem().toString());
                 User.setName(name.getText().toString());
+                Toast.makeText(getActivity().getApplicationContext(),"Information Saved",Toast.LENGTH_SHORT).show();
             }
         });
         dob = (TextView)getActivity().findViewById(R.id.dob);

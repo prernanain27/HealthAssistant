@@ -129,6 +129,8 @@ public class TimingInformation extends Fragment {
                 User.setGym_time(gym.getText().toString());
                 User.setDinner_time(dinner.getText().toString());
                 User.setSleep_time(sleep.getText().toString());
+                Toast.makeText(getActivity().getApplicationContext(),"Information Saved",Toast.LENGTH_SHORT).show();
+
 //                addData();
 
             }

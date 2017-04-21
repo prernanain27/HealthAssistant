@@ -13,34 +13,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Personal Information"
+            android:layout_weight="3"
+            android:text="Personal Info"
+            android:background="@color/cardview_light_background"
             android:id="@+id/personal"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Details"
+            android:background="@color/cardview_light_background"
             android:id="@+id/details"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Timings"
+            android:background="@color/cardview_light_background"
             android:id="@+id/timings"/>
+
         </LinearLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="420dp"
         android:id="@+id/contentFrame"
-        android:layout_margin="15dp"></FrameLayout>
+        android:layout_margin="2dp"></FrameLayout>
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:text="Save"
+        android:textColor="@color/cardview_light_background"
+        android:background="@color/colorPrimary"
         android:id="@+id/savePHR"/>
     </LinearLayout>
 
