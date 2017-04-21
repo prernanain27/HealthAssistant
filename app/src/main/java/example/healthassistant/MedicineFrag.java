@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 
 public class MedicineFrag extends Fragment {
@@ -105,6 +106,8 @@ public class MedicineFrag extends Fragment {
 
                     Log.d("MedicineFrag", med.getMedName());
                     Log.d("Array Size",  "" + prescription.medicineArrayList.size());
+
+                    Toast.makeText(getActivity(), "Medicine added to Prescription", Toast.LENGTH_SHORT).show();
                     //Log.d("Object Name:", " " + prescription.medicineArrayList.get(0));
 
                     //Log.d("Object Name:", " " + prescription.medicineArrayList.get());
