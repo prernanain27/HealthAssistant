@@ -40,6 +40,7 @@
             android:id="@+id/dose"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:layout_marginLeft="10dp"/>
         <Spinner
             android:id="@+id/spinner1"
@@ -83,6 +84,7 @@
             android:id="@+id/medTotal"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:layout_marginLeft="10dp"/>
     </LinearLayout>
 
@@ -100,6 +102,7 @@
             android:id="@+id/duration"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:layout_marginLeft="10dp"/>
         <Spinner
             android:id="@+id/spinner3"
