@@ -91,28 +91,36 @@ public class MedicineFrag extends Fragment {
         saveMed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Medicine med = new Medicine();
-                if((medName.getText().toString()!="") || (medDose.getText().toString() != "")) {
 
-                    med.setMedName(medName.getText().toString());
-                    med.setMedDose(medDose.getText().toString());
-                    med.setMedDuration(duration.getText().toString());
-                    med.setMedTotal(medTotal.getText().toString());
-                    med.setMedType(doseDropdown.getSelectedItem().toString());
-                    med.setMedTime(medTimeDropdown.getSelectedItem().toString());
-                    med.setDurationType(durationDropdown.getSelectedItem().toString());
+                if (medName.getText().toString().trim().matches("")) {
+                    Toast.makeText(getActivity(), "Please enter Medicine Name", Toast.LENGTH_SHORT).show();
+                }
+                else if (medDose.getText().toString().trim().matches("")) {
+                    Toast.makeText(getActivity(), "Please enter Medicine Dose", Toast.LENGTH_SHORT).show();
+                }
+                else if (duration.getText().toString().trim().matches("")) {
+                    Toast.makeText(getActivity(), "Please enter the duration", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Medicine med = new Medicine();
+                    if ((medName.getText().toString() != "") || (medDose.getText().toString() != "")) {
 
-                    prescription.medicineArrayList.add(med);
+                        med.setMedName(medName.getText().toString());
+                        med.setMedDose(medDose.getText().toString());
+                        med.setMedDuration(duration.getText().toString());
+                        med.setMedTotal(medTotal.getText().toString());
+                        med.setMedType(doseDropdown.getSelectedItem().toString());
+                        med.setMedTime(medTimeDropdown.getSelectedItem().toString());
+                        med.setDurationType(durationDropdown.getSelectedItem().toString());
 
-                    Log.d("MedicineFrag", med.getMedName());
-                    Log.d("Array Size",  "" + prescription.medicineArrayList.size());
+                        prescription.medicineArrayList.add(med);
 
-                    Toast.makeText(getActivity(), "Medicine added to Prescription", Toast.LENGTH_SHORT).show();
-                    //Log.d("Object Name:", " " + prescription.medicineArrayList.get(0));
+                        Log.d("MedicineFrag", med.getMedName());
+                        Log.d("Array Size", "" + prescription.medicineArrayList.size());
 
-                    //Log.d("Object Name:", " " + prescription.medicineArrayList.get());
-                    //Log.d("DoseItems",doseDropdown.toString());
-                    med = null;
+                        Toast.makeText(getActivity(), "Medicine added to Prescription", Toast.LENGTH_SHORT).show();
+                        med = null;
+                    }
                 }
             }
         });

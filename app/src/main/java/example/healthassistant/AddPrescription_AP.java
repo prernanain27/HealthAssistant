@@ -82,7 +82,16 @@ public class AddPrescription_AP extends AppCompatActivity {
                 Prescription.setPrescriptionName(presName.getText().toString());
                 Prescription.setDisease(disease.getText().toString());
 //                Prescription.setMedicineArrayList(medArray);
-                addData();
+
+                if (presName.getText().toString().trim().matches("")) {
+                    Toast.makeText(getApplicationContext(), "Please enter Prescription Name", Toast.LENGTH_SHORT).show();
+                }
+                else if (disease.getText().toString().trim().matches("")) {
+                    Toast.makeText(getApplicationContext(), "Please enter Disease Name", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    addData();
+                }
             }
         });
     }
