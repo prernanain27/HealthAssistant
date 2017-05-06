@@ -48,27 +48,19 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="Height"
-            android:layout_weight="1"/>
+            />
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:id="@+id/feet"
-            android:layout_weight="2"/>
+            android:layout_marginLeft="10dp"
+            android:inputType="numberDecimal"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ft."
-            android:layout_weight="1"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/inches"
-            android:layout_weight="2"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="in."
-            android:layout_weight="1"/>
+            android:text="cm"
+            />
 
 
     </LinearLayout>
@@ -81,23 +73,28 @@
         <TextView
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Eye-Sight"
-            android:layout_weight="1"/>
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:entries="@array/BloodSign"
-            android:layout_weight="2"
-            android:id="@+id/eyesightSign"></Spinner>
+            android:text="Weight"
+            />
+        <!--<Spinner-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:entries="@array/BloodSign"-->
+            <!--android:layout_weight="2"-->
+            <!--android:id="@+id/eyesightSign"></Spinner>-->
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="10dp"
             android:ems="10"
             android:id="@+id/eyesight"
-            android:layout_weight="2"/>
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="lbs"
+            />
     </LinearLayout>
     <Button
         android:layout_width="match_parent"

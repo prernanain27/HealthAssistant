@@ -14,10 +14,10 @@ import android.widget.Toast;
 
 public class DetailedInformation extends Fragment implements NumberPicker.OnValueChangeListener{
     private EditText feet;
-    private EditText inches;
+//    private EditText inches;
     private Spinner bloodSign;
     private Spinner bloodType;
-    private Spinner eyeSign;
+//    private Spinner eyeSign;
     private EditText eyeSight;
     private Button save;
     @Override
@@ -40,17 +40,17 @@ public class DetailedInformation extends Fragment implements NumberPicker.OnValu
                 show(feet);
             }
         });
-        inches = (EditText) getActivity().findViewById(R.id.inches);
-        inches.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                show(inches);
-            }
-        });
+//        inches = (EditText) getActivity().findViewById(R.id.inches);
+//        inches.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                show(inches);
+//            }
+//        });
         bloodSign = (Spinner)getActivity().findViewById(R.id.bloodSign);
        // user.setBlood_sign(bloodSign.getSelectedItem().toString());
         bloodType = (Spinner)getActivity().findViewById(R.id.bloodType);
-        eyeSign = (Spinner)getActivity().findViewById(R.id.eyesightSign);
+//        eyeSign = (Spinner)getActivity().findViewById(R.id.eyesightSign);
         eyeSight = (EditText)getActivity().findViewById(R.id.eyesight);
        // user.setBoold_type(bloodType.getSelectedItem().toString());
        // user.setHeight_feet(feet.getText().toString());
@@ -64,8 +64,8 @@ public class DetailedInformation extends Fragment implements NumberPicker.OnValu
                 User.setBlood_sign(bloodSign.getSelectedItem().toString());
                 User.setBoold_type(bloodType.getSelectedItem().toString());
                 User.setHeight_feet(feet.getText().toString());
-                User.setHeight_inches(inches.getText().toString());
-                User.setEye_sign(eyeSign.getSelectedItem().toString());
+//                User.setHeight_inches(inches.getText().toString());
+//                User.setEye_sign(eyeSign.getSelectedItem().toString());
                 User.setEye_sight(eyeSight.getText().toString());
                 Toast.makeText(getActivity().getApplicationContext(),"Information Saved",Toast.LENGTH_SHORT).show();
 
