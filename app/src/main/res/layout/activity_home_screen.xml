@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context="example.healthassistant.HomeScreen">
+    tools:context="example.healthassistant.Activities.HomeScreen">
 
     <LinearLayout
         android:background="@color/black_overlay"

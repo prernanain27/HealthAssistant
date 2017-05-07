@@ -1,6 +1,7 @@
-package example.healthassistant;
+package example.healthassistant.Models;
 
 import java.util.Enumeration;
+import java.util.List;
 
 /**
  * Created by ameethakkar on 4/2/17.
@@ -12,7 +13,8 @@ public class Medicine {
         private  String medName = "";
         private  String medDose = "";
         private  String medDuration = "";
-        private  String medTime = "";
+        private List<String> medTime ;
+        private StringBuilder medTimeString;
         private  String medType = "";
         private  String medTotal = "";
         private  String durationType = "";
@@ -42,12 +44,26 @@ public class Medicine {
         this.medDuration = medDuration;
     }
 
-    public String getMedTime() {
+    public List<String> getMedTime() {
+
+
         return medTime;
     }
 
-    public void setMedTime(String medTime) {
+    public void setMedTime(List<String> medTime) {
+
+
         this.medTime = medTime;
+    }
+
+    public StringBuilder getMedTimeString() {
+
+        for (String str:this.medTime
+                ) {
+
+            medTimeString.append(str+ " , ");
+        }
+        return medTimeString;
     }
 
     public String getMedType() {

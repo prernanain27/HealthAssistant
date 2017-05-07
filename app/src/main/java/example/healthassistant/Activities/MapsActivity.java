@@ -1,4 +1,4 @@
-package example.healthassistant;
+package example.healthassistant.Activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -11,7 +11,6 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -29,9 +28,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.HashMap;
-import java.util.List;
-
+import example.healthassistant.GetNearbyPlacesData;
+import example.healthassistant.R;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,

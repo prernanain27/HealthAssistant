@@ -1,18 +1,9 @@
-package example.healthassistant;
+package example.healthassistant.Fragments;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
-import android.content.ContentValues;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,14 +16,8 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_DISEASE;
-import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_DURATION;
-import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_DURATION_TYPE;
-import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_DOSE;
-import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_NAME;
-import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_TIME;
-import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_TYPE;
-import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME;
+import example.healthassistant.Models.User;
+import example.healthassistant.R;
 
 
 public class PersonalInformation extends Fragment  {

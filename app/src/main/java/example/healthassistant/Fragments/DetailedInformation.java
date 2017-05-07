@@ -1,4 +1,4 @@
-package example.healthassistant;
+package example.healthassistant.Fragments;
 
 import android.app.Dialog;
 import android.app.Fragment;
@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import example.healthassistant.Models.User;
+import example.healthassistant.R;
 
 public class DetailedInformation extends Fragment implements NumberPicker.OnValueChangeListener{
     private EditText feet;

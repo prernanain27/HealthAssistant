@@ -1,4 +1,4 @@
-package example.healthassistant;
+package example.healthassistant.Activities;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -21,14 +20,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 
-import static android.R.attr.data;
+import example.healthassistant.DbContract;
+import example.healthassistant.DbHelper;
+import example.healthassistant.R;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -63,7 +60,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         newUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this , PHR.class);
+                Intent intent = new Intent(LoginActivity.this , AddPHRActivity.class);
                 startActivity(intent);
             }
         });

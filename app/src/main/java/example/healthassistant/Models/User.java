@@ -1,4 +1,4 @@
-package example.healthassistant;
+package example.healthassistant.Models;
 
 /**
  * Created by prernaa on 4/1/2017.

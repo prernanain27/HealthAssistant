@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="example.healthassistant.ViewPHR"
+    tools:context="example.healthassistant.Activities.ViewPHR"
     tools:showIn="@layout/activity_view_phr">
 
 <TextView

@@ -1,4 +1,4 @@
-package example.healthassistant;
+package example.healthassistant.Activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -12,24 +12,35 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import example.healthassistant.DbContract;
+import example.healthassistant.DbHelper;
+import example.healthassistant.Fragments.MedicineFrag;
+import example.healthassistant.Models.Medicine;
+import example.healthassistant.Models.Prescription;
+import example.healthassistant.R;
+
+import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_TIME_AB;
+import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_TIME_AD;
+import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_TIME_AL;
+import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_TIME_BB;
+import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_TIME_BD;
+import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_TIME_BL;
 import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME;
 import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_DISEASE;
 import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_NAME;
 import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_DOSE;
 import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_TYPE;
-import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_TIME;
+
+
 import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_DURATION;
 import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_DURATION_TYPE;
 //import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_TOTAL;
-import static example.healthassistant.Prescription.*;
 
 
 public class AddPrescription_AP extends AppCompatActivity {
@@ -82,7 +93,16 @@ public class AddPrescription_AP extends AppCompatActivity {
                 Prescription.setPrescriptionName(presName.getText().toString());
                 Prescription.setDisease(disease.getText().toString());
 //                Prescription.setMedicineArrayList(medArray);
-                addData();
+
+                if (presName.getText().toString().trim().matches("")) {
+                    Toast.makeText(getApplicationContext(), "Please enter Prescription Name", Toast.LENGTH_SHORT).show();
+                }
+                else if (disease.getText().toString().trim().matches("")) {
+                    Toast.makeText(getApplicationContext(), "Please enter Disease Name", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    addData();
+                }
             }
         });
     }
@@ -92,14 +112,55 @@ public class AddPrescription_AP extends AppCompatActivity {
         mDb = db.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
+        String BB= "0",AB="0",BL ="0",AL= "0",BD="0",AD ="0";
         for (Medicine temp : Prescription.medicineArrayList)
         {
+            //Log.d("timimgs",temp.getMedTimeString().toString());
             cv.put(COLUMN_PRESCRIPTION_NAME, Prescription.getPrescriptionName());
             cv.put(COLUMN_DISEASE, Prescription.getDisease());
             cv.put(COLUMN_MED_NAME, temp.getMedName());
             cv.put(COLUMN_MED_DOSE, temp.getMedDose());
             cv.put(COLUMN_MED_TYPE, temp.getMedType());
-            cv.put(COLUMN_MED_TIME, temp.getMedTime());
+
+            for (String time:temp.getMedTime()
+                 ) {
+                switch (time)
+                {
+                    case "Before Breakfast": {
+                        BB="1";
+                        break;
+                    }
+                    case "After Breakfast": {
+                        AB = "1";
+                        break;
+                    }
+                    case "Before Lunch": {
+                        BL = "1";
+                        break;
+                    }
+                    case"After Lunch": {
+                        AL ="1";
+                        break;
+                    }
+                    case"Before Dinner": {
+                        BD ="1";
+                        break;
+                    }
+                    case "After Dinner": {
+                       AD="1";
+                        break;
+                    }
+
+
+                }
+            }
+
+            cv.put(COLUMN_MED_TIME_BB,BB);
+            cv.put(COLUMN_MED_TIME_AB,AB);
+            cv.put(COLUMN_MED_TIME_BL,BL);
+            cv.put(COLUMN_MED_TIME_AL,AL);
+            cv.put(COLUMN_MED_TIME_BD,BD);
+            cv.put(COLUMN_MED_TIME_AD, AD);
             cv.put(COLUMN_DURATION, temp.getMedDuration());
             cv.put(COLUMN_DURATION_TYPE, temp.getDurationType());
 

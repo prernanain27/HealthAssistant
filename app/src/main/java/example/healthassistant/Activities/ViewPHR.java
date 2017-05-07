@@ -1,4 +1,4 @@
-package example.healthassistant;
+package example.healthassistant.Activities;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +12,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import example.healthassistant.DbContract;
+import example.healthassistant.DbHelper;
+import example.healthassistant.R;
 
 public class ViewPHR extends AppCompatActivity {
     private SQLiteDatabase mDb;
@@ -65,7 +69,7 @@ public class ViewPHR extends AppCompatActivity {
         int indexEmergencyContact = cursor.getColumnIndex(DbContract.DbEntryPHR.COLUMN_EMERGENCT_CONTACT);
         int indexCareTakerContact = cursor.getColumnIndex(DbContract.DbEntryPHR.COLUMN_CARETAKER_CONTACT);
         if(cursor.getCount() != 0) {
-            Log.d("View PHR: " , "Record Exists");
+            Log.d("View AddPHRActivity: " , "Record Exists");
             viewPHRHead_textView.setText("Name:" + "\n \n" + "Address:" + "\n \n" +
                     "DOB:" + "\n \n" + "Sex:" + "\n \n" + "Gym Time:" + "\n \n" + "Breakfast Time:" + "\n \n" + "Lunch Time:" +
                     "\n \n" + "Dinner Time:" + "\n \n" + "Primary Contact:" + "\n \n" + "Emergency Contact:" + "\n \n" + "CareTaker Contact:");
@@ -77,7 +81,7 @@ public class ViewPHR extends AppCompatActivity {
                     + cursor.getString(indexCareTakerContact));
         }
         else {
-            Log.d("View PHR: " , "No Record Exists");
+            Log.d("View AddPHRActivity: " , "No Record Exists");
             Toast.makeText(this, "No Record Exists", Toast.LENGTH_LONG).show();
         }
 

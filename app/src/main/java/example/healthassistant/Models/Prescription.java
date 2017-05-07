@@ -1,4 +1,4 @@
-package example.healthassistant;
+package example.healthassistant.Models;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,8 @@ import java.util.ArrayList;
  * Created by ameethakkar on 4/2/17.
  */
 
-public class Prescription {
+public class
+Prescription {
     private static String prescriptionName = "";
     private static String disease = "";
     public static ArrayList <Medicine> medicineArrayList = new ArrayList<Medicine>();

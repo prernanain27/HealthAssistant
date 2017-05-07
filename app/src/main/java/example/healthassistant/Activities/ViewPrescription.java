@@ -1,25 +1,21 @@
-package example.healthassistant;
+package example.healthassistant.Activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.text.Layout;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 
-import java.util.ArrayList;
+import example.healthassistant.Activities.ViewMedicine;
+import example.healthassistant.DbContract;
+import example.healthassistant.DbHelper;
+import example.healthassistant.R;
 
 public class ViewPrescription extends AppCompatActivity {
     private SQLiteDatabase mDb;
@@ -41,7 +37,12 @@ public class ViewPrescription extends AppCompatActivity {
             DbContract.DbEntryPrescription.COLUMN_MED_NAME,
             DbContract.DbEntryPrescription.COLUMN_MED_DOSE,
             DbContract.DbEntryPrescription.COLUMN_MED_TYPE,
-            DbContract.DbEntryPrescription.COLUMN_MED_TIME,
+            DbContract.DbEntryPrescription.COLUMN_MED_TIME_BB,
+            DbContract.DbEntryPrescription.COLUMN_MED_TIME_AB,
+            DbContract.DbEntryPrescription.COLUMN_MED_TIME_BL,
+            DbContract.DbEntryPrescription.COLUMN_MED_TIME_AL,
+            DbContract.DbEntryPrescription.COLUMN_MED_TIME_BD,
+            DbContract.DbEntryPrescription.COLUMN_MED_TIME_AD,
             DbContract.DbEntryPrescription.COLUMN_DURATION,
             DbContract.DbEntryPrescription.COLUMN_DURATION_TYPE
 

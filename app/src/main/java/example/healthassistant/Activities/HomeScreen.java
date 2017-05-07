@@ -1,16 +1,10 @@
-package example.healthassistant;
+package example.healthassistant.Activities;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.CardView;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -21,6 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import example.healthassistant.R;
+
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
@@ -30,7 +26,7 @@ public class HomeScreen extends AppCompatActivity {
 
     private void initList(){
 
-        homeList.add(createList("listItem","View PHR"));
+        homeList.add(createList("listItem","View AddPHRActivity"));
         homeList.add(createList("listItem","Add Prescription"));
 
     }

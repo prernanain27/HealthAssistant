@@ -1,7 +1,9 @@
-package example.healthassistant;
+package example.healthassistant.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import example.healthassistant.R;
 
 public class HomeActivity extends AppCompatActivity {
 

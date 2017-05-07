@@ -14,7 +14,7 @@ public class DbContract {
         public static final String COLUMN_EMAIL = "email";
     }
     public static final class DbEntryPHR implements BaseColumns {
-        public static final String TABLE_NAME = "PHR";
+        public static final String TABLE_NAME = "AddPHRActivity";
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_Email = "email";
         public static final String COLUMN_NAME = "name";
@@ -45,7 +45,12 @@ public class DbContract {
         public static final String COLUMN_MED_NAME = "med_name";
         public static final String COLUMN_MED_DOSE = "med_dose";
         public static final String COLUMN_MED_TYPE = "med_type";
-        public static final String COLUMN_MED_TIME = "med_time";
+        public static final String COLUMN_MED_TIME_BB = "med_time_BB";
+        public static final String COLUMN_MED_TIME_AB = "med_time_AB";
+        public static final String COLUMN_MED_TIME_BL = "med_time_BL";
+        public static final String COLUMN_MED_TIME_AL = "med_time_AL";
+        public static final String COLUMN_MED_TIME_BD = "med_time_BD";
+        public static final String COLUMN_MED_TIME_AD = "med_time_AD";
         public static final String COLUMN_DURATION = "duration";
         public static final String COLUMN_DURATION_TYPE = "duration_type";
 //        public static final String COLUMN_MED_TOTAL = "med_total";

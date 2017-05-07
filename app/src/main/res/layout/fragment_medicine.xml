@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MedicineFrag">
+    tools:context=".Fragments.MedicineFrag">
 
 
     <!-- TODO: Update blank fragment layout -->
@@ -40,6 +40,7 @@
             android:id="@+id/dose"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:layout_marginLeft="10dp"/>
         <Spinner
             android:id="@+id/spinner1"
@@ -60,7 +61,7 @@
             android:text="Medicine Time"
             android:textSize="17sp"
             android:paddingTop="8dp"/>
-        <Spinner
+        <example.healthassistant.Fragments.MultiSelectionSpinner
             android:id="@+id/spinner2"
             android:layout_width="200dp"
             android:layout_height="40dp"
@@ -83,6 +84,7 @@
             android:id="@+id/medTotal"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:layout_marginLeft="10dp"/>
     </LinearLayout>
 
@@ -100,6 +102,7 @@
             android:id="@+id/duration"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:layout_marginLeft="10dp"/>
         <Spinner
             android:id="@+id/spinner3"

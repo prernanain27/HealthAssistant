@@ -48,7 +48,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 DbContract.DbEntryPHR.COLUMN_GYM_TIME +     " TEXT  , "+
                 DbContract.DbEntryPHR.COLUMN_DINNER_TIME +  " TEXT  "+");";
                 //DbContract.DbEntryPHR.COLUMN_SLEEP_TIME + "TEXT  "+
-            Log.d("DBHelper:OnCreate: ","Create Table PHR Command: " + SQL_CREATE_PHR);
+            Log.d("DBHelper:OnCreate: ","Create Table AddPHRActivity Command: " + SQL_CREATE_PHR);
 
         final String SQL_CREATE_PRESCRIPTION= "CREATE TABLE "+
                 DbContract.DbEntryPrescription.TABLE_NAME + "("+
@@ -58,7 +58,12 @@ public class DbHelper extends SQLiteOpenHelper {
                 DbContract.DbEntryPrescription.COLUMN_MED_NAME + " TEXT  , "+
                 DbContract.DbEntryPrescription.COLUMN_MED_DOSE + " TEXT  , "+
                 DbContract.DbEntryPrescription.COLUMN_MED_TYPE + " TEXT  , "+
-                DbContract.DbEntryPrescription.COLUMN_MED_TIME + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_MED_TIME_BB + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_MED_TIME_AB + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_MED_TIME_BL + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_MED_TIME_AL + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_MED_TIME_BD + " TEXT  , "+
+                DbContract.DbEntryPrescription.COLUMN_MED_TIME_AD + " TEXT  , "+
                 DbContract.DbEntryPrescription.COLUMN_DURATION + " TEXT  , "+
                 DbContract.DbEntryPrescription.COLUMN_DURATION_TYPE + " TEXT "+");";
 //                DbContract.DbEntryPrescription.COLUMN_MED_TOTAL + "TEXT  "+ ");";
