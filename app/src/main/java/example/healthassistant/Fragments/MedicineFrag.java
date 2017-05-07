@@ -19,6 +19,7 @@ import example.healthassistant.Models.Prescription;
 import example.healthassistant.R;
 
 
+//Added by neha
 public class MedicineFrag extends Fragment implements MultiSelectionSpinner.OnMultipleItemsSelectedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
