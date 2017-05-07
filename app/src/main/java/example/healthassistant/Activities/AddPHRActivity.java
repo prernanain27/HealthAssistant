@@ -151,7 +151,7 @@ public class AddPHRActivity extends AppCompatActivity  {
         cv.put(COLUMN_LUNCH_TIME,User.getLunch_time());
         cv.put(COLUMN_GYM_TIME,User.getGym_time());
         cv.put(COLUMN_DINNER_TIME,User.getDinner_time());
-        Log.d("AddData AddPHRActivity: ", " " + User.getName());
+        Log.d(" AddPHRActivity: ", " " + User.getName());
         try {
 
             long result = mDb.insert(DbContract.DbEntryPHR.TABLE_NAME, null, cv);

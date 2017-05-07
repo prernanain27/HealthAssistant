@@ -26,9 +26,7 @@
         <activity android:name=".Activities.HomeActivity" />
         <activity android:name=".Activities.SignUpActivity" />
         <activity android:name=".Activities.AddPHRActivity" />
-        <activity android:name=".Fragments.PersonalInformation" />
-        <activity android:name=".Fragments.DetailedInformation" />
-        <activity android:name=".Fragments.TimingInformation" />
+
         <activity
             android:name=".Activities.HomeScreen"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -82,6 +80,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="example.healthassistant.Activities.HomeScreen" />
         </activity>
+        <activity android:name=".Activities.Medicine_Schedule"></activity>
     </application>
 
 </manifest>

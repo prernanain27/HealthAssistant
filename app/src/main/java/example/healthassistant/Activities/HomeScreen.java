@@ -46,6 +46,14 @@ public class HomeScreen extends AppCompatActivity {
         ListView lv = (ListView) findViewById(R.id.homeListView);
         CardView viewPrescriptionCard = (CardView) findViewById(R.id.card_view1);
         Button viewPresBtn = (Button) findViewById(R.id.prescription);
+        Button viewMed = (Button) findViewById(R.id.medSchedule);
+        viewMed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent med = new Intent(getApplicationContext(),Medicine_Schedule.class);
+                startActivity(med);
+            }
+        });
         viewPresBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -25,6 +25,25 @@ public class DbHelper extends SQLiteOpenHelper {
                 DbContract.DbEntry.COLUMN_EMAIL +   " TEXT  , "+
                 DbContract.DbEntry.COLUMN_PASSWORD + " TEXT  "+");";
 
+        final String SQL_CREATE_MED_SPEC = "CREATE TABLE "+
+                DbContract.DbEntryMed.TABLE_NAME + "(" +
+                DbContract.DbEntryMed.COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , "+
+                DbContract.DbEntryMed.COLUMN_MED_NAME + " TEXT , " +
+                DbContract.DbEntryMed.COLUMN_MIN_DOSE + " TEXT , " +
+                DbContract.DbEntryMed.COLUMN_MAX_DOSE + " TEXT , " +
+                DbContract.DbEntryMed.COLUMN_SEPARATION + " TEXT " + ");";
+            //    DbContract.DbEntryMed.COLUMN_INTERFERENCE + "TEXT , " + ")";
+
+
+        final String SQL_CREATE_MED_INTERFERER = "CREATE TABLE "+
+                DbContract.DbEntryInterferer.TABLE_NAME + "(" +
+                DbContract.DbEntryInterferer.COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , "+
+                DbContract.DbEntryInterferer.COLUMN_MED_ID + " TEXT , " +
+                DbContract.DbEntryInterferer.COLUMN_INTERFERER_ID + " TEXT , " +
+                DbContract.DbEntryInterferer.COLUMN_MIN_FROM + " TEXT , " +
+                DbContract.DbEntryInterferer.COLUMN_MIN_TO + " TEXT " + ");";
+
+
         final String SQL_CREATE_PHR = "CREATE TABLE "+
                 DbContract.DbEntryPHR.TABLE_NAME + "("+
                 DbContract.DbEntryPHR.COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , "+
@@ -75,6 +94,8 @@ public class DbHelper extends SQLiteOpenHelper {
         try {
             db.execSQL(SQL_CREATE_PHR);
             db.execSQL(SQL_CREATE_PRESCRIPTION);
+            db.execSQL(SQL_CREATE_MED_SPEC);
+            db.execSQL(SQL_CREATE_MED_INTERFERER);
             Log.d("Create Table"," Prescription Successful");
         }
         catch (Exception e){
@@ -87,6 +108,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryPHR.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryPrescription.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryMed.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryInterferer.TABLE_NAME);
         onCreate(db);
     }
 }

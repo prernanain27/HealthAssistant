@@ -56,4 +56,24 @@ public class DbContract {
 //        public static final String COLUMN_MED_TOTAL = "med_total";
     }
 
+    public static final class DbEntryMed implements BaseColumns{
+        public static final String TABLE_NAME = "Med_Specification";
+        public static final String COLUMN_ID = "_id";
+        public static final String COLUMN_MED_NAME = "med_name";
+        public static final String COLUMN_MIN_DOSE = "min_dose";
+        public static final String COLUMN_MAX_DOSE = "max_dose";
+        public static final String COLUMN_SEPARATION = "separation";
+     //   public static final String COLUMN_INTERFERENCE = "interference";
+
+    }
+
+    public static final class DbEntryInterferer implements BaseColumns{
+        public static final String TABLE_NAME = "Med_Interferer";
+        public static final String COLUMN_ID = "_id";
+        public static final String COLUMN_MED_ID = "med_id";
+        public static final String COLUMN_INTERFERER_ID = "interferer_id";
+        public static final String COLUMN_MIN_FROM = "min_from";
+        public static final String COLUMN_MIN_TO = "min_to";
+
+    }
 }
