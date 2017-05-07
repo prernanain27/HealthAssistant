@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -43,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private FirebaseUser mFirebaseUser;
     private SQLiteDatabase mDb;
     SQLiteOpenHelper db;
+    private TextView loginErrorMessage;
 
 
     @Override
@@ -60,6 +62,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         password = (EditText) findViewById(R.id.password);
       emailEditText = (EditText) findViewById(R.id.email);
         login = (Button) findViewById(R.id.logIn);
+        loginErrorMessage = (TextView) findViewById(R.id.loginErrorMessage);
 
         newUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,21 +113,23 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             data.moveToFirst();
                             Log.d("Login:GetDBEmail", data.getString(indexEmail));
                         }
+                        if(!data.getString(indexEmail).equalsIgnoreCase(email) | !data.getString(indexPassword).equalsIgnoreCase(pass)){
+                            loginErrorMessage.setText("Incorrect Email or Password! Please enter again.");
+                            Toast.makeText(LoginActivity.this, "Incorrect Email or Password.",Toast.LENGTH_LONG).show();
 
+                        } else {
+                            Intent homeScreen = new Intent(getApplicationContext(), HomeScreen.class);
+                            startActivity(homeScreen);
+
+                        }
                     }catch(Exception e){
-                        Toast.makeText(LoginActivity.this, "Email not registered. Please click on 'New User' button to register!",Toast.LENGTH_SHORT).show();
-                        Log.d("Exception Occured: " , "Email Not Registered" +e);
+                        loginErrorMessage.setText("Email not registered. Click on 'New User' button to register!");
+                        Toast.makeText(LoginActivity.this, "Email not registered. Please click on 'New User' button to register!",Toast.LENGTH_LONG).show();
+                        Log.d("Exception Occured: " , "Email Not Registered: " +e);
 
 
                     }
-                    if(!data.getString(indexEmail).equalsIgnoreCase(email) | !data.getString(indexPassword).equalsIgnoreCase(pass)){
-                        Toast.makeText(LoginActivity.this, "Incorrect Email or Password.",Toast.LENGTH_LONG).show();
 
-                                    } else {
-                        Intent homeScreen = new Intent(getApplicationContext(), HomeScreen.class);
-                        startActivity(homeScreen);
-
-                                    }
 
 
                 }
@@ -146,27 +151,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (requestCode == REQUEST_CODE) {
             GoogleSignInResult user = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             GoogleSignInAccount profile_data = user.getSignInAccount();
-
-            //String email = profile_data.getEmail().toString();
-            //User.setEmail(email);
             Intent i = new Intent(this, HomeScreen.class);
             startActivity(i);
-           // addData(email,"");
-
 
         }
 
     }
-    public void addData(String email, String password){
-        DbHelper db = new DbHelper(this);
-        mDb = db.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(DbContract.DbEntry.COLUMN_EMAIL,email);
-        cv.put(DbContract.DbEntry.COLUMN_PASSWORD,password);
-        long result = mDb.insert(DbContract.DbEntry.TABLE_NAME,null,cv);
-        if(result!=-1)
-            Toast.makeText(this, "Inserted successfully", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
-    }
+
 }
