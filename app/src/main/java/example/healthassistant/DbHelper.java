@@ -11,7 +11,7 @@ import android.util.Log;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "healthdemo.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     public DbHelper(Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
     }
@@ -19,11 +19,11 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d("DbHelper OnCreate: " , "entered create table");
-        final String SQL_CREATE_TABLE= "CREATE TABLE "+
+        final String SQL_CREATE_TABLE = "CREATE TABLE "+
                 DbContract.DbEntry.TABLE_NAME + "("+
                 DbContract.DbEntry._ID +" INTEGER PRIMARY KEY AUTOINCREMENT , "+
-                DbContract.DbEntry.COLUMN_EMAIL + " TEXT  , "+
-                DbContract.DbEntry.COLUMN_PASSWORD + "TEXT  "+ ");";
+                DbContract.DbEntry.COLUMN_EMAIL +   " TEXT  , "+
+                DbContract.DbEntry.COLUMN_PASSWORD + " TEXT  "+");";
 
         final String SQL_CREATE_PHR = "CREATE TABLE "+
                 DbContract.DbEntryPHR.TABLE_NAME + "("+

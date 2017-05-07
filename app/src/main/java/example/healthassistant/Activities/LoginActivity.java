@@ -4,10 +4,12 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,6 +42,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private SQLiteDatabase mDb;
+    SQLiteOpenHelper db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         newUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this , AddPHRActivity.class);
+                Intent intent = new Intent(LoginActivity.this , NewUserData.class);
                 startActivity(intent);
             }
         });
@@ -91,14 +95,34 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 } else {
+                    String where = null;
+                    db = new DbHelper(getApplicationContext());
+                    Log.d("LoginActivity", " entered user login.setOnClickListner");
+                    mDb = db.getWritableDatabase();
 
                     String[] projection = {DbContract.DbEntry.COLUMN_EMAIL, DbContract.DbEntry.COLUMN_PASSWORD};
-                    Cursor data = mDb.query(DbContract.DbEntry.TABLE_NAME,projection, DbContract.DbEntry._ID + " = "+ emailEditText.getText().toString(),
-                            null,null,null,null,null);
-                    if(data.getCount()==0){
-                        Toast.makeText(LoginActivity.this, "Either E-mail is wrong or not registered",Toast.LENGTH_SHORT).show();
+
+                    Cursor data = mDb.query(true, DbContract.DbEntry.TABLE_NAME, projection, where, null, null, null, null, null);
+                    int indexEmail = data.getColumnIndex(DbContract.DbEntry.COLUMN_EMAIL);
+                    int indexPassword = data.getColumnIndex(DbContract.DbEntry.COLUMN_PASSWORD);
+                    try {
+                        if (data != null) {
+                            data.moveToFirst();
+                            Log.d("Login:GetDBEmail", data.getString(indexEmail));
+                        }
+
+                    }catch(Exception e){
+                        Toast.makeText(LoginActivity.this, "Email not registered. Please click on 'New User' button to register!",Toast.LENGTH_SHORT).show();
+                        Log.d("Exception Occured: " , "Email Not Registered" +e);
+
+
+                    }
+                    if(!data.getString(indexEmail).equalsIgnoreCase(email) | !data.getString(indexPassword).equalsIgnoreCase(pass)){
+                        Toast.makeText(LoginActivity.this, "Incorrect Email or Password.",Toast.LENGTH_LONG).show();
 
                                     } else {
+                        Intent homeScreen = new Intent(getApplicationContext(), HomeScreen.class);
+                        startActivity(homeScreen);
 
                                     }
 

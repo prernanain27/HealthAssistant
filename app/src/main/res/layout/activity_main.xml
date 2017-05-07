@@ -28,24 +28,12 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-        <!--<LinearLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="E-mail"-->
-        <!--android:layout_weight="1"-->
-            <!--android:textColor="@color/cardview_light_background"-->
-            <!--android:padding="5dp"/>-->
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/email"
-            android:textColor="@color/cardview_light_background"
+            android:textColor="@color/cardview_dark_background"
             android:paddingLeft="15dp"
             android:layout_marginTop="20dp"
             android:hint="Enter Email ID"
@@ -54,27 +42,12 @@
             android:layout_marginBottom="20dp"
             android:background="@color/colorWhite"/>
 
-   <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal">-->
-
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Password"-->
-            <!--android:layout_weight="1"-->
-            <!--android:textColor="@color/cardview_light_background"-->
-            <!--android:padding="5dp"/>-->
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/password"
             android:inputType="textPassword"
-            android:textColor="@color/cardview_light_background"
+            android:textColor="@color/cardview_dark_background"
             android:layout_gravity="center_horizontal"
             android:hint="Enter your password"
             android:layout_marginLeft="20dp"
@@ -82,12 +55,6 @@
             android:paddingLeft="15dp"
             android:background="@color/colorWhite"/>
 
-<!--</LinearLayout>-->
-
-
-<!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content">-->
     <com.google.android.gms.common.SignInButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
