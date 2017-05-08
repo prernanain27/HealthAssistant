@@ -1,5 +1,6 @@
 package example.healthassistant.Activities;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -35,7 +36,6 @@ public class ViewPHR extends AppCompatActivity {
     EditText viewPHRCaretakerContact_editText ;
     Button savePHR;
 
-
     public static final String[] ALL_COLUMNS = {
             DbContract.DbEntryPHR.COLUMN_ID,
             DbContract.DbEntryPHR.COLUMN_ADDRESS,
@@ -66,8 +66,6 @@ public class ViewPHR extends AppCompatActivity {
         setContentView(R.layout.activity_view_phr);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //TextView viewPHRHead_textView = (TextView) findViewById(R.id.viewPhrHeading);
-        //TextView viewPHRData_textView = (TextView) findViewById(R.id.viewPhrData);
 
          viewPHRName_editText = (EditText) findViewById(R.id.viewPhrName);
          viewPHRAddress_editText = (EditText) findViewById(R.id.viewPhrAddress);
@@ -111,15 +109,7 @@ public class ViewPHR extends AppCompatActivity {
         int indexCareTakerContact = cursor.getColumnIndex(DbContract.DbEntryPHR.COLUMN_CARETAKER_CONTACT);
         if(cursor.getCount() != 0) {
             Log.d("View AddPHRActivity: " , "Record Exists");
-            /*viewPHRHead_textView.setText("Name:" + "\n \n" + "Address:" + "\n \n" +
-                    "DOB:" + "\n \n" + "Sex:" + "\n \n" + "Gym Time:" + "\n \n" + "Breakfast Time:" + "\n \n" + "Lunch Time:" +
-                    "\n \n" + "Dinner Time:" + "\n \n" + "Primary Contact:" + "\n \n" + "Emergency Contact:" + "\n \n" + "CareTaker Contact:");
-            viewPHRData_textView.setText(cursor.getString(indexName) + "\n \n" + cursor.getString(indexAddress) + "\n \n" +
-                    cursor.getString(indexDOB) + "\n \n" + cursor.getString(indexSex) + "\n \n" + cursor.getString(indexGymTime) +
-                    "\n \n" + cursor.getString(indexBreakfastTime)
-                    + "\n \n" + cursor.getString(indexLunchTime) + "\n \n" + cursor.getString(indexDinnerTime) +
-                    "\n \n" + cursor.getString(indexPrimaryContact) + "\n \n" + cursor.getString(indexEmergencyContact) + "\n \n"
-                    + cursor.getString(indexCareTakerContact));*/
+
             viewPHRName_editText.setText(cursor.getString(indexName));
             viewPHRAddress_editText.setText(cursor.getString(indexAddress));
             viewPHRDOB_editText.setText(cursor.getString(indexDOB));
@@ -143,8 +133,6 @@ public class ViewPHR extends AppCompatActivity {
             viewPHRPrimaryContact_Text.setText("Primary Contact");
             viewPHREmergencyContact_Text.setText("Emergency Contact");
             viewPHRCaretakerContact_Text.setText("Caretaker Contact");
-
-
         }
         else {
             Log.d("View AddPHRActivity: " , "No Record Exists");
@@ -155,7 +143,7 @@ public class ViewPHR extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "You can now edit your information", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 viewPHRName_editText.setEnabled(true);
                 viewPHRAddress_editText.setEnabled(true);
@@ -173,6 +161,12 @@ public class ViewPHR extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        savePHR.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                updateAllRows();
+            }
+        });
     }
     public Cursor getAllRows() {
         String where = null;
@@ -193,6 +187,61 @@ public class ViewPHR extends AppCompatActivity {
         }
 
         return cursor;
+    }
+
+    public void updateAllRows(){
+        String where = null;
+        db = new DbHelper(getApplicationContext());
+        Log.d("ViewPHR", " entered get all rows");
+        mDb = db.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DbContract.DbEntryPHR.COLUMN_NAME, viewPHRName_editText.getText().toString());
+        contentValues.put(DbContract.DbEntryPHR.COLUMN_ADDRESS, viewPHRAddress_editText.getText().toString());
+        contentValues.put(DbContract.DbEntryPHR.COLUMN_DOB, viewPHRDOB_editText.getText().toString());
+        contentValues.put(DbContract.DbEntryPHR.COLUMN_SEX, viewPHRSex_editText.getText().toString());
+        contentValues.put(DbContract.DbEntryPHR.COLUMN_GYM_TIME, viewPHRGym_editText.getText().toString());
+        contentValues.put(DbContract.DbEntryPHR.COLUMN_BREAKFAST_TIME, viewPHRBreakfast_editText.getText().toString());
+        contentValues.put(DbContract.DbEntryPHR.COLUMN_LUNCH_TIME, viewPHRLunch_editText.getText().toString());
+        contentValues.put(DbContract.DbEntryPHR.COLUMN_DINNER_TIME, viewPHRDinner_editText.getText().toString());
+        contentValues.put(DbContract.DbEntryPHR.COLUMN_PRIMARY_CONTACT, viewPHRPrimaryContact_editText.getText().toString());
+        contentValues.put(DbContract.DbEntryPHR.COLUMN_EMERGENCT_CONTACT, viewPHREmergencyContact_editText.getText().toString());
+        contentValues.put(DbContract.DbEntryPHR.COLUMN_CARETAKER_CONTACT, viewPHRCaretakerContact_editText.getText().toString());
+
+        try {
+            mDb.update(DbContract.DbEntryPHR.TABLE_NAME, contentValues, null, null);
+            viewPHRName_editText.setEnabled(false);
+            viewPHRAddress_editText.setEnabled(false);
+            viewPHRDOB_editText.setEnabled(false);
+            viewPHRSex_editText.setEnabled(false);
+            viewPHRGym_editText.setEnabled(false);
+            viewPHRBreakfast_editText.setEnabled(false);
+            viewPHRLunch_editText.setEnabled(false);
+            viewPHRDinner_editText.setEnabled(false);
+            viewPHRPrimaryContact_editText.setEnabled(false);
+            viewPHREmergencyContact_editText.setEnabled(false);
+            viewPHRCaretakerContact_editText.setEnabled(false);
+            savePHR.setVisibility(View.INVISIBLE);
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(getApplicationContext(),"Record not updated, something went wrong!",Toast.LENGTH_LONG);
+        }finally {
+            Toast.makeText(getApplicationContext(),"Record updated successfully!",Toast.LENGTH_LONG);
+
+        }
+
+
+        /*try {
+            if (cursor != null) {
+                cursor.moveToFirst();
+                int indexName = cursor.getColumnIndex(DbContract.DbEntryPHR.COLUMN_NAME);
+                Log.d("ViewPHR:GetAllRows", cursor.getString(indexName));
+            }
+
+        }catch(Exception e){
+            Log.d("Exception Occured: " , " " +e);
+        }*/
+
     }
 
 }
