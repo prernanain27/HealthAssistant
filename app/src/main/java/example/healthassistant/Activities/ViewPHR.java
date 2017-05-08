@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,19 @@ import example.healthassistant.R;
 public class ViewPHR extends AppCompatActivity {
     private SQLiteDatabase mDb;
     SQLiteOpenHelper db;
+    EditText viewPHRName_editText;
+    EditText viewPHRAddress_editText ;
+    EditText viewPHRDOB_editText ;
+    EditText viewPHRSex_editText ;
+    EditText viewPHRGym_editText ;
+    EditText viewPHRBreakfast_editText;
+    EditText viewPHRLunch_editText ;
+    EditText viewPHRDinner_editText ;
+    EditText viewPHRPrimaryContact_editText ;
+    EditText viewPHREmergencyContact_editText ;
+    EditText viewPHRCaretakerContact_editText ;
+    Button savePHR;
+
 
     public static final String[] ALL_COLUMNS = {
             DbContract.DbEntryPHR.COLUMN_ID,
@@ -55,17 +69,18 @@ public class ViewPHR extends AppCompatActivity {
         //TextView viewPHRHead_textView = (TextView) findViewById(R.id.viewPhrHeading);
         //TextView viewPHRData_textView = (TextView) findViewById(R.id.viewPhrData);
 
-        EditText viewPHRName_editText = (EditText) findViewById(R.id.viewPhrName);
-        EditText viewPHRAddress_editText = (EditText) findViewById(R.id.viewPhrAddress);
-        EditText viewPHRDOB_editText = (EditText) findViewById(R.id.viewPhrDOB);
-        EditText viewPHRSex_editText = (EditText) findViewById(R.id.viewPhrSex);
-        EditText viewPHRGym_editText = (EditText) findViewById(R.id.viewPhrGym);
-        EditText viewPHRBreakfast_editText = (EditText) findViewById(R.id.viewPhrBreakfast);
-        EditText viewPHRLunch_editText = (EditText) findViewById(R.id.viewPhrLunch);
-        EditText viewPHRDinner_editText = (EditText) findViewById(R.id.viewPhrDinner);
-        EditText viewPHRPrimaryContact_editText = (EditText) findViewById(R.id.viewPhrPrimaryContact);
-        EditText viewPHREmergencyContact_editText = (EditText) findViewById(R.id.viewPhrEmergencyContact);
-        EditText viewPHRCaretakerContact_editText = (EditText) findViewById(R.id.viewPhrCaretakerContact);
+         viewPHRName_editText = (EditText) findViewById(R.id.viewPhrName);
+         viewPHRAddress_editText = (EditText) findViewById(R.id.viewPhrAddress);
+         viewPHRDOB_editText = (EditText) findViewById(R.id.viewPhrDOB);
+         viewPHRSex_editText = (EditText) findViewById(R.id.viewPhrSex);
+         viewPHRGym_editText = (EditText) findViewById(R.id.viewPhrGym);
+         viewPHRBreakfast_editText = (EditText) findViewById(R.id.viewPhrBreakfast);
+         viewPHRLunch_editText = (EditText) findViewById(R.id.viewPhrLunch);
+         viewPHRDinner_editText = (EditText) findViewById(R.id.viewPhrDinner);
+         viewPHRPrimaryContact_editText = (EditText) findViewById(R.id.viewPhrPrimaryContact);
+         viewPHREmergencyContact_editText = (EditText) findViewById(R.id.viewPhrEmergencyContact);
+         viewPHRCaretakerContact_editText = (EditText) findViewById(R.id.viewPhrCaretakerContact);
+         savePHR = (Button) findViewById(R.id.savePHR);
 
         TextView viewPHRName_Text = (TextView) findViewById(R.id.viewPhrName_tv);
         TextView viewPHRAddress_Text = (TextView) findViewById(R.id.viewPhrAddress_tv);
@@ -142,6 +157,19 @@ public class ViewPHR extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                viewPHRName_editText.setEnabled(true);
+                viewPHRAddress_editText.setEnabled(true);
+                viewPHRDOB_editText.setEnabled(true);
+                viewPHRSex_editText.setEnabled(true);
+                viewPHRGym_editText.setEnabled(true);
+                viewPHRBreakfast_editText.setEnabled(true);
+                viewPHRLunch_editText.setEnabled(true);
+                viewPHRDinner_editText.setEnabled(true);
+                viewPHRPrimaryContact_editText.setEnabled(true);
+                viewPHREmergencyContact_editText.setEnabled(true);
+                viewPHRCaretakerContact_editText.setEnabled(true);
+                savePHR.setVisibility(View.VISIBLE);
+
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
