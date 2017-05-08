@@ -11,8 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +28,7 @@ public class ViewPHR extends AppCompatActivity {
     EditText viewPHRName_editText;
     EditText viewPHRAddress_editText ;
     EditText viewPHRDOB_editText ;
-    EditText viewPHRSex_editText ;
+    Spinner viewPHRSex_editText ;
     EditText viewPHRGym_editText ;
     EditText viewPHRBreakfast_editText;
     EditText viewPHRLunch_editText ;
@@ -34,6 +36,8 @@ public class ViewPHR extends AppCompatActivity {
     EditText viewPHRPrimaryContact_editText ;
     EditText viewPHREmergencyContact_editText ;
     EditText viewPHRCaretakerContact_editText ;
+    EditText viewPHRHeight_editText;
+    EditText viewPHRWeight_editText;
     Button savePHR;
 
     public static final String[] ALL_COLUMNS = {
@@ -70,7 +74,7 @@ public class ViewPHR extends AppCompatActivity {
          viewPHRName_editText = (EditText) findViewById(R.id.viewPhrName);
          viewPHRAddress_editText = (EditText) findViewById(R.id.viewPhrAddress);
          viewPHRDOB_editText = (EditText) findViewById(R.id.viewPhrDOB);
-         viewPHRSex_editText = (EditText) findViewById(R.id.viewPhrSex);
+         viewPHRSex_editText = (Spinner) findViewById(R.id.viewPhrSex);
          viewPHRGym_editText = (EditText) findViewById(R.id.viewPhrGym);
          viewPHRBreakfast_editText = (EditText) findViewById(R.id.viewPhrBreakfast);
          viewPHRLunch_editText = (EditText) findViewById(R.id.viewPhrLunch);
@@ -78,19 +82,12 @@ public class ViewPHR extends AppCompatActivity {
          viewPHRPrimaryContact_editText = (EditText) findViewById(R.id.viewPhrPrimaryContact);
          viewPHREmergencyContact_editText = (EditText) findViewById(R.id.viewPhrEmergencyContact);
          viewPHRCaretakerContact_editText = (EditText) findViewById(R.id.viewPhrCaretakerContact);
-         savePHR = (Button) findViewById(R.id.savePHR);
+         viewPHRHeight_editText = (EditText) findViewById(R.id.viewPhrHeight);
+         viewPHRWeight_editText = (EditText) findViewById(R.id.viewPhrWeight);
+         viewPHRSex_editText.setEnabled(false);
 
-        TextView viewPHRName_Text = (TextView) findViewById(R.id.viewPhrName_tv);
-        TextView viewPHRAddress_Text = (TextView) findViewById(R.id.viewPhrAddress_tv);
-        TextView viewPHRDOB_Text = (TextView) findViewById(R.id.viewPhrDOB_tv);
-        TextView viewPHRSex_Text = (TextView) findViewById(R.id.viewPhrSex_tv);
-        TextView viewPHRGym_Text = (TextView) findViewById(R.id.viewPhrGym_tv);
-        TextView viewPHRBreakfast_Text = (TextView) findViewById(R.id.viewPhrBreakfast_tv);
-        TextView viewPHRLunch_Text = (TextView) findViewById(R.id.viewPhrLunch_tv);
-        TextView viewPHRDinner_Text = (TextView) findViewById(R.id.viewPhrDinner_tv);
-        TextView viewPHRPrimaryContact_Text = (TextView) findViewById(R.id.viewPhrPrimaryContact_tv);
-        TextView viewPHREmergencyContact_Text = (TextView) findViewById(R.id.viewPhrEmergencyContact_tv);
-        TextView viewPHRCaretakerContact_Text = (TextView) findViewById(R.id.viewPhrCaretakerContact_tv);
+        savePHR = (Button) findViewById(R.id.savePHR);
+
 
         Cursor cursor = getAllRows();
         int indexName = cursor.getColumnIndex(DbContract.DbEntryPHR.COLUMN_NAME);
@@ -98,6 +95,8 @@ public class ViewPHR extends AppCompatActivity {
         int indexAddress = cursor.getColumnIndex(DbContract.DbEntryPHR.COLUMN_ADDRESS);
         int indexDOB = cursor.getColumnIndex(DbContract.DbEntryPHR.COLUMN_DOB);
         int indexSex = cursor.getColumnIndex(DbContract.DbEntryPHR.COLUMN_SEX);
+        final int indexHeight = cursor.getColumnIndex(DbContract.DbEntryPHR.COLUMN_HEIGHT_FEET);
+        int indexWeight = cursor.getColumnIndex(DbContract.DbEntryPHR.COLUMN_EYE_SIGHT);
         //int indexBloodType = cursor.getColumnIndex(DbContract.DbEntryPHR.COLUMN_BLOODTYPE);
         //int indexBloodSign = cursor.getColumnIndex(DbContract.DbEntryPHR.COLUMN_BLOOD_SIGN);
         int indexGymTime = cursor.getColumnIndex(DbContract.DbEntryPHR.COLUMN_GYM_TIME);
@@ -109,11 +108,17 @@ public class ViewPHR extends AppCompatActivity {
         int indexCareTakerContact = cursor.getColumnIndex(DbContract.DbEntryPHR.COLUMN_CARETAKER_CONTACT);
         if(cursor.getCount() != 0) {
             Log.d("View AddPHRActivity: " , "Record Exists");
+            ArrayAdapter myAdap = (ArrayAdapter) viewPHRSex_editText.getAdapter(); //cast to an ArrayAdapter
+
+            int spinnerPosition = myAdap.getPosition(cursor.getString(indexSex));
+
 
             viewPHRName_editText.setText(cursor.getString(indexName));
             viewPHRAddress_editText.setText(cursor.getString(indexAddress));
             viewPHRDOB_editText.setText(cursor.getString(indexDOB));
-            viewPHRSex_editText.setText(cursor.getString(indexSex));
+            viewPHRSex_editText.setSelection(spinnerPosition);
+            viewPHRHeight_editText.setText(cursor.getString(indexHeight));
+            viewPHRWeight_editText.setText(cursor.getString(indexWeight));
             viewPHRGym_editText.setText(cursor.getString(indexGymTime));
             viewPHRBreakfast_editText.setText(cursor.getString(indexBreakfastTime));
             viewPHRLunch_editText.setText(cursor.getString(indexLunchTime));
@@ -122,17 +127,6 @@ public class ViewPHR extends AppCompatActivity {
             viewPHREmergencyContact_editText.setText(cursor.getString(indexEmergencyContact));
             viewPHRCaretakerContact_editText.setText(cursor.getString(indexCareTakerContact));
 
-            viewPHRName_Text.setText("Name");
-            viewPHRAddress_Text.setText("Address");
-            viewPHRDOB_Text.setText("DOB");
-            viewPHRSex_Text.setText("Sex");
-            viewPHRGym_Text.setText("Gym Time");
-            viewPHRBreakfast_Text.setText("Breakfast Time");
-            viewPHRLunch_Text.setText("Lunch Time");
-            viewPHRDinner_Text.setText("Dinner Time");
-            viewPHRPrimaryContact_Text.setText("Primary Contact");
-            viewPHREmergencyContact_Text.setText("Emergency Contact");
-            viewPHRCaretakerContact_Text.setText("Caretaker Contact");
         }
         else {
             Log.d("View AddPHRActivity: " , "No Record Exists");
@@ -149,6 +143,8 @@ public class ViewPHR extends AppCompatActivity {
                 viewPHRAddress_editText.setEnabled(true);
                 viewPHRDOB_editText.setEnabled(true);
                 viewPHRSex_editText.setEnabled(true);
+                viewPHRHeight_editText.setEnabled(true);
+                viewPHRWeight_editText.setEnabled(true);
                 viewPHRGym_editText.setEnabled(true);
                 viewPHRBreakfast_editText.setEnabled(true);
                 viewPHRLunch_editText.setEnabled(true);
@@ -198,7 +194,9 @@ public class ViewPHR extends AppCompatActivity {
         contentValues.put(DbContract.DbEntryPHR.COLUMN_NAME, viewPHRName_editText.getText().toString());
         contentValues.put(DbContract.DbEntryPHR.COLUMN_ADDRESS, viewPHRAddress_editText.getText().toString());
         contentValues.put(DbContract.DbEntryPHR.COLUMN_DOB, viewPHRDOB_editText.getText().toString());
-        contentValues.put(DbContract.DbEntryPHR.COLUMN_SEX, viewPHRSex_editText.getText().toString());
+        contentValues.put(DbContract.DbEntryPHR.COLUMN_SEX, viewPHRSex_editText.getSelectedItem().toString());
+        contentValues.put(DbContract.DbEntryPHR.COLUMN_HEIGHT_FEET, viewPHRHeight_editText.getText().toString());
+        contentValues.put(DbContract.DbEntryPHR.COLUMN_EYE_SIGHT, viewPHRWeight_editText.getText().toString());
         contentValues.put(DbContract.DbEntryPHR.COLUMN_GYM_TIME, viewPHRGym_editText.getText().toString());
         contentValues.put(DbContract.DbEntryPHR.COLUMN_BREAKFAST_TIME, viewPHRBreakfast_editText.getText().toString());
         contentValues.put(DbContract.DbEntryPHR.COLUMN_LUNCH_TIME, viewPHRLunch_editText.getText().toString());
