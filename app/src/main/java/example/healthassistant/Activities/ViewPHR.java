@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,8 +52,33 @@ public class ViewPHR extends AppCompatActivity {
         setContentView(R.layout.activity_view_phr);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        TextView viewPHRHead_textView = (TextView) findViewById(R.id.viewPhrHeading);
-        TextView viewPHRData_textView = (TextView) findViewById(R.id.viewPhrData);
+        //TextView viewPHRHead_textView = (TextView) findViewById(R.id.viewPhrHeading);
+        //TextView viewPHRData_textView = (TextView) findViewById(R.id.viewPhrData);
+
+        EditText viewPHRName_editText = (EditText) findViewById(R.id.viewPhrName);
+        EditText viewPHRAddress_editText = (EditText) findViewById(R.id.viewPhrAddress);
+        EditText viewPHRDOB_editText = (EditText) findViewById(R.id.viewPhrDOB);
+        EditText viewPHRSex_editText = (EditText) findViewById(R.id.viewPhrSex);
+        EditText viewPHRGym_editText = (EditText) findViewById(R.id.viewPhrGym);
+        EditText viewPHRBreakfast_editText = (EditText) findViewById(R.id.viewPhrBreakfast);
+        EditText viewPHRLunch_editText = (EditText) findViewById(R.id.viewPhrLunch);
+        EditText viewPHRDinner_editText = (EditText) findViewById(R.id.viewPhrDinner);
+        EditText viewPHRPrimaryContact_editText = (EditText) findViewById(R.id.viewPhrPrimaryContact);
+        EditText viewPHREmergencyContact_editText = (EditText) findViewById(R.id.viewPhrEmergencyContact);
+        EditText viewPHRCaretakerContact_editText = (EditText) findViewById(R.id.viewPhrCaretakerContact);
+
+        TextView viewPHRName_Text = (TextView) findViewById(R.id.viewPhrName_tv);
+        TextView viewPHRAddress_Text = (TextView) findViewById(R.id.viewPhrAddress_tv);
+        TextView viewPHRDOB_Text = (TextView) findViewById(R.id.viewPhrDOB_tv);
+        TextView viewPHRSex_Text = (TextView) findViewById(R.id.viewPhrSex_tv);
+        TextView viewPHRGym_Text = (TextView) findViewById(R.id.viewPhrGym_tv);
+        TextView viewPHRBreakfast_Text = (TextView) findViewById(R.id.viewPhrBreakfast_tv);
+        TextView viewPHRLunch_Text = (TextView) findViewById(R.id.viewPhrLunch_tv);
+        TextView viewPHRDinner_Text = (TextView) findViewById(R.id.viewPhrDinner_tv);
+        TextView viewPHRPrimaryContact_Text = (TextView) findViewById(R.id.viewPhrPrimaryContact_tv);
+        TextView viewPHREmergencyContact_Text = (TextView) findViewById(R.id.viewPhrEmergencyContact_tv);
+        TextView viewPHRCaretakerContact_Text = (TextView) findViewById(R.id.viewPhrCaretakerContact_tv);
+
         Cursor cursor = getAllRows();
         int indexName = cursor.getColumnIndex(DbContract.DbEntryPHR.COLUMN_NAME);
         Log.d("ViewPHR: "," "+ cursor.getString(indexName));
@@ -70,7 +96,7 @@ public class ViewPHR extends AppCompatActivity {
         int indexCareTakerContact = cursor.getColumnIndex(DbContract.DbEntryPHR.COLUMN_CARETAKER_CONTACT);
         if(cursor.getCount() != 0) {
             Log.d("View AddPHRActivity: " , "Record Exists");
-            viewPHRHead_textView.setText("Name:" + "\n \n" + "Address:" + "\n \n" +
+            /*viewPHRHead_textView.setText("Name:" + "\n \n" + "Address:" + "\n \n" +
                     "DOB:" + "\n \n" + "Sex:" + "\n \n" + "Gym Time:" + "\n \n" + "Breakfast Time:" + "\n \n" + "Lunch Time:" +
                     "\n \n" + "Dinner Time:" + "\n \n" + "Primary Contact:" + "\n \n" + "Emergency Contact:" + "\n \n" + "CareTaker Contact:");
             viewPHRData_textView.setText(cursor.getString(indexName) + "\n \n" + cursor.getString(indexAddress) + "\n \n" +
@@ -78,7 +104,32 @@ public class ViewPHR extends AppCompatActivity {
                     "\n \n" + cursor.getString(indexBreakfastTime)
                     + "\n \n" + cursor.getString(indexLunchTime) + "\n \n" + cursor.getString(indexDinnerTime) +
                     "\n \n" + cursor.getString(indexPrimaryContact) + "\n \n" + cursor.getString(indexEmergencyContact) + "\n \n"
-                    + cursor.getString(indexCareTakerContact));
+                    + cursor.getString(indexCareTakerContact));*/
+            viewPHRName_editText.setText(cursor.getString(indexName));
+            viewPHRAddress_editText.setText(cursor.getString(indexAddress));
+            viewPHRDOB_editText.setText(cursor.getString(indexDOB));
+            viewPHRSex_editText.setText(cursor.getString(indexSex));
+            viewPHRGym_editText.setText(cursor.getString(indexGymTime));
+            viewPHRBreakfast_editText.setText(cursor.getString(indexBreakfastTime));
+            viewPHRLunch_editText.setText(cursor.getString(indexLunchTime));
+            viewPHRDinner_editText.setText(cursor.getString(indexDinnerTime));
+            viewPHRPrimaryContact_editText.setText(cursor.getString(indexPrimaryContact));
+            viewPHREmergencyContact_editText.setText(cursor.getString(indexEmergencyContact));
+            viewPHRCaretakerContact_editText.setText(cursor.getString(indexCareTakerContact));
+
+            viewPHRName_Text.setText("Name");
+            viewPHRAddress_Text.setText("Address");
+            viewPHRDOB_Text.setText("DOB");
+            viewPHRSex_Text.setText("Sex");
+            viewPHRGym_Text.setText("Gym Time");
+            viewPHRBreakfast_Text.setText("Breakfast Time");
+            viewPHRLunch_Text.setText("Lunch Time");
+            viewPHRDinner_Text.setText("Dinner Time");
+            viewPHRPrimaryContact_Text.setText("Primary Contact");
+            viewPHREmergencyContact_Text.setText("Emergency Contact");
+            viewPHRCaretakerContact_Text.setText("Caretaker Contact");
+
+
         }
         else {
             Log.d("View AddPHRActivity: " , "No Record Exists");

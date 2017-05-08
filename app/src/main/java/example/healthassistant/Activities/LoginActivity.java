@@ -54,13 +54,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-
         signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions).build();
         google_login = (SignInButton) findViewById(R.id.Google_sign_in);
         newUser = (Button) findViewById(R.id.new_user);
         password = (EditText) findViewById(R.id.password);
-      emailEditText = (EditText) findViewById(R.id.email);
+        emailEditText = (EditText) findViewById(R.id.email);
         login = (Button) findViewById(R.id.logIn);
         loginErrorMessage = (TextView) findViewById(R.id.loginErrorMessage);
 
@@ -71,7 +70,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 startActivity(intent);
             }
         });
-
 
         google_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,10 +125,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         Toast.makeText(LoginActivity.this, "Email not registered. Please click on 'New User' button to register!",Toast.LENGTH_LONG).show();
                         Log.d("Exception Occured: " , "Email Not Registered: " +e);
 
-
                     }
-
-
 
                 }
             }
