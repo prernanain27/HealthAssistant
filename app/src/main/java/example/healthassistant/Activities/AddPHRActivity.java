@@ -58,6 +58,11 @@ public class AddPHRActivity extends AppCompatActivity  {
         db = new DbHelper(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phr);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        PersonalInformation personalInformation =new PersonalInformation();
+        fragmentTransaction.replace(R.id.contentFrame, personalInformation);
+        fragmentTransaction.commit();
         save = (Button)findViewById(R.id.savePHR);
         personal=(Button) findViewById(R.id.personal);
         personal.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +110,7 @@ public class AddPHRActivity extends AppCompatActivity  {
                 if(User.getName()!= "" ||User.getSex()!= ""||User.getDob()!= ""||User.getPrimary_contact()!= ""||User.getEmergency_contact()!= ""){
                     if(User.getBlood_sign()!=""||User.getBoold_type()!=""||User.getHeight_feet()!=""||User.getHeight_inches()!=""){
                         if(User.getWake_up_time()!=""||User.getBreakfast_time()!=""||User.getLunch_time()!=""||User.getGym_time()!=""||User.getDinner_time()!=""||User.getSleep_time()!=""){
-                            Toast.makeText(AddPHRActivity.this,"Wohhoo",Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(AddPHRActivity.this,"Wohhoo",Toast.LENGTH_SHORT).show();
                         }
                         else Toast.makeText(AddPHRActivity.this, "Fill Timings Mandatory Details",Toast.LENGTH_SHORT).show();
                     }

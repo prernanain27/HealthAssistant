@@ -115,7 +115,7 @@ public class ViewPHR extends AppCompatActivity {
 
             viewPHRName_editText.setText(cursor.getString(indexName));
             viewPHRAddress_editText.setText(cursor.getString(indexAddress));
-            viewPHRDOB_editText.setText(cursor.getString(indexDOB));
+         //   viewPHRDOB_editText.setText(cursor.getString(indexDOB));
             viewPHRSex_editText.setSelection(spinnerPosition);
             viewPHRHeight_editText.setText(cursor.getString(indexHeight));
             viewPHRWeight_editText.setText(cursor.getString(indexWeight));

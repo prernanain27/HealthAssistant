@@ -67,6 +67,7 @@ public class PersonalInformation extends Fragment  {
                 User.setPrimary_contact(primary_contact.getText().toString());
                 User.setAddress(address.getText().toString());
                 User.setSex(sex.getSelectedItem().toString());
+                User.setDob(dob.getText().toString());
                 User.setName(name.getText().toString());
                 Toast.makeText(getActivity().getApplicationContext(),"Information Saved",Toast.LENGTH_SHORT).show();
             }

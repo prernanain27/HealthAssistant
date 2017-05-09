@@ -94,9 +94,7 @@ public class NotificationService1 extends IntentService {
         String hour = Integer.toString(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
         String minutes = "";
         int min = (Calendar.getInstance().get(Calendar.MINUTE));
-        if (min < 10)
-            minutes = "0"+Integer.toString(min);
-        else minutes = Integer.toString(min);
+         minutes = Integer.toString(min);
         String value1 = hour+":"+minutes;
         String value = year+"-"+month+"-"+day;
         String[] projection = {DbContract.DbEntryAppointment.COLUMN_DOC_NAME, DbContract.DbEntryAppointment.COLUMN_APPOINT_TIME};
