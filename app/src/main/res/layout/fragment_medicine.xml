@@ -78,24 +78,6 @@
         <TextView
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="Medicine Total"
-            android:textSize="17sp"/>
-        <EditText
-            android:id="@+id/medTotal"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:layout_marginLeft="10dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="1dp">
-        <TextView
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
             android:text="Duration"
             android:textSize="17sp"/>
         <EditText
@@ -111,6 +93,25 @@
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="1dp">
+        <TextView
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Medicine Total"
+            android:textSize="17sp"/>
+        <EditText
+            android:id="@+id/medTotal"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
