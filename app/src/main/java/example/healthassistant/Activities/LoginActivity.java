@@ -97,7 +97,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
                 email = email.trim();
                 pass = pass.trim();
-
+                if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                    builder.setMessage("Invalid Email Address")
+                            .setTitle("Error")
+                            .setPositiveButton(android.R.string.ok, null);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
                 if (email.isEmpty() || pass.isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                     builder.setMessage(R.string.login_error_message)

@@ -4,12 +4,14 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import java.lang.String;
 
 import example.healthassistant.DbContract;
 import example.healthassistant.DbHelper;
@@ -24,6 +26,7 @@ public class NewUserData extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user_data);
         email = (EditText)findViewById(R.id.signUpEmail);
@@ -55,6 +58,15 @@ public class NewUserData extends AppCompatActivity {
                 }
                 else
                     Toast.makeText(NewUserData.this, "Enter valid Email Address",Toast.LENGTH_SHORT).show();
+
+                if (!email.getText().toString().trim().matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(NewUserData.this);
+                    builder.setMessage("Invalid Email Address")
+                            .setTitle("Error")
+                            .setPositiveButton(android.R.string.ok, null);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
             }
         });
     }

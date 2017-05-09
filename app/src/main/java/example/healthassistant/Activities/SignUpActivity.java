@@ -45,7 +45,14 @@ public class SignUpActivity extends AppCompatActivity {
 
                 password = password.trim();
                 email = email.trim();
-
+                if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+                    builder.setMessage("Invalid Email Address")
+                            .setTitle("Error")
+                            .setPositiveButton(android.R.string.ok, null);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
                 if (password.isEmpty() || email.isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                     builder.setMessage(R.string.signup_error_message)
