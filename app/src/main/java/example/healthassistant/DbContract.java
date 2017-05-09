@@ -76,4 +76,16 @@ public class DbContract {
         public static final String COLUMN_MIN_TO = "min_to";
 
     }
+
+    public static final class DbEntryAppointment implements BaseColumns{
+        public static final String TABLE_NAME = "Doc_Appointment";
+        public static final String COLUMN_ID = "_id";
+        public static final String COLUMN_DOC_NAME = "doc_name";
+        public static final String COLUMN_DOC_CONTACT = "doc_contact";
+        public static final String COLUMN_APPOINT_DATE = "appointment_date";
+        public static final String COLUMN_APPOINT_TIME = "appointment_time";
+        public static final String COLUMN_APPOINT_DESCRIPTION = "appointment_description";
+
+
+    }
 }

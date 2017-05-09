@@ -43,6 +43,15 @@ public class DbHelper extends SQLiteOpenHelper {
                 DbContract.DbEntryInterferer.COLUMN_MIN_FROM + " TEXT , " +
                 DbContract.DbEntryInterferer.COLUMN_MIN_TO + " TEXT " + ");";
 
+        final String SQL_CREATE_DOC_APPOINTMENT = "CREATE TABLE "+
+                DbContract.DbEntryAppointment.TABLE_NAME + "(" +
+                DbContract.DbEntryAppointment.COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , "+
+                DbContract.DbEntryAppointment.COLUMN_DOC_NAME + " TEXT , " +
+                DbContract.DbEntryAppointment.COLUMN_DOC_CONTACT + " TEXT , " +
+                DbContract.DbEntryAppointment.COLUMN_APPOINT_DATE + " TEXT , " +
+                DbContract.DbEntryAppointment.COLUMN_APPOINT_TIME + " TEXT , " +
+                DbContract.DbEntryAppointment.COLUMN_APPOINT_DESCRIPTION + " TEXT " + ");";
+
 
         final String SQL_CREATE_PHR = "CREATE TABLE "+
                 DbContract.DbEntryPHR.TABLE_NAME + "("+
@@ -96,6 +105,7 @@ public class DbHelper extends SQLiteOpenHelper {
             db.execSQL(SQL_CREATE_PRESCRIPTION);
             db.execSQL(SQL_CREATE_MED_SPEC);
             db.execSQL(SQL_CREATE_MED_INTERFERER);
+            db.execSQL(SQL_CREATE_DOC_APPOINTMENT);
             Log.d("Create Table"," Prescription Successful");
         }
         catch (Exception e){
@@ -110,6 +120,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryPrescription.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryMed.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryInterferer.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryAppointment.TABLE_NAME);
         onCreate(db);
     }
 }
