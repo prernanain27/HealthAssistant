@@ -2,6 +2,7 @@ package example.healthassistant.Activities;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -14,6 +15,7 @@ import example.healthassistant.DbContract;
 import example.healthassistant.DbHelper;
 import example.healthassistant.R;
 
+import static example.healthassistant.DbContract.DbEntryAppointment.COLUMN_DOC_CONTACT;
 import static example.healthassistant.DbContract.DbEntryInterferer.COLUMN_INTERFERER_ID;
 import static example.healthassistant.DbContract.DbEntryInterferer.COLUMN_MED_ID;
 import static example.healthassistant.DbContract.DbEntryInterferer.COLUMN_MIN_FROM;
@@ -32,8 +34,13 @@ public class Medicine_Schedule extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medicine__schedule);
         db = new DbHelper(getApplicationContext());
-        if(a == 1)
+        mDb = db.getWritableDatabase();
+        String[] projection = {DbContract.DbEntryMed.COLUMN_MED_NAME};
+        Cursor data = mDb.query(DbContract.DbEntryMed.TABLE_NAME,projection, null,null,null,null,null,null);
+        if(!(data.getCount()>0)){
             addData();
+        }
+
 
 
     }
@@ -84,7 +91,7 @@ public class Medicine_Schedule extends AppCompatActivity {
         cv5.put(COLUMN_SEPARATION,"60");
         cv6.put(COLUMN_SEPARATION,"60");
         cv7.put(COLUMN_SEPARATION,"60");
-      //  cv.put(COLUMN_INTERFERENCE,"2");
+        //  cv.put(COLUMN_INTERFERENCE,"2");
 
         // CONTENT VALUES FOR MED_INTERFERER TABLE
         ContentValues cv8 = new ContentValues();
@@ -128,14 +135,13 @@ public class Medicine_Schedule extends AppCompatActivity {
             long result10 = mDb.insert(DbContract.DbEntryInterferer.TABLE_NAME, null, cv10);
             long result11 = mDb.insert(DbContract.DbEntryInterferer.TABLE_NAME, null, cv11);
 
-                if(result != -1&& result1 != -1 && result2 != -1 && result3 != -1 && result4 != -1 && result5 != -1 && result6 != -1 && result7 != -1) {
-                    if(result8 != -1 && result9 != -1 && result10 != -1 && result11 != -1 ) {
-                        a = 2 ;
-                        Toast.makeText(this, "Inserted successfully in both tables", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        Toast.makeText(this, "Inserted successfully in specifications tables", Toast.LENGTH_SHORT).show();
-                    }
+            if(result != -1&& result1 != -1 && result2 != -1 && result3 != -1 && result4 != -1 && result5 != -1 && result6 != -1 && result7 != -1) {
+                if(result8 != -1 && result9 != -1 && result10 != -1 && result11 != -1 ) {
+                    Toast.makeText(this, "Inserted successfully in both tables", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(this, "Inserted successfully in specifications tables", Toast.LENGTH_SHORT).show();
+                }
             }
             else
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
@@ -150,5 +156,6 @@ public class Medicine_Schedule extends AppCompatActivity {
 
 
     }
+
 
 }

@@ -88,4 +88,12 @@ public class DbContract {
 
 
     }
+
+    public static final class DbEntryFirstTime implements BaseColumns {
+        public static final String TABLE_NAME = "First_Time_Data";
+        public static final String COLUMN_ID = "_id";
+        public static final String COLUMN_NUMBER = "first_number";
+
+    }
+
 }
