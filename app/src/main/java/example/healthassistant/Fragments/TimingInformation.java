@@ -102,14 +102,33 @@ public class TimingInformation extends Fragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User.setWake_up_time(wakeUp.getText().toString());
-                User.setBreakfast_time(breakFast.getText().toString());
-                User.setLunch_time(lunch.getText().toString());
-                User.setGym_time(gym.getText().toString());
-                User.setDinner_time(dinner.getText().toString());
-                User.setSleep_time(sleep.getText().toString());
-                Toast.makeText(getActivity().getApplicationContext(),"Information Saved",Toast.LENGTH_SHORT).show();
-
+                if (wakeUp.getText().toString().trim().matches("")) {
+                    Toast.makeText(getActivity(), "Please enter Wake-Up Time", Toast.LENGTH_SHORT).show();
+                }
+                else if (breakFast.getText().toString().trim().matches("")) {
+                    Toast.makeText(getActivity(), "Please enter Breakfast Time", Toast.LENGTH_SHORT).show();
+                }
+                else if (breakFast.getText().toString().trim().matches("")) {
+                    Toast.makeText(getActivity(), "Please enter Breakfast Time", Toast.LENGTH_SHORT).show();
+                }
+                else if (lunch.getText().toString().trim().matches("")) {
+                    Toast.makeText(getActivity(), "Please enter Lunch Time", Toast.LENGTH_SHORT).show();
+                }
+                else if (dinner.getText().toString().trim().matches("")) {
+                    Toast.makeText(getActivity(), "Please enter Dinner Time", Toast.LENGTH_SHORT).show();
+                }
+                else if (sleep.getText().toString().trim().matches("")) {
+                    Toast.makeText(getActivity(), "Please enter Sleep Time", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    User.setWake_up_time(wakeUp.getText().toString());
+                    User.setBreakfast_time(breakFast.getText().toString());
+                    User.setLunch_time(lunch.getText().toString());
+                    User.setGym_time(gym.getText().toString());
+                    User.setDinner_time(dinner.getText().toString());
+                    User.setSleep_time(sleep.getText().toString());
+                    Toast.makeText(getActivity().getApplicationContext(), "Information Saved", Toast.LENGTH_SHORT).show();
+                }
 //                addData();
 
             }
