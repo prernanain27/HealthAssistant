@@ -1,29 +1,309 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="example.healthassistant.ViewPHR"
+    tools:context="example.healthassistant.Activities.ViewPHR"
     tools:showIn="@layout/activity_view_phr">
 
-<TextView
-    android:layout_width="wrap_content"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:layout_height="match_parent"
-    android:id="@+id/viewPhrHeading"
-    android:textColor="@color/cardview_dark_background"
-    android:textSize="16sp"
-    android:textAllCaps="true"
-    />
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:id="@+id/viewPhrData"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="16sp"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:id="@+id/viewPhrName_tv"
+            android:paddingLeft="5dp"
+            android:text="Name"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="14sp"
+            android:enabled="false"/>
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="36dp"
+            android:id="@+id/viewPhrName"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="14sp"
+            android:enabled="false"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/viewPhrAddress_tv"
+            android:text="Address"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="14sp"
+            android:enabled="false"/>
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="36dp"
+                android:id="@+id/viewPhrAddress"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="14sp"
+                android:enabled="false"/>
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/viewPhrDOB_tv"
+            android:text="DOB"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="14sp"
+            android:enabled="false"/>
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="36dp"
+                android:id="@+id/viewPhrDOB"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="14sp"
+                android:enabled="false"/>
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/viewPhrSex_tv"
+            android:text="Sex"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="14sp"
+            android:enabled="false"/>
+
+            <Spinner
+                android:layout_width="200dp"
+                android:layout_height="36dp"
+                android:entries="@array/Sex"
+                android:layout_weight="2"
+                android:gravity="center_horizontal"
+                android:id="@+id/viewPhrSex"
+                android:textColor="@color/cardview_dark_background"
+                android:clickable="false"></Spinner>
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/viewPhrHeight_tv"
+            android:text="Height"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="14sp"
+            android:enabled="false"/>
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="36dp"
+                android:id="@+id/viewPhrHeight"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="14sp"
+                android:enabled="false"/>
+
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/viewPhrWeight_tv"
+            android:text="Weight"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="14sp"
+            android:enabled="false"/>
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="36dp"
+                android:id="@+id/viewPhrWeight"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="14sp"
+                android:enabled="false"/>
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/viewPhrGym_tv"
+            android:text="Gym Time"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="14sp"
+            android:enabled="false"/>
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="36dp"
+                android:id="@+id/viewPhrGym"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="14sp"
+                android:enabled="false"/>
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/viewPhrBreakfast_tv"
+            android:text="Breakfast Time"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="14sp"
+            android:enabled="false"/>
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="36dp"
+                android:id="@+id/viewPhrBreakfast"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="14sp"
+                android:enabled="false"/>
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/viewPhrLunch_tv"
+            android:text="Lunch Time"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="14sp"
+            android:enabled="false"/>
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="36dp"
+                android:id="@+id/viewPhrLunch"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="14sp"
+                android:enabled="false"/>
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/viewPhrDinner_tv"
+            android:text="Dinner Time"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="14sp"
+            android:enabled="false"/>
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="36dp"
+                android:id="@+id/viewPhrDinner"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="14sp"
+                android:enabled="false"/>
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/viewPhrPrimaryContact_tv"
+            android:text="Primary Contact"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="14sp"
+            android:enabled="false"/>
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="36dp"
+                android:id="@+id/viewPhrPrimaryContact"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="14sp"
+                android:enabled="false"/>
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/viewPhrEmergencyContact_tv"
+            android:text="Emergency Contact"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="14sp"
+            android:enabled="false"/>
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="36dp"
+                android:id="@+id/viewPhrEmergencyContact"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="14sp"
+                android:enabled="false"/>
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/viewPhrCaretakerContact_tv"
+            android:text="Care Taker Contact"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="14sp"
+            android:enabled="false"/>
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="36dp"
+                android:id="@+id/viewPhrCaretakerContact"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="14sp"
+                android:enabled="false"/>
+            </LinearLayout>
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="36dp"
+    android:layout_gravity="center_horizontal|bottom"
+    android:textColor="@color/cardview_light_background"
+    android:id="@id/savePHR"
+    android:text="Save"
+    android:background="@color/colorPrimary"
+    android:visibility="invisible"/>
 </LinearLayout>

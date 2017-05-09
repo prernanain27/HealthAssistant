@@ -1,4 +1,4 @@
-package example.healthassistant;
+package example.healthassistant.Activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -13,6 +13,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import example.healthassistant.DbContract;
+import example.healthassistant.DbHelper;
+import example.healthassistant.Fragments.DetailedInformation;
+import example.healthassistant.Fragments.PersonalInformation;
+import example.healthassistant.Models.User;
+import example.healthassistant.R;
+import example.healthassistant.Fragments.TimingInformation;
 
 import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_ADDRESS;
 import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_BLOODTYPE;
@@ -35,7 +43,7 @@ import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_SEX;
 import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_WAKE_UP_TIME;
 
 
-public class PHR extends AppCompatActivity  {
+public class AddPHRActivity extends AppCompatActivity  {
     private Button personal;
     private Button details;
     private Button timings;
@@ -73,7 +81,7 @@ public class PHR extends AppCompatActivity  {
                 fragmentTransaction.replace(R.id.contentFrame, detailedInformation);
              fragmentTransaction.commit();}
                 else
-                    Toast.makeText(PHR.this, "Fill all the mandatory Personal Information",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddPHRActivity.this, "Fill all the mandatory Personal Information",Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -88,7 +96,7 @@ public class PHR extends AppCompatActivity  {
                 fragmentTransaction.replace(R.id.contentFrame, timingInformation);
                 fragmentTransaction.commit();}
                 else
-                    Toast.makeText(PHR.this, "Fill all the mandatory Detailed Information",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddPHRActivity.this, "Fill all the mandatory Detailed Information",Toast.LENGTH_SHORT).show();
             }
         });
         save.setOnClickListener(new View.OnClickListener() {
@@ -97,16 +105,16 @@ public class PHR extends AppCompatActivity  {
                 if(User.getName()!= "" ||User.getSex()!= ""||User.getDob()!= ""||User.getPrimary_contact()!= ""||User.getEmergency_contact()!= ""){
                     if(User.getBlood_sign()!=""||User.getBoold_type()!=""||User.getHeight_feet()!=""||User.getHeight_inches()!=""){
                         if(User.getWake_up_time()!=""||User.getBreakfast_time()!=""||User.getLunch_time()!=""||User.getGym_time()!=""||User.getDinner_time()!=""||User.getSleep_time()!=""){
-                            Toast.makeText(PHR.this,"Wohhoo",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddPHRActivity.this,"Wohhoo",Toast.LENGTH_SHORT).show();
                         }
-                        else Toast.makeText(PHR.this, "Fill Timings Mandatory Details",Toast.LENGTH_SHORT).show();
+                        else Toast.makeText(AddPHRActivity.this, "Fill Timings Mandatory Details",Toast.LENGTH_SHORT).show();
                     }
                     else
-                        Toast.makeText(PHR.this, "Fill Detailed Mandatory Details",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddPHRActivity.this, "Fill Detailed Mandatory Details",Toast.LENGTH_SHORT).show();
 
                 }
                 else
-                    Toast.makeText(PHR.this, "Fill Personal Mandatory Details",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddPHRActivity.this, "Fill Personal Mandatory Details",Toast.LENGTH_SHORT).show();
                 addData();
             }
 
@@ -117,7 +125,7 @@ public class PHR extends AppCompatActivity  {
     }
 
     public void addData(){
-        Log.d("AddData: ", "Entered into Insert PHR");
+        Log.d("AddData: ", "Entered into Insert AddPHRActivity");
         //DbHelper db = new DbHelper(getActivity());
 
         mDb = db.getWritableDatabase();
@@ -143,7 +151,7 @@ public class PHR extends AppCompatActivity  {
         cv.put(COLUMN_LUNCH_TIME,User.getLunch_time());
         cv.put(COLUMN_GYM_TIME,User.getGym_time());
         cv.put(COLUMN_DINNER_TIME,User.getDinner_time());
-        Log.d("AddData PHR: ", " " + User.getName());
+        Log.d(" AddPHRActivity: ", " " + User.getName());
         try {
 
             long result = mDb.insert(DbContract.DbEntryPHR.TABLE_NAME, null, cv);

@@ -14,7 +14,7 @@ public class DbContract {
         public static final String COLUMN_EMAIL = "email";
     }
     public static final class DbEntryPHR implements BaseColumns {
-        public static final String TABLE_NAME = "PHR";
+        public static final String TABLE_NAME = "AddPHRActivity";
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_Email = "email";
         public static final String COLUMN_NAME = "name";
@@ -45,10 +45,47 @@ public class DbContract {
         public static final String COLUMN_MED_NAME = "med_name";
         public static final String COLUMN_MED_DOSE = "med_dose";
         public static final String COLUMN_MED_TYPE = "med_type";
-        public static final String COLUMN_MED_TIME = "med_time";
+        public static final String COLUMN_MED_TIME_BB = "med_time_BB";
+        public static final String COLUMN_MED_TIME_AB = "med_time_AB";
+        public static final String COLUMN_MED_TIME_BL = "med_time_BL";
+        public static final String COLUMN_MED_TIME_AL = "med_time_AL";
+        public static final String COLUMN_MED_TIME_BD = "med_time_BD";
+        public static final String COLUMN_MED_TIME_AD = "med_time_AD";
         public static final String COLUMN_DURATION = "duration";
         public static final String COLUMN_DURATION_TYPE = "duration_type";
 //        public static final String COLUMN_MED_TOTAL = "med_total";
     }
 
+    public static final class DbEntryMed implements BaseColumns{
+        public static final String TABLE_NAME = "Med_Specification";
+        public static final String COLUMN_ID = "_id";
+        public static final String COLUMN_MED_NAME = "med_name";
+        public static final String COLUMN_MIN_DOSE = "min_dose";
+        public static final String COLUMN_MAX_DOSE = "max_dose";
+        public static final String COLUMN_SEPARATION = "separation";
+     //   public static final String COLUMN_INTERFERENCE = "interference";
+
+    }
+
+    public static final class DbEntryInterferer implements BaseColumns{
+        public static final String TABLE_NAME = "Med_Interferer";
+        public static final String COLUMN_ID = "_id";
+        public static final String COLUMN_MED_ID = "med_id";
+        public static final String COLUMN_INTERFERER_ID = "interferer_id";
+        public static final String COLUMN_MIN_FROM = "min_from";
+        public static final String COLUMN_MIN_TO = "min_to";
+
+    }
+
+    public static final class DbEntryAppointment implements BaseColumns{
+        public static final String TABLE_NAME = "Doc_Appointment";
+        public static final String COLUMN_ID = "_id";
+        public static final String COLUMN_DOC_NAME = "doc_name";
+        public static final String COLUMN_DOC_CONTACT = "doc_contact";
+        public static final String COLUMN_APPOINT_DATE = "appointment_date";
+        public static final String COLUMN_APPOINT_TIME = "appointment_time";
+        public static final String COLUMN_APPOINT_DESCRIPTION = "appointment_description";
+
+
+    }
 }

@@ -1,7 +1,5 @@
-package example.healthassistant;
+package example.healthassistant.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,8 +12,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.List;
 
-public class MedicineFrag extends Fragment {
+import example.healthassistant.Models.Medicine;
+import example.healthassistant.Models.Prescription;
+import example.healthassistant.R;
+
+
+//Added by neha
+public class MedicineFrag extends Fragment implements MultiSelectionSpinner.OnMultipleItemsSelectedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
@@ -24,7 +29,7 @@ public class MedicineFrag extends Fragment {
     EditText medTotal;
     EditText duration;
     Spinner doseDropdown;
-    Spinner medTimeDropdown;
+    MultiSelectionSpinner medTimeDropdown;
     Spinner durationDropdown;
     Prescription prescription = new Prescription();
 
@@ -69,10 +74,13 @@ public class MedicineFrag extends Fragment {
         ArrayAdapter<String> doseAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, doseItems);
         doseDropdown.setAdapter(doseAdapter);
 
-        medTimeDropdown = (Spinner) getActivity().findViewById(R.id.spinner2);
+        medTimeDropdown = (MultiSelectionSpinner) getActivity().findViewById(R.id.spinner2);
         String[] medTimeItems = new String[]{"Before Breakfast","After Breakfast","Before Lunch","After Lunch","Before Dinner","After Dinner"};
-        ArrayAdapter<String> medTimeAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, medTimeItems);
-        medTimeDropdown.setAdapter(medTimeAdapter);
+        //ArrayAdapter<String> medTimeAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, medTimeItems);
+        //medTimeDropdown.setAdapter(medTimeAdapter);
+        medTimeDropdown.setItems(medTimeItems);
+        medTimeDropdown.setSelection(new int[]{1});
+        medTimeDropdown.setListener(this);
 
         durationDropdown = (Spinner)getActivity().findViewById(R.id.spinner3);
         String[] durationItems = new String[]{"Days", "Months"};
@@ -110,7 +118,7 @@ public class MedicineFrag extends Fragment {
                         med.setMedDuration(duration.getText().toString());
                         med.setMedTotal(medTotal.getText().toString());
                         med.setMedType(doseDropdown.getSelectedItem().toString());
-                        med.setMedTime(medTimeDropdown.getSelectedItem().toString());
+                        med.setMedTime(medTimeDropdown.getSelectedStrings());
                         med.setDurationType(durationDropdown.getSelectedItem().toString());
 
                         prescription.medicineArrayList.add(med);
@@ -131,4 +139,23 @@ public class MedicineFrag extends Fragment {
 
     }
 
+    @Override
+    public void selectedIndices(List<Integer> indices) {
+
+    }
+
+    @Override
+    public void selectedStrings(List<String> _strings) {
+
+        final List<String> strings = _strings;
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                Toast.makeText(getActivity().getApplicationContext(), strings.toString(), Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+    }
 }

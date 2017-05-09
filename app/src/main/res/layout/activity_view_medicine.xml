@@ -9,7 +9,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="example.healthassistant.ViewMedicine">
+    tools:context="example.healthassistant.Activities.ViewMedicine">
 
    <!-- <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"

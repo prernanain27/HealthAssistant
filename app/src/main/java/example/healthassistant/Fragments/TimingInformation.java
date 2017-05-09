@@ -1,45 +1,24 @@
-package example.healthassistant;
+package example.healthassistant.Fragments;
 
 import android.app.Fragment;
 import android.app.TimePickerDialog;
-import android.content.ContentValues;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
 
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_ADDRESS;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_BLOODTYPE;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_BLOOD_SIGN;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_BREAKFAST_TIME;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_CARETAKER_CONTACT;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_DINNER_TIME;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_DOB;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_EMERGENCT_CONTACT;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_EYE_SIGHT;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_EYE_SIGN;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_Email;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_GYM_TIME;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_HEIGHT_FEET;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_HEIGHT_INCHES;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_LUNCH_TIME;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_NAME;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_PRIMARY_CONTACT;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_SEX;
+import example.healthassistant.Models.User;
+import example.healthassistant.R;
+
 //import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_SLEEP_TIME;
-import static example.healthassistant.DbContract.DbEntryPHR.COLUMN_WAKE_UP_TIME;
+
 
 public class TimingInformation extends Fragment {
 
