@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -29,6 +30,15 @@ import com.google.firebase.auth.FirebaseUser;
 import example.healthassistant.DbContract;
 import example.healthassistant.DbHelper;
 import example.healthassistant.R;
+
+import static example.healthassistant.DbContract.DbEntryInterferer.COLUMN_INTERFERER_ID;
+import static example.healthassistant.DbContract.DbEntryInterferer.COLUMN_MED_ID;
+import static example.healthassistant.DbContract.DbEntryInterferer.COLUMN_MIN_FROM;
+import static example.healthassistant.DbContract.DbEntryInterferer.COLUMN_MIN_TO;
+import static example.healthassistant.DbContract.DbEntryMed.COLUMN_MAX_DOSE;
+import static example.healthassistant.DbContract.DbEntryMed.COLUMN_MED_NAME;
+import static example.healthassistant.DbContract.DbEntryMed.COLUMN_MIN_DOSE;
+import static example.healthassistant.DbContract.DbEntryMed.COLUMN_SEPARATION;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -152,5 +162,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
 
     }
+
+
+
 
 }

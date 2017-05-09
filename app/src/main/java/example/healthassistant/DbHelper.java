@@ -25,6 +25,11 @@ public class DbHelper extends SQLiteOpenHelper {
                 DbContract.DbEntry.COLUMN_EMAIL +   " TEXT  , "+
                 DbContract.DbEntry.COLUMN_PASSWORD + " TEXT  "+");";
 
+        final String SQL_CREATE_FIRST = "CREATE TABLE "+
+                DbContract.DbEntryFirstTime.TABLE_NAME + "("+
+                DbContract.DbEntryFirstTime.COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , "+
+                DbContract.DbEntryFirstTime.COLUMN_NUMBER + " TEXT  "+");";
+
         final String SQL_CREATE_MED_SPEC = "CREATE TABLE "+
                 DbContract.DbEntryMed.TABLE_NAME + "(" +
                 DbContract.DbEntryMed.COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , "+
@@ -106,6 +111,7 @@ public class DbHelper extends SQLiteOpenHelper {
             db.execSQL(SQL_CREATE_MED_SPEC);
             db.execSQL(SQL_CREATE_MED_INTERFERER);
             db.execSQL(SQL_CREATE_DOC_APPOINTMENT);
+            db.execSQL(SQL_CREATE_FIRST);
             Log.d("Create Table"," Prescription Successful");
         }
         catch (Exception e){
@@ -121,6 +127,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryMed.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryInterferer.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryAppointment.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryFirstTime.TABLE_NAME);
         onCreate(db);
     }
 }
