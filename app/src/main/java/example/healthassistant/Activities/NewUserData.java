@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,7 +39,7 @@ public class NewUserData extends AppCompatActivity {
         createUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(email.getText().toString()!=""){
+                if(email.getText().toString()!="" && email.getText().toString().trim().matches("^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$")){
                     if(!password.getText().toString().equals("")&&!confirmPassword.getText().toString().equals("")){
                         if(password.getText().toString().equals(confirmPassword.getText().toString())){
                             db = new DbHelper(getApplicationContext());
@@ -53,15 +54,15 @@ public class NewUserData extends AppCompatActivity {
 
                             else
                                Toast.makeText(NewUserData.this, "Use other email address. This one already registered",Toast.LENGTH_SHORT).show();
-
                         }
                         else
                             Toast.makeText(NewUserData.this, "Password and confirm password don't match",Toast.LENGTH_SHORT).show();
                     }
-                    else Toast.makeText(NewUserData.this, "Enter valid Passwords",Toast.LENGTH_SHORT).show();
+                    else Toast.makeText(NewUserData.this, "Enter valid Password",Toast.LENGTH_SHORT).show();
                 }
                 else
                     Toast.makeText(NewUserData.this, "Enter valid Email Address",Toast.LENGTH_SHORT).show();
+
             }
 
         });

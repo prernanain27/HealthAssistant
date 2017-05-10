@@ -28,6 +28,7 @@ public class ViewMedicine extends Activity {
     private Context mContext;
     private RelativeLayout mRelativeLayout;
     ListView medicineListView;
+    TextView diseaseTextView;
     private SQLiteDatabase mDb;
     SQLiteOpenHelper db;
     List<Medicine> viewMedicines = new ArrayList<Medicine>();
@@ -38,25 +39,25 @@ public class ViewMedicine extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_medicine);
+        diseaseTextView = (TextView) findViewById(R.id.tv_disease);
 
         medicineListView = (ListView) findViewById(R.id.medicineList);
         Bundle prescription = getIntent().getExtras();
         String prescriptionName = prescription.getString("prescriptionName");
-        viewMedicines = getMedicineData(prescriptionName);
+        String diseaseName = prescription.getString("diseaseName");
+        diseaseTextView.setText(diseaseName);
+        viewMedicines = getMedicineData(prescriptionName, diseaseName);
         Log.d("ViewMedicineOnCreate: ", " " + viewMedicines.size());
-        //ArrayAdapter<Medicine> simpleAdapter = new MedicineAdapter(this, R.layout.medicine_item_cv, viewMedicines);
         medicineListView.setAdapter(new MedicineAdapter());
         Log.d("PrintListViewChildCount", " " + medicineListView.getChildCount());
     }
 
 
-    public  List<Medicine> getMedicineData(String prescriptionName) {
-        //setContentView(R.layout.medicine_item_cv);
-
+    public  List<Medicine> getMedicineData(String prescriptionName, String disease) {
         Log.d("ViewMedicine","Entered Get Medicine Data Method");
-        String whereClause = DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME + "=?";
+        String whereClause = DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME + "=?  and " + DbContract.DbEntryPrescription.COLUMN_DISEASE + "=?";
         List<Medicine> viewMedicines = new ArrayList<>();
-        String[] whereArgs = {prescriptionName};
+        String[] whereArgs = {prescriptionName, disease};
         mContext = getApplicationContext();
         db =  new DbHelper(getApplicationContext());
         mDb = db.getWritableDatabase();
@@ -76,7 +77,6 @@ public class ViewMedicine extends Activity {
             int indexMedDuration = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_DURATION);
             Log.d("GetMedicineData","MedicineName Index");
 
-           // CardView card = (CardView) findViewById(R.id.card_view_medItem);
             if (cursor.getCount() > 0) {
 
                 while (cursor.moveToNext()) {
@@ -108,6 +108,36 @@ public class ViewMedicine extends Activity {
         db.close();
         return viewMedicines;
     }
+
+   /* private String getDisease(String prescriptionName) {
+        String diseaseName = "";
+        String whereClause = DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME + "=?";
+        String[] whereArgs = {prescriptionName};
+        mContext = getApplicationContext();
+        db =  new DbHelper(getApplicationContext());
+        mDb = db.getWritableDatabase();
+        Cursor cursor = null;
+        try {
+
+            cursor = mDb.query(DbContract.DbEntryPrescription.TABLE_NAME, viewPrescription.ALL_COLUMNS, whereClause, whereArgs, null, null, null);
+            int indexDisease = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_DISEASE);
+            Log.d("getDisease","Disease Name Index " + indexDisease);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    diseaseName = cursor.getString(indexDisease);
+                    Log.d("getDisease", diseaseName);
+                }
+            }
+        } catch (Exception e) {
+            Log.d("Populate List View", " exception details: " + e);
+        } finally {
+
+            db.close();
+
+        }
+        return diseaseName;
+    }
+*/
     private class MedicineAdapter extends BaseAdapter {
         @Override
         public int getCount() {

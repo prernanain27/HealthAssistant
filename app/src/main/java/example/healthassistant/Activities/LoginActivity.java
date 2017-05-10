@@ -130,6 +130,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             startActivity(homeScreen);
 
                         }
+                        if (!email.matches("^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$")) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                            builder.setMessage("Invalid Email Address")
+                                    .setTitle("Error")
+                                    .setPositiveButton(android.R.string.ok, null);
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
                     }catch(Exception e){
                         loginErrorMessage.setText("Email not registered. Click on 'New User' button to register!");
                         Toast.makeText(LoginActivity.this, "Email not registered. Please click on 'New User' button to register!",Toast.LENGTH_LONG).show();

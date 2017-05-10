@@ -17,6 +17,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         /> -->
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="35dp"
+    android:id="@+id/tv_disease"
+    android:background="@color/black_overlay"
+    android:textAllCaps="true"
+    android:textColor="@color/cardview_light_background"
+    android:text="Disease Name"
+    android:textStyle="bold"
+    android:gravity="center"
+    />
 
     <ListView
         android:layout_width="match_parent"
