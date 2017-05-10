@@ -63,7 +63,24 @@ public class AddMedicine extends AppCompatActivity {
         Bundle prescription = getIntent().getExtras();
         presName = prescription.getString("presName");
         disease = prescription.getString("disease");
+        Button addMed = (Button) findViewById(R.id.addMed_frag);
+        addMed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+//                if(Prescription.getMedicineArrayList().isEmpty()){
+//                    Prescription.setMedicineArrayList(medArray);
+//                }
+                //Medicine medicine;
+                Log.d("medFrag.med", medicine.getMedName());
+
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                MedicineFrag medFrag = new MedicineFrag();
+                fragmentTransaction.replace(R.id.addMedFrame, medFrag);
+                fragmentTransaction.commit();
+            }
+        });
 
         Button savePrescription = (Button) findViewById(R.id.addMedicine);
         savePrescription.setOnClickListener(new View.OnClickListener() {
