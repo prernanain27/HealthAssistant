@@ -54,6 +54,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private FirebaseUser mFirebaseUser;
     private SQLiteDatabase mDb;
     SQLiteOpenHelper db;
+    String email;
+    String pass;
     private TextView loginErrorMessage;
 
 
@@ -64,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions).build();
         google_login = (SignInButton) findViewById(R.id.Google_sign_in);
         newUser = (Button) findViewById(R.id.new_user);
@@ -92,19 +94,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = emailEditText.getText().toString();
-                String pass = password.getText().toString();
+                 email = emailEditText.getText().toString();
+                 pass = password.getText().toString();
 
                 email = email.trim();
                 pass = pass.trim();
-                if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                    builder.setMessage("Invalid Email Address")
-                            .setTitle("Error")
-                            .setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                }
+
                 if (email.isEmpty() || pass.isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                     builder.setMessage(R.string.login_error_message)
@@ -113,14 +108,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 } else {
-                    String where = null;
+                    String where = email;
                     db = new DbHelper(getApplicationContext());
                     Log.d("LoginActivity", " entered user login.setOnClickListner");
                     mDb = db.getWritableDatabase();
-
                     String[] projection = {DbContract.DbEntry.COLUMN_EMAIL, DbContract.DbEntry.COLUMN_PASSWORD};
-
-                    Cursor data = mDb.query(true, DbContract.DbEntry.TABLE_NAME, projection, where, null, null, null, null, null);
+                    Cursor data = mDb.query( DbContract.DbEntry.TABLE_NAME, projection,DbContract.DbEntry.COLUMN_EMAIL + " = ?",new String[]{where} , null, null, null, null);
                     int indexEmail = data.getColumnIndex(DbContract.DbEntry.COLUMN_EMAIL);
                     int indexPassword = data.getColumnIndex(DbContract.DbEntry.COLUMN_PASSWORD);
                     try {
@@ -163,12 +156,54 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (requestCode == REQUEST_CODE) {
             GoogleSignInResult user = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             GoogleSignInAccount profile_data = user.getSignInAccount();
-            Intent i = new Intent(this, HomeScreen.class);
-            startActivity(i);
+            if(profile_data != null) {
+                String g_mail = profile_data.getEmail().toString();
+                String where = g_mail;
+                db = new DbHelper(getApplicationContext());
+                Log.d("LoginActivity", " entered user login.setOnClickListner");
+                mDb = db.getWritableDatabase();
+
+                String[] projection = {DbContract.DbEntry.COLUMN_EMAIL, DbContract.DbEntry.COLUMN_PASSWORD};
+
+                Cursor data1 = mDb.query(DbContract.DbEntry.TABLE_NAME, projection, DbContract.DbEntry.COLUMN_EMAIL + " = ?", new String[]{where}, null, null, null, null);
+                if (data1.getCount() > 0) {
+                    Intent i = new Intent(this, HomeScreen.class);
+                    startActivity(i);
+                } else {
+                 //   NewUserData nw = new NewUserData();
+                 //   nw.addData(g_mail, "");
+                    addData(g_mail, " ");
+                    Intent i = new Intent(this, AddPHRActivity.class);
+                    startActivity(i);
+                }
+            }
+            else
+                Toast.makeText(this, "Something is wrong with sign-in",Toast.LENGTH_SHORT).show();
 
         }
 
     }
+
+    public void addData(String email, String password) {
+        db = new DbHelper(this);
+        mDb = db.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(DbContract.DbEntry.COLUMN_EMAIL, email);
+        cv.put(DbContract.DbEntry.COLUMN_PASSWORD, password);
+        try {
+            long result = mDb.insert(DbContract.DbEntry.TABLE_NAME, null, cv);
+
+            if (result != -1)
+                Toast.makeText(this, "Inserted successfully", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
+        catch (SQLiteException ex){
+            String s = ex.getMessage();
+        }
+
+    }
+
 
 
 
