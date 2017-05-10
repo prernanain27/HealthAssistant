@@ -6,33 +6,41 @@ import java.util.ArrayList;
  * Created by ameethakkar on 4/2/17.
  */
 
-public class
-Prescription {
-    private static String prescriptionName = "";
-    private static String disease = "";
-    public static ArrayList <Medicine> medicineArrayList = new ArrayList<Medicine>();
+public class Prescription {
+    private  String prescriptionName = "";
+    private  String disease = "";
+    public  ArrayList <Medicine> medicineArrayList = new ArrayList<Medicine>();
+    public static ArrayList<Medicine> medStaticArrayList = new ArrayList<>();
 
-    public static String getPrescriptionName() {
+    public  String getPrescriptionName() {
         return prescriptionName;
     }
 
-    public static void setPrescriptionName(String prescriptionName) {
-        Prescription.prescriptionName = prescriptionName;
+    public  void setPrescriptionName(String prescriptionName) {
+        this.prescriptionName = prescriptionName;
     }
 
-    public static String getDisease() {
+    public static ArrayList<Medicine> getMedStaticArrayList() {
+        return medStaticArrayList;
+    }
+
+    public static void setMedStaticArrayList(ArrayList<Medicine> medStaticArrayList) {
+        Prescription.medStaticArrayList = medStaticArrayList;
+    }
+
+    public  String getDisease() {
         return disease;
     }
 
-    public static void setDisease(String disease) {
-        Prescription.disease = disease;
+    public  void setDisease(String disease) {
+        this.disease = disease;
     }
 
-    public static ArrayList<Medicine> getMedicineArrayList() {
+    public  ArrayList<Medicine> getMedicineArrayList() {
         return medicineArrayList;
     }
 
-    public static void setMedicineArrayList(ArrayList<Medicine> medicineArrayList) {
-        Prescription.medicineArrayList = medicineArrayList;
+    public  void setMedicineArrayList(ArrayList<Medicine> medicineArrayList) {
+        this.medicineArrayList = medicineArrayList;
     }
 }

@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import example.healthassistant.DbContract;
 import example.healthassistant.DbHelper;
+import example.healthassistant.Models.User;
 import example.healthassistant.R;
 
 public class ViewPHR extends AppCompatActivity {
@@ -40,29 +41,7 @@ public class ViewPHR extends AppCompatActivity {
     EditText viewPHRWeight_editText;
     Button savePHR;
 
-    public static final String[] ALL_COLUMNS = {
-            DbContract.DbEntryPHR.COLUMN_ID,
-            DbContract.DbEntryPHR.COLUMN_ADDRESS,
-            DbContract.DbEntryPHR.COLUMN_BLOODTYPE,
-            DbContract.DbEntryPHR.COLUMN_BLOOD_SIGN,
-            DbContract.DbEntryPHR.COLUMN_BREAKFAST_TIME,
-            DbContract.DbEntryPHR.COLUMN_CARETAKER_CONTACT,
-            DbContract.DbEntryPHR.COLUMN_DINNER_TIME,
-            DbContract.DbEntryPHR.COLUMN_DOB,
-            DbContract.DbEntryPHR.COLUMN_EMERGENCT_CONTACT,
-            DbContract.DbEntryPHR.COLUMN_EYE_SIGHT,
-            DbContract.DbEntryPHR.COLUMN_EYE_SIGN,
-            DbContract.DbEntryPHR.COLUMN_Email,
-            DbContract.DbEntryPHR.COLUMN_GYM_TIME,
-            DbContract.DbEntryPHR.COLUMN_HEIGHT_FEET,
-            DbContract.DbEntryPHR.COLUMN_HEIGHT_INCHES,
-            DbContract.DbEntryPHR.COLUMN_LUNCH_TIME,
-            DbContract.DbEntryPHR.COLUMN_NAME,
-            DbContract.DbEntryPHR.COLUMN_PRIMARY_CONTACT,
-            DbContract.DbEntryPHR.COLUMN_SEX,
-            DbContract.DbEntryPHR.COLUMN_WAKE_UP_TIME
 
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,7 +148,7 @@ public class ViewPHR extends AppCompatActivity {
         db = new DbHelper(getApplicationContext());
         Log.d("ViewPHR", " entered get all rows");
         mDb = db.getWritableDatabase();
-        Cursor cursor = mDb.query(true, DbContract.DbEntryPHR.TABLE_NAME, ALL_COLUMNS, where, null, null, null, null, null);
+        Cursor cursor = mDb.query(true, DbContract.DbEntryPHR.TABLE_NAME, User.ALL_COLUMNS, where, null, null, null, null, null);
 
         try {
             if (cursor != null) {

@@ -43,6 +43,9 @@ public class Medicine_Schedule extends AppCompatActivity {
 
 
 
+        Intent intent = new Intent(this,CreateScheduleActivity.class);
+        startActivity(intent);
+
     }
 
     private void addData() {

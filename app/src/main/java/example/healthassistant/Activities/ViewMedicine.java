@@ -50,7 +50,7 @@ public class ViewMedicine extends Activity {
     }
 
 
-    public List<Medicine> getMedicineData(String prescriptionName) {
+    public  List<Medicine> getMedicineData(String prescriptionName) {
         //setContentView(R.layout.medicine_item_cv);
 
         Log.d("ViewMedicine","Entered Get Medicine Data Method");

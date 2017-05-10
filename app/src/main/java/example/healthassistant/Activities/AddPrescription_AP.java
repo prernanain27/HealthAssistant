@@ -48,6 +48,7 @@ public class AddPrescription_AP extends AppCompatActivity {
     private static ArrayList<Medicine> medArray = new ArrayList<Medicine>();
     private SQLiteDatabase mDb;
     Medicine medicine = new Medicine();
+    Prescription pres = new Prescription();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,8 +91,8 @@ public class AddPrescription_AP extends AppCompatActivity {
         savePrescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Prescription.setPrescriptionName(presName.getText().toString());
-                Prescription.setDisease(disease.getText().toString());
+                pres.setPrescriptionName(presName.getText().toString());
+                pres.setDisease(disease.getText().toString());
 //                Prescription.setMedicineArrayList(medArray);
 
                 if (presName.getText().toString().trim().matches("")) {
@@ -113,11 +114,11 @@ public class AddPrescription_AP extends AppCompatActivity {
         ContentValues cv = new ContentValues();
 
         String BB= "0",AB="0",BL ="0",AL= "0",BD="0",AD ="0";
-        for (Medicine temp : Prescription.medicineArrayList)
+        for (Medicine temp : Prescription.getMedStaticArrayList())
         {
             //Log.d("timimgs",temp.getMedTimeString().toString());
-            cv.put(COLUMN_PRESCRIPTION_NAME, Prescription.getPrescriptionName());
-            cv.put(COLUMN_DISEASE, Prescription.getDisease());
+            cv.put(COLUMN_PRESCRIPTION_NAME, pres.getPrescriptionName());
+            cv.put(COLUMN_DISEASE, pres.getDisease());
             cv.put(COLUMN_MED_NAME, temp.getMedName());
             cv.put(COLUMN_MED_DOSE, temp.getMedDose());
             cv.put(COLUMN_MED_TYPE, temp.getMedType());

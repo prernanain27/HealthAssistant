@@ -19,7 +19,7 @@ import example.healthassistant.Models.Prescription;
 import example.healthassistant.R;
 
 
-//Added by neha
+//Added by nehaq
 public class MedicineFrag extends Fragment implements MultiSelectionSpinner.OnMultipleItemsSelectedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -121,10 +121,10 @@ public class MedicineFrag extends Fragment implements MultiSelectionSpinner.OnMu
                         med.setMedTime(medTimeDropdown.getSelectedStrings());
                         med.setDurationType(durationDropdown.getSelectedItem().toString());
 
-                        prescription.medicineArrayList.add(med);
+                        Prescription.medStaticArrayList.add(med);
 
                         Log.d("MedicineFrag", med.getMedName());
-                        Log.d("Array Size", "" + prescription.medicineArrayList.size());
+                        Log.d("Array Size", "" + Prescription.medStaticArrayList.size());
 
                         Toast.makeText(getActivity(), "Medicine added to Prescription", Toast.LENGTH_SHORT).show();
                         med = null;
@@ -133,7 +133,7 @@ public class MedicineFrag extends Fragment implements MultiSelectionSpinner.OnMu
             }
         });
 
-        for(Medicine temp: Prescription.medicineArrayList){
+        for(Medicine temp: Prescription.medStaticArrayList){
             Log.d("Object Name:", " " + temp);
         }
 

@@ -1,11 +1,45 @@
 package example.healthassistant.Models;
 
+import java.util.HashMap;
+
+import example.healthassistant.DbContract;
+
 /**
  * Created by prernaa on 4/1/2017.
  */
 
 public class User {
 
+    public static final String WAKE_UP_TIME ="Wake up Time";
+    public static final String BREAKFAST_TIME = "Breakfast Time";
+    public static final String LUNCH_TIME ="Lunch Time";
+    public static final String GYM_TIME ="Gym Time";
+    public static final String DINNER_TIME ="Dinner Time";
+    public static final String SLEEP_TIME ="Sleep Time";
+
+    public static final String[] ALL_COLUMNS = {
+            DbContract.DbEntryPHR.COLUMN_ID,
+            DbContract.DbEntryPHR.COLUMN_ADDRESS,
+            DbContract.DbEntryPHR.COLUMN_BLOODTYPE,
+            DbContract.DbEntryPHR.COLUMN_BLOOD_SIGN,
+            DbContract.DbEntryPHR.COLUMN_BREAKFAST_TIME,
+            DbContract.DbEntryPHR.COLUMN_CARETAKER_CONTACT,
+            DbContract.DbEntryPHR.COLUMN_DINNER_TIME,
+            DbContract.DbEntryPHR.COLUMN_DOB,
+            DbContract.DbEntryPHR.COLUMN_EMERGENCT_CONTACT,
+            DbContract.DbEntryPHR.COLUMN_EYE_SIGHT,
+            DbContract.DbEntryPHR.COLUMN_EYE_SIGN,
+            DbContract.DbEntryPHR.COLUMN_Email,
+            DbContract.DbEntryPHR.COLUMN_GYM_TIME,
+            DbContract.DbEntryPHR.COLUMN_HEIGHT_FEET,
+            DbContract.DbEntryPHR.COLUMN_HEIGHT_INCHES,
+            DbContract.DbEntryPHR.COLUMN_LUNCH_TIME,
+            DbContract.DbEntryPHR.COLUMN_NAME,
+            DbContract.DbEntryPHR.COLUMN_PRIMARY_CONTACT,
+            DbContract.DbEntryPHR.COLUMN_SEX,
+            DbContract.DbEntryPHR.COLUMN_WAKE_UP_TIME
+
+    };
     private static String email = "";
     private static String name = "";
     private static String sex = "";
@@ -27,6 +61,20 @@ public class User {
     private static String dinner_time = "";
     private static String sleep_time = "";
 
+    public static final String[] USERPREFCOLUMNNAMES ={DbContract.DbEntryPHR.COLUMN_WAKE_UP_TIME,DbContract.DbEntryPHR.COLUMN_BREAKFAST_TIME,
+                                                        DbContract.DbEntryPHR.COLUMN_GYM_TIME,
+                                                        DbContract.DbEntryPHR.COLUMN_LUNCH_TIME,
+                                                        DbContract.DbEntryPHR.COLUMN_DINNER_TIME};
+    private HashMap<String,String> userPreferences;
+
+    public HashMap<String, String> getUserPreferences() {
+
+        return userPreferences;
+    }
+
+    public void setUserPreferences(HashMap<String, String> userPreferences) {
+        this.userPreferences = userPreferences;
+    }
 
     public static String getEmail() {
         return email;
