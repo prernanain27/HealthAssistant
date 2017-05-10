@@ -9,6 +9,15 @@ public class MedScheduleItem {
     private String scheduleTime;
     private String medName;
     private String duration;
+    private String dose;
+
+    public String getDose() {
+        return dose;
+    }
+
+    public void setDose(String dose) {
+        this.dose = dose;
+    }
 
     public String getDuration() {
         return duration;

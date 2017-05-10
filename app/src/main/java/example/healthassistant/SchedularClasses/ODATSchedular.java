@@ -103,7 +103,7 @@ public  class ODATSchedular {
         this.feasible = feasible;
     }
 
-    public  void createODATSchedule(ArrayList<Med_Specification> MSSData, ArrayList<Prescription> PresData,HashMap<String ,String> userPreferences)
+    public  ResourceModel createODATSchedule(ArrayList<Med_Specification> MSSData, ArrayList<Prescription> PresData,HashMap<String ,String> userPreferences)
     {
 
         ArrayList<String> temp = new ArrayList<>();
@@ -114,10 +114,11 @@ public  class ODATSchedular {
         mMSSData = MSSData;
         mUserPreferences = userPreferences;
         Med_Specification medFromSpec = new Med_Specification();
+
         for (Prescription prescription:PresData
              ) {
 
-            if(prescription.getPrescriptionName().equals("Test2")) {
+
                 for (Medicine medicine : prescription.getMedicineArrayList()
                         ) {
 
@@ -141,11 +142,12 @@ public  class ODATSchedular {
                             MedScheduleItem item = new MedScheduleItem();
                             item.setScheduleTime(job.getRelease_time());
                             item.setMedName(job.getMed_Name());
+                            item.setDose(currentMedicine.getMedDose());
 
                             tempMedItemArray[0][0] = job.getRelease_time();
                             tempMedItemArray[1][0] = job.getMed_Name();
 
-                            tempSchedule.add(item);
+                            //tempSchedule.add(item);
 
                         } else {
 
@@ -154,32 +156,34 @@ public  class ODATSchedular {
 
                     }
 
-                }
+
             }
 
-            for(int i=0 ;i<tempMedItemArray[0].length;i++)
+
+        }
+
+
+        for(int i=0 ;i<tempMedItemArray[0].length;i++)
+        {
+            if(tempMedItemArray[0][i]!=null) {
+                medItem = new MedScheduleItem();
+                medItem.setMedName(tempMedItemArray[1][i]);
+                medItem.setScheduleTime(tempMedItemArray[0][i]);
+                medItem.setDose(currentMedicine.getMedDose());
+                //medItem.setDuration(currentMedicine.getMedDuration());
+
+                tempSchedule.add(medItem);
+            }
+            else
             {
-                if(tempMedItemArray[0][i]!=null) {
-                    medItem = new MedScheduleItem();
-                    medItem.setMedName(tempMedItemArray[1][i]);
-                    medItem.setScheduleTime(tempMedItemArray[0][i]);
-                    //medItem.setDuration(currentMedicine.getMedDuration());
-
-                    tempSchedule.add(medItem);
-                }
-                else
-                {
-                    break;
-                }
+                break;
             }
-
-
-
-            resourceModel.setSchedule(tempSchedule);
         }
 
 
 
+        resourceModel.setSchedule(tempSchedule);
+    return resourceModel;
 
     }
 

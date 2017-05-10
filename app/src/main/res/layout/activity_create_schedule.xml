@@ -10,4 +10,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="example.healthassistant.Activities.CreateScheduleActivity">
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:dividerHeight="5dp"
+        android:divider="@color/colorWhite"></ListView>
+
 </RelativeLayout>
