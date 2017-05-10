@@ -48,4 +48,5 @@
     <string name="title_activity_view_phr">ViewPHR</string>
     <string name="action_uninstall">Uninstall</string>
     <string name="action_signout">Signout</string>
+    <string name="title_activity_add_medicine">AddMedicine</string>
 </resources>

@@ -26,7 +26,6 @@
         <activity android:name=".Activities.HomeActivity" />
         <activity android:name=".Activities.SignUpActivity" />
         <activity android:name=".Activities.AddPHRActivity" />
-
         <activity
             android:name=".Activities.HomeScreen"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -55,11 +54,10 @@
             android:label="Medicine"
             android:parentActivityName=".Activities.ViewPrescription"
             android:theme="@style/AppTheme" />
-
-        <activity android:name=".Activities.CreateScheduleActivity"
+        <activity
+            android:name=".Activities.CreateScheduleActivity"
             android:label="Your Daily Schedule"
-            android:parentActivityName=".Activities.HomeScreen"
-            />
+            android:parentActivityName=".Activities.HomeScreen" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -83,6 +81,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="example.healthassistant.Activities.HomeScreen" />
+        </activity>
+        <activity
+            android:name=".Activities.AddMedicine"
+            android:label="@string/title_activity_add_medicine"
+            android:parentActivityName=".Activities.ViewPrescription"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="example.healthassistant.Activities.ViewMedicine" />
         </activity>
     </application>
 

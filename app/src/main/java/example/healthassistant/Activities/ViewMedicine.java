@@ -2,11 +2,14 @@ package example.healthassistant.Activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 //import android.support.v7.widget.Card;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,16 +43,29 @@ public class ViewMedicine extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_medicine);
         diseaseTextView = (TextView) findViewById(R.id.tv_disease);
-
         medicineListView = (ListView) findViewById(R.id.medicineList);
         Bundle prescription = getIntent().getExtras();
-        String prescriptionName = prescription.getString("prescriptionName");
-        String diseaseName = prescription.getString("diseaseName");
+        final String prescriptionName = prescription.getString("prescriptionName");
+        final String diseaseName = prescription.getString("diseaseName");
         diseaseTextView.setText(diseaseName);
         viewMedicines = getMedicineData(prescriptionName, diseaseName);
         Log.d("ViewMedicineOnCreate: ", " " + viewMedicines.size());
         medicineListView.setAdapter(new MedicineAdapter());
         Log.d("PrintListViewChildCount", " " + medicineListView.getChildCount());
+
+        FloatingActionButton fabMed = (FloatingActionButton) findViewById(R.id.fabMedicine);
+        fabMed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "You can now edit your information", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(), AddMedicine.class);
+                intent.putExtra("presName", prescriptionName);
+                intent.putExtra("disease", diseaseName);
+                startActivity(intent);
+
+            }
+        });
     }
 
 
