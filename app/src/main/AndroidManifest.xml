@@ -69,7 +69,8 @@
             android:name=".NotificationService1"
             android:exported="false" />
 
-        <activity android:name=".Dialog_Appointment" />
+        <activity android:name=".Dialog_Appointment"
+            android:theme="@android:style/Theme.Dialog"/>
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
