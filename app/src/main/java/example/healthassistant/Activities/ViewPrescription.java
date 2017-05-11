@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,29 +13,34 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import example.healthassistant.Activities.ViewMedicine;
 import example.healthassistant.DbContract;
 import example.healthassistant.DbHelper;
-import example.healthassistant.Models.Medicine;
+import example.healthassistant.Models.Med_Specification;
 import example.healthassistant.Models.Prescription;
 import example.healthassistant.R;
+import example.healthassistant.SchedularClasses.CreateSchedule;
+import example.healthassistant.SchedularClasses.MedScheduleItem;
+import example.healthassistant.SchedularClasses.ResourceModel;
 
 public class ViewPrescription extends AppCompatActivity {
     private SQLiteDatabase mDb;
     SQLiteOpenHelper db;
     ListView prescriptionListView;
     ImageButton buttonDeletePres;
+    Button createSchedule;
     FloatingActionButton floatingActionButtonEdit;
     ArrayList<Prescription> viewPrescription = new ArrayList<Prescription>();
+
+
+
     private String[] medicineData = {
             "Medicine Name",
             "Medicine Type",
@@ -124,6 +128,15 @@ public class ViewPrescription extends AppCompatActivity {
                         }
                     });
                 return true;
+            }
+        });
+
+        createSchedule = (Button)findViewById(R.id.createScheduleButton);
+        createSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                CreateSchedule createSchedule = new CreateSchedule(getApplicationContext());
             }
         });
 

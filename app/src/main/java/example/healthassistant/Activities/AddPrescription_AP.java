@@ -91,6 +91,7 @@ public class AddPrescription_AP extends AppCompatActivity {
         savePrescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 pres.setPrescriptionName(presName.getText().toString());
                 pres.setDisease(disease.getText().toString());
 //                Prescription.setMedicineArrayList(medArray);
@@ -104,6 +105,8 @@ public class AddPrescription_AP extends AppCompatActivity {
                 else {
                     addData();
                 }
+
+                Prescription.setMedStaticArrayList(new ArrayList<Medicine>());
             }
         });
     }

@@ -62,7 +62,7 @@ public class HomeScreen extends AppCompatActivity {
         viewMed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent med = new Intent(getApplicationContext(),CreateScheduleActivity.class);
+                Intent med = new Intent(getApplicationContext(),ViewScheduleActivity.class);
                 startActivity(med);
             }
         });

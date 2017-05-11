@@ -25,10 +25,23 @@ public class DbHelper extends SQLiteOpenHelper {
                 DbContract.DbEntry.COLUMN_EMAIL +   " TEXT  , "+
                 DbContract.DbEntry.COLUMN_PASSWORD + " TEXT  "+");";
 
-        final String SQL_CREATE_FIRST = "CREATE TABLE "+
-                DbContract.DbEntryFirstTime.TABLE_NAME + "("+
-                DbContract.DbEntryFirstTime.COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , "+
-                DbContract.DbEntryFirstTime.COLUMN_NUMBER + " TEXT  "+");";
+        final String SQL_CREATE_MED_SCHEDULE = "CREATE TABLE "+
+                DbContract.DbEntryMed_Schedule.TABLE_NAME + "(" +
+                DbContract.DbEntryMed_Schedule.COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , "+
+                DbContract.DbEntryMed_Schedule.COLUMN_TIME + " TEXT , " +
+                DbContract.DbEntryMed_Schedule.COLUMN_MED_NAME + " TEXT , " +
+                DbContract.DbEntryMed_Schedule.COLUMN_MED_DURATION + " TEXT , " +
+                DbContract.DbEntryMed_Schedule.COLUMN_MED_DOSE + " TEXT , " +
+                DbContract.DbEntryMed_Schedule.COLUMN_DAYS_LAPSED + " TEXT " + ");";
+
+
+        final String SQL_CREATE_USER_DATA_ANALYSIS = "CREATE TABLE "+
+                DbContract.DbEntryUser_DataAnalysis.TABLE_NAME + "(" +
+                DbContract.DbEntryUser_DataAnalysis.COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT , "+
+                DbContract.DbEntryUser_DataAnalysis.COLUMN_DOSE_DATE + " TEXT , " +
+                DbContract.DbEntryUser_DataAnalysis.COLUMN_DOSE_TIME + " TEXT , " +
+                DbContract.DbEntryUser_DataAnalysis.COLUMN_MED_LIST + " TEXT , " +
+                DbContract.DbEntryUser_DataAnalysis.COLUMN_MED_IS_TAKEN + " TEXT " + ");";
 
         final String SQL_CREATE_MED_SPEC = "CREATE TABLE "+
                 DbContract.DbEntryMed.TABLE_NAME + "(" +
@@ -111,7 +124,9 @@ public class DbHelper extends SQLiteOpenHelper {
             db.execSQL(SQL_CREATE_MED_SPEC);
             db.execSQL(SQL_CREATE_MED_INTERFERER);
             db.execSQL(SQL_CREATE_DOC_APPOINTMENT);
-            db.execSQL(SQL_CREATE_FIRST);
+            db.execSQL(SQL_CREATE_MED_SCHEDULE);
+            db.execSQL(SQL_CREATE_USER_DATA_ANALYSIS);
+
             Log.d("Create Table"," Prescription Successful");
         }
         catch (Exception e){
@@ -127,7 +142,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryMed.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryInterferer.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryAppointment.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryFirstTime.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryMed_Schedule.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+ DbContract.DbEntryUser_DataAnalysis.TABLE_NAME);
         onCreate(db);
     }
 }

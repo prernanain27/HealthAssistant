@@ -1,6 +1,7 @@
 package example.healthassistant;
 
 import android.*;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -18,7 +19,7 @@ import java.util.Calendar;
 
 import static example.healthassistant.DbContract.DbEntryAppointment.COLUMN_DOC_CONTACT;
 
-public class Dialog_Appointment extends AppCompatActivity {
+public class Dialog_Appointment extends Activity {
     private SQLiteDatabase mDb;
     String text = "";
     String phone = "";

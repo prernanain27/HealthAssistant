@@ -89,11 +89,24 @@ public class DbContract {
 
     }
 
-    public static final class DbEntryFirstTime implements BaseColumns {
-        public static final String TABLE_NAME = "First_Time_Data";
+    public static final class DbEntryMed_Schedule implements BaseColumns {
+        public static final String TABLE_NAME = "MED_SCHEDULE";
         public static final String COLUMN_ID = "_id";
-        public static final String COLUMN_NUMBER = "first_number";
+        public static final String COLUMN_TIME = "med_time";
+        public static final String COLUMN_MED_NAME = "med_name";
+        public static final String COLUMN_MED_DURATION = "med_duration";
+        public static final String COLUMN_MED_DOSE = "med_dose";
+        public static final String COLUMN_DAYS_LAPSED = "med_days_lapsed";
 
     }
 
+    public static final class DbEntryUser_DataAnalysis implements BaseColumns {
+        public static final String TABLE_NAME = "USER_DATA_ANALYSIS";
+        public static final String COLUMN_ID = "_id";
+        public static final String COLUMN_DOSE_DATE = "dose_date";
+        public static final String COLUMN_DOSE_TIME = "dose_time";
+        public static final String COLUMN_MED_LIST = "med_list";
+        public static final String COLUMN_MED_IS_TAKEN = "med_is_taken";
+
+    }
 }

@@ -28,6 +28,12 @@
         android:layout_height="380dp"
         android:id="@+id/prescriptionList"></ListView>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Schedule"
+            android:id="@+id/createScheduleButton"/>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/editFab"
         android:layout_width="wrap_content"
