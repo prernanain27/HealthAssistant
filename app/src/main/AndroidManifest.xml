@@ -58,6 +58,19 @@
             android:name=".Activities.CreateScheduleActivity"
             android:label="Your Daily Schedule"
             android:parentActivityName=".Activities.HomeScreen" />
+        <activity android:name=".Activities.Appointment_Scheduler" />
+
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service
+            android:name=".NotificationService1"
+            android:exported="false" />
+
+        <activity android:name=".Dialog_Appointment" />
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -91,6 +104,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="example.healthassistant.Activities.ViewMedicine" />
         </activity>
+
+        <receiver
+            android:name=".MyReceiver_DailySchedule"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service
+            android:name=".Daily_ScheduleNotification"
+            android:exported="false"></service>
     </application>
 
 </manifest>

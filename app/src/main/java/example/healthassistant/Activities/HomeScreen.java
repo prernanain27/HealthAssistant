@@ -82,7 +82,13 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(viewPharmLocator);
             }
         });
-
+        appoint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent( getApplicationContext(),Appointment_Scheduler.class);
+                startActivity(i);
+            }
+        });
         SimpleAdapter simpleAdpt = new SimpleAdapter(this, homeList,android.R.layout.simple_expandable_list_item_1,
                 new String[] {"listItem"}, new int[] {android.R.id.text1});
 

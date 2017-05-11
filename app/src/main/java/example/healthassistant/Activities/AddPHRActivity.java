@@ -54,6 +54,11 @@ public class AddPHRActivity extends AppCompatActivity  {
 //    User user = new User();
 
     @Override
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(),"To continue fill your data !!",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         db = new DbHelper(getApplicationContext());
         super.onCreate(savedInstanceState);

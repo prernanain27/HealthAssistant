@@ -34,6 +34,7 @@ import example.healthassistant.Models.Medicine;
 import example.healthassistant.Models.Prescription;
 import example.healthassistant.Models.User;
 import example.healthassistant.MyReceiver;
+import example.healthassistant.MyReceiver_DailySchedule;
 import example.healthassistant.R;
 import example.healthassistant.SchedularClasses.MedScheduleItem;
 import example.healthassistant.SchedularClasses.ODATSchedular;
@@ -68,8 +69,7 @@ public class CreateScheduleActivity extends AppCompatActivity {
     public ListView lv;
     List<String> names;
     List<MedScheduleItem> schedule = new ArrayList<MedScheduleItem>();
-    public static String[] time = {"15:55", "15:45", "15:46", "15:39"};
-    public static String[][] med = {{"Let Us C"}, {"c++"}, {"JAVA"}, {"Jsp"}};
+
     alarm[] a = new alarm[20];
 //In On Create..........
 
@@ -168,7 +168,7 @@ public class CreateScheduleActivity extends AppCompatActivity {
     public class alarm {
         public void create_alarm(int hour, int minutes) {
             alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            Intent alarmIntent = new Intent(getApplicationContext(), MyReceiver.class); // AlarmReceiver1 = broadcast receiver
+            Intent alarmIntent = new Intent(getApplicationContext(), MyReceiver_DailySchedule.class); // AlarmReceiver1 = broadcast receiver
             final int _id = (int) System.currentTimeMillis();
             pendingIntent = PendingIntent.getBroadcast(CreateScheduleActivity.this, _id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmIntent.setData((Uri.parse("custom://" + System.currentTimeMillis())));

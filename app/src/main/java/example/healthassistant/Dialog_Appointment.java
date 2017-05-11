@@ -34,16 +34,15 @@ public class Dialog_Appointment extends AppCompatActivity {
         String hour = Integer.toString(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
         String minutes = "";
         int min = (Calendar.getInstance().get(Calendar.MINUTE));
-         minutes = Integer.toString(min);
+        minutes = Integer.toString(min);
         String value1 = hour+":"+minutes;
         String[] projection = {DbContract.DbEntryAppointment.COLUMN_DOC_NAME,COLUMN_DOC_CONTACT, DbContract.DbEntryAppointment.COLUMN_APPOINT_TIME, DbContract.DbEntryAppointment.COLUMN_APPOINT_DESCRIPTION};
         Cursor data = mDb.query(DbContract.DbEntryAppointment.TABLE_NAME,projection, DbContract.DbEntryAppointment.COLUMN_APPOINT_TIME + " = ?",new String[]{value1}
                 ,null,null,null,null);
-        if(data.getCount()>0) {
-            while (data.moveToNext()) {
+        if(data.getCount()>0){
+            while(data.moveToNext())
                 phone = data.getString(1).toString();
-                text = "Meet Dr." + data.getString(0).toString() + " at " + data.getString(2).toString() + "\n Regarding :" + data.getString(3).toString();
-            }
+                text = "Meet Dr."+ data.getString(0).toString() + " at " + data.getString(2).toString() +"\n Regarding :"+ data.getString(3).toString();
         }
         builder.setMessage(text).setCancelable(
                 false).setPositiveButton("Yes",

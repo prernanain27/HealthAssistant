@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -61,6 +62,7 @@ public class Appointment_Scheduler extends AppCompatActivity {
         db = new DbHelper(getApplicationContext());
         calendar = java.util.Calendar.getInstance();
         date = (EditText) findViewById(R.id.appointmentDate);
+        date.setInputType(InputType.TYPE_NULL);
         desc = (EditText) findViewById(R.id.description);
         docName = (EditText) findViewById(R.id.docName);
         docContact = (EditText) findViewById(R.id.contactNumber);
