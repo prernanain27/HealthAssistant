@@ -1,6 +1,8 @@
 package example.healthassistant.Fragments;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,7 +85,7 @@ public class MedicineFrag extends Fragment implements MultiSelectionSpinner.OnMu
         medTimeDropdown.setListener(this);
 
         durationDropdown = (Spinner)getActivity().findViewById(R.id.spinner3);
-        String[] durationItems = new String[]{"Days", "Months"};
+        String[] durationItems = new String[]{"Days"};
         ArrayAdapter<String> durationAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, durationItems);
         durationDropdown.setAdapter(durationAdapter);
 
@@ -92,8 +94,42 @@ public class MedicineFrag extends Fragment implements MultiSelectionSpinner.OnMu
          medTotal = (EditText) getActivity().findViewById(R.id.medTotal);
          duration = (EditText) getActivity().findViewById(R.id.duration);
 
+        medDose.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        Log.d("MedicineName", medName.getText().toString());
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                calculateMedTotal();
+            }
+        });
+
+        duration.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                calculateMedTotal();
+            }
+        });
+
+
+                Log.d("MedicineName", medName.getText().toString());
 
         Button saveMed = (Button) getActivity().findViewById(R.id.saveMedicine);
         saveMed.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +174,32 @@ public class MedicineFrag extends Fragment implements MultiSelectionSpinner.OnMu
         }
 
     }
+
+    public void calculateMedTotal(){
+
+        int total= 0;
+        int dose, dur;
+//        int dose = Integer.parseInt(medDose.getText().toString());
+//        int dur = Integer.parseInt(duration.getText().toString());
+        int times = medTimeDropdown.getSelectedStrings().size();
+
+        if(duration.getText().toString().trim().isEmpty()){
+            dur = 1;
+        }
+        else{
+            dur = Integer.parseInt(duration.getText().toString());
+        }
+        if(medDose.getText().toString().trim().isEmpty()){
+            dose = 1;
+        }
+        else{
+            dose = Integer.parseInt(medDose.getText().toString());
+        }
+
+        total = dose * dur * times ;
+        medTotal.setText(""+ total);
+    }
+
 
     @Override
     public void selectedIndices(List<Integer> indices) {
