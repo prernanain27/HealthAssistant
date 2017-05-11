@@ -4,11 +4,13 @@ import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -16,9 +18,13 @@ import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import example.healthassistant.Activities.Appointment_Scheduler;
+import example.healthassistant.Models.Med_Specification;
+import example.healthassistant.Models.Medicine;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -89,6 +95,18 @@ public class Daily_ScheduleNotification extends IntentService {
         mIntent.putExtras(bundle);
         pendingIntent = PendingIntent.getActivity(context, 0, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+
+        //1) access schedule table and populate list of med_schedule list
+        Cursor cursor = getAllRows(DbContract.DbEntryMed_Schedule.TABLE_NAME, Med_Specification.ALL_COLUMNS_MEDSPEC);
+        if(cursor.getCount()>0)
+        {
+            do {
+                text = text + cursor.getString(1).toString() + "\t" + cursor.getString(3).toString() + "\n";
+
+                updateLapsedForMedicine(cursor.getString(0).toString(), cursor.getString(1).toString(), cursor.getString(2).toString());
+            }while (cursor.moveToNext());
+        }
+        //2) update date lapsed field for all medicines
         Resources res = this.getResources();
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
@@ -113,6 +131,53 @@ public class Daily_ScheduleNotification extends IntentService {
         Intent i = new Intent(getBaseContext(),Dialog_Appointment.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getApplication().startActivity(i);
+    }
+
+    private void updateLapsedForMedicine(String timeString, String medName,String duration) {
+
+        DbHelper db = new DbHelper(getApplicationContext());
+        mDb = db.getWritableDatabase();
+
+        int du = Integer.parseInt(duration)-1;
+
+        String dL = String.valueOf(du);
+        String whereClause = DbContract.DbEntryMed_Schedule.COLUMN_TIME + "=?  and " + DbContract.DbEntryMed_Schedule.COLUMN_MED_NAME + "=?";
+
+        String[] whereArgs = {timeString, medName};
+
+        ContentValues cv = new ContentValues();
+        cv.put(DbContract.DbEntryMed_Schedule.COLUMN_DAYS_LAPSED,dL);
+
+        try {
+
+            mDb.update(DbContract.DbEntryMed_Schedule.TABLE_NAME, cv, whereClause, whereArgs);
+        }
+        catch (Exception ex)
+        {
+            Log.e("Daily Sched Notif","exception while updating days_lapsed"+ex.getMessage());
+        }
+
+    }
+
+    public Cursor getAllRows(String tableName, String[] columns) {
+        String where = null;
+        DbHelper db = new DbHelper(getApplicationContext());
+        Log.d("Notification Service", " entered get all rows");
+        mDb = db.getWritableDatabase();
+        Cursor cursor = null;
+        cursor = mDb.query(tableName, columns, where, null, null, null, null, null);
+
+
+        try {
+            if (cursor != null) {
+                cursor.moveToFirst();
+                Log.d("GetAllRows", cursor.getString(1));
+            }
+        } catch (SQLiteException ex) {
+            Log.e("Notification Service", "Exception reading user data");
+        }
+        db.close();
+        return cursor;
     }
 
     /**

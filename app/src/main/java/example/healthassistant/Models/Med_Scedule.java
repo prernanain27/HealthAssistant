@@ -1,5 +1,7 @@
 package example.healthassistant.Models;
 
+import example.healthassistant.DbContract;
+
 /**
  * Created by Neha on 5/11/2017.
  */
@@ -10,6 +12,13 @@ public class Med_Scedule {
     private String duration;
     private String dose;
     private String days_lapsed;
+
+
+    public static final String[] ALL_COLUMNS = {DbContract.DbEntryMed_Schedule.COLUMN_TIME,
+                                                DbContract.DbEntryMed_Schedule.COLUMN_MED_NAME,
+                                                DbContract.DbEntryMed_Schedule.COLUMN_MED_DURATION,
+                                                DbContract.DbEntryMed_Schedule.COLUMN_MED_DOSE,
+                                                DbContract.DbEntryMed_Schedule.COLUMN_DAYS_LAPSED};
 
     public String getMed_time() {
         return med_time;

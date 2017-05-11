@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -17,14 +18,18 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import example.healthassistant.DbContract;
 import example.healthassistant.DbHelper;
 import example.healthassistant.Fragments.MedicineFrag;
+import example.healthassistant.Models.Interferer;
+import example.healthassistant.Models.Med_Specification;
 import example.healthassistant.Models.Medicine;
 import example.healthassistant.Models.Prescription;
 import example.healthassistant.R;
 
+import static example.healthassistant.Activities.ViewPrescription.ALL_COLUMNS;
 import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_DISEASE;
 import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_DURATION;
 import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_DURATION_TYPE;
@@ -40,7 +45,10 @@ import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_MED_
 import static example.healthassistant.DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME;
 
 public class AddMedicine extends AppCompatActivity {
+    private String TAG ="Add Medicine Activity";
+
     private static ArrayList<Medicine> medArray = new ArrayList<Medicine>();
+    private DbHelper db;
     private SQLiteDatabase mDb;
     Medicine medicine = new Medicine();
     Prescription pres = new Prescription();
@@ -96,20 +104,195 @@ public class AddMedicine extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Error: Disease Name not passed", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    addData();
-                    Intent intent = new Intent(getApplicationContext(), ViewMedicine.class);
-                    intent.putExtra("prescriptionName", presName);
-                    intent.putExtra("diseaseName", disease);
-                    startActivity(intent);
+
+                    if(checkForMedDose()) {
+                        addData();
+                        Intent intent = new Intent(getApplicationContext(), ViewMedicine.class);
+                        intent.putExtra("prescriptionName", presName);
+                        intent.putExtra("diseaseName", disease);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(), "Error: Medicine Dose exceeds the maximum permitted dose", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });
     }
 
+
+    private Boolean checkForMedDose()
+    {
+        Med_Specification spec = new Med_Specification();
+
+        for (Medicine med: Prescription.getMedStaticArrayList()
+             ) {
+
+                 spec = getSingleMedSpecData(med.getMedName());
+
+                if(spec!=null)
+                {
+                    if (Integer.parseInt(med.getMedDose()) <= Integer.parseInt(spec.getMax_dose())
+                            ) {
+
+                        return true;
+                    }
+                }
+
+
+        }
+        return false;
+    }
+
+    private Med_Specification getSingleMedSpecData(String medName)
+    {
+        ArrayList<Med_Specification> tempSpecData = getAllMedSpecData();
+
+        for (Med_Specification med:tempSpecData
+             ) {
+
+            if(med.getMed_name().equals(medName))
+            {
+                return med;
+            }
+        }
+
+        return null;
+    }
+    private ArrayList<Med_Specification> getAllMedSpecData() {
+        Log.d(TAG, "getAllMedSpecData entered");
+        ArrayList<Med_Specification> _medSpecs = new ArrayList<>();
+        db = new DbHelper(getApplicationContext());
+        mDb = db.getWritableDatabase();
+        Cursor cursor = null;
+
+        try {
+
+            cursor = getAllRows(DbContract.DbEntryMed.TABLE_NAME, Med_Specification.ALL_COLUMNS_MEDSPEC);
+            int indexMedId = cursor.getColumnIndex(DbContract.DbEntryMed.COLUMN_ID);
+            int indexMedName = cursor.getColumnIndex(DbContract.DbEntryMed.COLUMN_MED_NAME);
+            int indexMinDose = cursor.getColumnIndex(DbContract.DbEntryMed.COLUMN_MIN_DOSE);
+            int indexMaxDose = cursor.getColumnIndex(DbContract.DbEntryMed.COLUMN_MAX_DOSE);
+            int indexColSeperation = cursor.getColumnIndex(DbContract.DbEntryMed.COLUMN_SEPARATION);
+
+
+            if (cursor.getCount() > 0) {
+                do {
+
+                    Med_Specification MSSObj = new Med_Specification();
+                    MSSObj.setMed_id(cursor.getString(indexMedId));
+                    MSSObj.setMed_name(cursor.getString(indexMedName));
+                    MSSObj.setMax_dose(cursor.getString(indexMaxDose));
+                    MSSObj.setMin_dose(cursor.getString(indexMinDose));
+                    MSSObj.setMin_seperation(cursor.getString(indexColSeperation));
+
+                    _medSpecs.add(MSSObj);
+
+                } while (cursor.moveToNext());
+            }
+
+
+        } catch (Exception ex) {
+            Log.e(TAG, "Exception raised while reading Medicine specification data" + ex);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        db.close();
+
+        return _medSpecs;
+    }
+    public ArrayList<Medicine> getMedicineData(String prescriptionName) {
+        //setContentView(R.layout.medicine_item_cv);
+
+        Log.d("ViewMedicine", "Entered Get Medicine Data Method");
+        String whereClause = DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME + "=?";
+        ArrayList<Medicine> viewMedicines = new ArrayList<>();
+        String[] whereArgs = {prescriptionName};
+
+        db = new DbHelper(getApplicationContext());
+        mDb = db.getWritableDatabase();
+        Cursor cursor = null;
+
+        try {
+            cursor = mDb.query(DbContract.DbEntryPrescription.TABLE_NAME, ALL_COLUMNS, whereClause, whereArgs, null, null, null);
+            int indexMedName = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_MED_NAME);
+            int indexMedTime_BB = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_MED_TIME_BB);
+            int indexMedTime_AB = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_MED_TIME_AB);
+            int indexMedTime_BL = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_MED_TIME_BL);
+            int indexMedTime_AL = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_MED_TIME_AL);
+            int indexMedTime_BD = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_MED_TIME_BD);
+            int indexMedTime_AD = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_MED_TIME_AD);
+            int indexMedDose = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_MED_DOSE);
+            int indexMedType = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_MED_TYPE);
+            int indexMedDuration = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_DURATION);
+            Log.d("GetMedicineData", "MedicineName Index");
+
+            // CardView card = (CardView) findViewById(R.id.card_view_medItem);
+            if (cursor.getCount() > 0) {
+
+                while (cursor.moveToNext()) {
+                    Medicine med = new Medicine();
+                    med.setMedName(cursor.getString(indexMedName));
+                    med.setMedDose(cursor.getString(indexMedDose));
+                    med.setMedDuration(cursor.getString(indexMedDuration));
+                    med.setMedType(cursor.getString(indexMedType));
+                    List<String> times = new ArrayList<>();
+                    times.add(cursor.getString(indexMedTime_BB));
+                    times.add(cursor.getString(indexMedTime_AB));
+                    times.add(cursor.getString(indexMedTime_BL));
+                    times.add(cursor.getString(indexMedTime_AL));
+                    times.add(cursor.getString(indexMedTime_BD));
+                    times.add(cursor.getString(indexMedTime_AD));
+                    med.setMedTime(times);
+                    viewMedicines.add(med);
+
+                    Log.d("GetMedicineData", " Inside Cursor Loop MedicineName Index: " + cursor.getString(indexMedName));
+                }
+            }
+        } catch (Exception e) {
+            Log.d("ViewMedicine", "Get Medicine Data method: Exception Raised with a value of " + e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        db.close();
+        return viewMedicines;
+    }
+
+    public Cursor getAllRows(String tableName, String[] columns) {
+        String where = null;
+        db = new DbHelper(getApplicationContext());
+        Log.d(TAG, " entered get all rows");
+        mDb = db.getWritableDatabase();
+        Cursor cursor = null;
+        if (tableName.equals(DbContract.DbEntryPrescription.TABLE_NAME)) {
+            cursor = mDb.query(true, tableName, columns, where, null, DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME, null, null, null);
+        } else {
+            cursor = mDb.query(tableName, columns, where, null, null, null, null, null);
+        }
+
+        try {
+            if (cursor != null) {
+                cursor.moveToFirst();
+                Log.d("GetAllRows", cursor.getString(1));
+            }
+        } catch (SQLiteException ex) {
+            Log.e(TAG, "Exception reading user data");
+        }
+        db.close();
+        return cursor;
+    }
     public void addData(){
         SQLiteOpenHelper db = new DbHelper(getApplicationContext());
         mDb = db.getWritableDatabase();
         ContentValues cv = new ContentValues();
+
 
         String BB= "0",AB="0",BL ="0",AL= "0",BD="0",AD ="0";
         for (Medicine temp : Prescription.getMedStaticArrayList())

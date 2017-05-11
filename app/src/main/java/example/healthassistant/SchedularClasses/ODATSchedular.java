@@ -128,16 +128,19 @@ public  class ODATSchedular {
         mUserPreferences = userPreferences;
         Med_Specification medFromSpec = new Med_Specification();
 
+        Boolean res = deleteExistingSchedule();
+
+
         for (Prescription prescription:PresData
              ) {
-
-
 
                 for (Medicine medicine : prescription.getMedicineArrayList()
                         ) {
 
                     currentMedicine = medicine;
                     medFromSpec = getMedSpecObject(MSSData, medicine.getMedName());
+
+
                     //this.resourceModel.setMed_Id(medFromSpec.getMed_id());
                     this.resourceModel.setFeasible(true);
 
@@ -150,20 +153,23 @@ public  class ODATSchedular {
                             ) {
 
 
+                        MedScheduleItem item = new MedScheduleItem();
+                        item.setScheduleTime(job.getRelease_time());
+                        item.setMedName(job.getMed_Name());
+                        item.setDose(currentMedicine.getMedDose());
+                        item.setDuration(currentMedicine.getMedDuration());
+
+
+                        insertScheduleToDB(item);
+
                         if (tempMedItemArray[0][0]==null) {
-
-
-                            MedScheduleItem item = new MedScheduleItem();
-                            item.setScheduleTime(job.getRelease_time());
-                            item.setMedName(job.getMed_Name());
-                            item.setDose(currentMedicine.getMedDose());
-
                             tempMedItemArray[0][0] = job.getRelease_time();
                             tempMedItemArray[1][0] = job.getMed_Name();
 
                             //tempSchedule.add(item);
 
                         } else {
+
 
                             checkAvailableTime(job);
                         }
@@ -172,11 +178,6 @@ public  class ODATSchedular {
 
 
             }
-
-
-
-
-
 
 
         }
@@ -188,7 +189,7 @@ public  class ODATSchedular {
                 medItem = new MedScheduleItem();
                 medItem.setMedName(tempMedItemArray[1][i]);
                 medItem.setScheduleTime(tempMedItemArray[0][i]);
-                medItem.setDose(currentMedicine.getMedDose());
+                //medItem.setDose(currentMedicine.getMedDose());
                 //medItem.setDuration(currentMedicine.getMedDuration());
 
                 tempSchedule.add(medItem);
@@ -201,6 +202,9 @@ public  class ODATSchedular {
         }
 
 
+
+
+
         resourceModel.setSchedule(tempSchedule);
 
 
@@ -208,7 +212,30 @@ public  class ODATSchedular {
 
     }
 
-    private void insertScheduleToDB(Medicine med,MedScheduleItem scheduleItem)
+    private Boolean deleteExistingSchedule()
+    {
+
+        db = new DbHelper((mContext));
+
+        Log.d("delete Schedule in DB: ", "Entered into delete Scedule");
+        mDb = db.getWritableDatabase();
+
+        try
+        {
+            long result = mDb.delete(DbContract.DbEntryMed_Schedule.TABLE_NAME,null,null);
+
+            if(result!=-1)
+            {
+                Toast.makeText(mContext,"Schedule deleted",Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        }catch (Exception ex)
+        {
+            Log.e(TAG,"Exception deleting schedule data");
+        }
+        return false;
+    }
+    private void insertScheduleToDB(MedScheduleItem scheduleItem)
     {
         db = new DbHelper((mContext));
 
@@ -216,9 +243,9 @@ public  class ODATSchedular {
         mDb = db.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(DbContract.DbEntryMed_Schedule.COLUMN_TIME,scheduleItem.getScheduleTime());
-        cv.put(DbContract.DbEntryMed_Schedule.COLUMN_MED_NAME,med.getMedName());
-        cv.put(DbContract.DbEntryMed_Schedule.COLUMN_MED_DURATION,med.getMedDuration());
-        cv.put(DbContract.DbEntryMed_Schedule.COLUMN_MED_DOSE,med.getMedDose());
+        cv.put(DbContract.DbEntryMed_Schedule.COLUMN_MED_NAME,scheduleItem.getMedName());
+        cv.put(DbContract.DbEntryMed_Schedule.COLUMN_MED_DURATION,scheduleItem.getDuration());
+        cv.put(DbContract.DbEntryMed_Schedule.COLUMN_MED_DOSE,scheduleItem.getDose());
 
 
         try
@@ -400,15 +427,15 @@ public  class ODATSchedular {
 
         String wakeUpTime = mUserPreferences.get(User.WAKE_UP_TIME);
         String breakfastTime = mUserPreferences.get(User.BREAKFAST_TIME);
-        //String lunchTime = mUserPreferences.get(User.LUNCH_TIME);
-        String lunchTime = "13:30";
-        //String dinnerTime = mUserPreferences.get(User.DINNER_TIME);
-        String dinnerTime = "20:00";
+        String lunchTime = mUserPreferences.get(User.LUNCH_TIME);
+        //String lunchTime = "13:30";
+        String dinnerTime = mUserPreferences.get(User.DINNER_TIME);
+        //String dinnerTime = "20:00";
 
         LocalTime wUTime = fm.parseLocalTime(wakeUpTime);
         LocalTime bFTime = fm.parseLocalTime(breakfastTime);
-        LocalTime lTime = fm.parseLocalTime("13:30");
-        LocalTime dTime = fm.parseLocalTime("20:00");
+        LocalTime lTime = fm.parseLocalTime(lunchTime);
+        LocalTime dTime = fm.parseLocalTime(dinnerTime);
 
             if(time.equals(Medicine.BEFORE_BREAKFAST_STRING))
             {

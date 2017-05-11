@@ -29,6 +29,7 @@ import java.util.List;
 import example.healthassistant.DbContract;
 import example.healthassistant.DbHelper;
 import example.healthassistant.Models.Interferer;
+import example.healthassistant.Models.Med_Scedule;
 import example.healthassistant.Models.Med_Specification;
 import example.healthassistant.Models.Medicine;
 import example.healthassistant.Models.Prescription;
@@ -41,6 +42,7 @@ import example.healthassistant.SchedularClasses.ODATSchedular;
 import example.healthassistant.SchedularClasses.ResourceModel;
 
 import static example.healthassistant.Activities.ViewPrescription.ALL_COLUMNS;
+import static example.healthassistant.DbContract.DbEntryAppointment.COLUMN_DOC_CONTACT;
 import static example.healthassistant.DbContract.DbEntryInterferer.COLUMN_INTERFERER_ID;
 import static example.healthassistant.DbContract.DbEntryInterferer.COLUMN_MED_ID;
 import static example.healthassistant.DbContract.DbEntryInterferer.COLUMN_MIN_FROM;
@@ -125,6 +127,8 @@ public class CreateScheduleActivity extends AppCompatActivity {
             String[] split = time.split(":");
             int hour = Integer.parseInt(split[0]);
             int min = Integer.parseInt(split[1]);
+
+
             a[i] = new alarm();
             a[i].create_alarm(hour, min);
         }
@@ -159,16 +163,78 @@ public class CreateScheduleActivity extends AppCompatActivity {
             TextView tv2= (TextView)convertView.findViewById(R.id.med_Dose);
             String medicine = "";
             String dose ="";
+
+            ArrayList<Med_Scedule> tempSchedule = checkForLapsedTime();
+            for (Med_Scedule item:tempSchedule
+                 ) {
+
+
+            }
+
             tv.setText(schedule.get(position).getScheduleTime());
+            db = new DbHelper(getApplicationContext());
+            mDb = db.getWritableDatabase();
             for (String s : schedule.get(position).getMedName().split("_")) {
                 medicine = medicine + s + "\n";
-                dose = dose+ schedule.get(position).getDose()+"\n";
+
+                String[] projection = {DbContract.DbEntryMed_Schedule.COLUMN_MED_DOSE};
+                Cursor data = mDb.query(DbContract.DbEntryMed_Schedule.TABLE_NAME,projection, DbContract.DbEntryMed_Schedule.COLUMN_TIME + " = ? AND "+
+                        DbContract.DbEntryMed_Schedule.COLUMN_MED_NAME +" = ? ",new String[]{schedule.get(position).getScheduleTime(),s}
+                        ,null,null,null,null);
+                if(data.getCount()>0) {
+                    while (data.moveToNext()) {
+                        dose = dose+ data.getString(0).toString()+"\n";
+                        //text = "Meet Dr." + data.getString(0).toString() + " at " + data.getString(2).toString() + "\n Regarding :" + data.getString(3).toString();
+                    }
+                }
+                //dose = dose+ schedule.get(position).getDose()+"\n";
             }
+
+
 
             tv1.setText(medicine);
             tv2.setText(dose);
             return convertView;
         }
+    }
+
+    public ArrayList<Med_Scedule> checkForLapsedTime() {
+        Log.d(TAG,"checkForLapsedTime entered");
+        ArrayList<Med_Scedule> _scheduleDb = new ArrayList<>();
+        db = new DbHelper(getApplicationContext());
+        mDb = db.getWritableDatabase();
+        Cursor cursor = null;
+
+        try
+        {
+            cursor = getAllRows(DbContract.DbEntryMed_Schedule.TABLE_NAME,Med_Scedule.ALL_COLUMNS);
+            int indexMedTime = cursor.getColumnIndex(DbContract.DbEntryMed_Schedule.COLUMN_TIME);
+            int indexMedName = cursor.getColumnIndex(DbContract.DbEntryMed_Schedule.COLUMN_MED_NAME);
+            int indexMedDuration = cursor.getColumnIndex(DbContract.DbEntryMed_Schedule.COLUMN_MED_DURATION);
+            int indexMedDose = cursor.getColumnIndex(DbContract.DbEntryMed_Schedule.COLUMN_MED_DOSE);
+            int indexDaysLapsed = cursor.getColumnIndex(DbContract.DbEntryMed_Schedule.COLUMN_DAYS_LAPSED);
+
+            if(cursor.getCount()>0)
+            {
+                Med_Scedule item = new Med_Scedule();
+                item.setMed_time(cursor.getString(indexMedTime));
+                item.setMed_Name(cursor.getString(indexMedName));
+                item.setDuration(cursor.getString(indexMedDuration));
+                item.setDose(cursor.getString(indexMedDose));
+                item.setDays_lapsed(cursor.getString(indexDaysLapsed));
+
+                _scheduleDb.add(item);
+            }
+
+
+
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Exception raised while reading Medicine Schedule data" + ex);
+        }
+
+        return _scheduleDb;
     }
 
     public class alarm {
@@ -186,12 +252,43 @@ public class CreateScheduleActivity extends AppCompatActivity {
             alarmStartTime.set(Calendar.SECOND, 0);
             if (now.after(alarmStartTime)) {
                 Log.d("Hey", "Added a day");
+
+                ArrayList<Med_Scedule> _scheduleData= checkForLapsedTime();
+                for (Med_Scedule item:_scheduleData
+                        ) {
+
+                    if(item.getDays_lapsed().equals("0"))
+                    {
+                        deleteScheduleItem(item.getMed_time(),item.getMed_Name());
+                    }
+                }
+
                 alarmStartTime.add(Calendar.DATE, 1);
             }
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmStartTime.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
             Log.d("Alarm", "Alarms set for everyday" + Integer.toString(hour) + Integer.toString(minutes));
 
         }
+
+           }
+
+    private void deleteScheduleItem(String time, String medName) {
+        String whereClause = DbContract.DbEntryMed_Schedule.COLUMN_TIME + "=?  and " + DbContract.DbEntryMed_Schedule.COLUMN_MED_NAME + "=?";
+        String[] whereArgs = {time, medName};
+        db = new DbHelper(getApplicationContext());
+        mDb = db.getWritableDatabase();
+        Cursor cursor = null;
+
+        try {
+            mDb.delete(DbContract.DbEntryMed_Schedule.TABLE_NAME, whereClause, whereArgs);
+        } catch (Exception e) {
+            Log.d("CreateScheduleActivity", "delete schedule if time lapsed " + e);
+        }finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        db.close();
     }
 
         private void addData() {
@@ -447,8 +544,6 @@ public class CreateScheduleActivity extends AppCompatActivity {
 
             ArrayList<Prescription> temmPres = new ArrayList<>();
             ArrayList<Medicine> tepMeds = new ArrayList<>();
-            db = new DbHelper(getApplicationContext());
-            mDb = db.getWritableDatabase();
             Cursor cursor = null;
 
             try {

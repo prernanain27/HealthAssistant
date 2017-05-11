@@ -26,7 +26,24 @@ public class JobModel {
     private String med_Name;
     private String release_time;
     private Boolean hasInterferer;
+    private String duration;
+    private String dose;
 
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getDose() {
+        return dose;
+    }
+
+    public void setDose(String dose) {
+        this.dose = dose;
+    }
 
     private SQLiteDatabase mDb;
     SQLiteOpenHelper db;
