@@ -56,7 +56,7 @@
             android:parentActivityName=".Activities.ViewPrescription"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activities.CreateScheduleActivity"
+            android:name=".Activities.ViewScheduleActivity"
             android:label="Your Daily Schedule"
             android:parentActivityName=".Activities.HomeScreen" />
         <activity android:name=".Activities.Appointment_Scheduler" />
@@ -112,9 +112,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <service
-            android:name=".Daily_ScheduleNotification"
-            android:exported="false"></service>
+
     </application>
 
 </manifest>

@@ -160,6 +160,7 @@ public  class ODATSchedular {
                         item.setDuration(currentMedicine.getMedDuration());
 
 
+
                         insertScheduleToDB(item);
 
                         if (tempMedItemArray[0][0]==null) {
@@ -246,6 +247,7 @@ public  class ODATSchedular {
         cv.put(DbContract.DbEntryMed_Schedule.COLUMN_MED_NAME,scheduleItem.getMedName());
         cv.put(DbContract.DbEntryMed_Schedule.COLUMN_MED_DURATION,scheduleItem.getDuration());
         cv.put(DbContract.DbEntryMed_Schedule.COLUMN_MED_DOSE,scheduleItem.getDose());
+        cv.put(DbContract.DbEntryMed_Schedule.COLUMN_DAYS_LAPSED,scheduleItem.getDuration());
 
 
         try
