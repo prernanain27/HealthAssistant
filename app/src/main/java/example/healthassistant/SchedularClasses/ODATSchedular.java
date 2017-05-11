@@ -1,6 +1,11 @@
 package example.healthassistant.SchedularClasses;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.vision.Detector;
 
@@ -21,6 +26,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import example.healthassistant.DbContract;
+import example.healthassistant.DbHelper;
 import example.healthassistant.Models.Med_Specification;
 import example.healthassistant.Models.Medicine;
 import example.healthassistant.Models.Prescription;
@@ -32,11 +39,16 @@ import example.healthassistant.Models.User;
 
 public  class ODATSchedular {
 
+    public String TAG = "ODATSChedular";
+
     private ArrayList<MedScheduleItem> UserSchedule;
     private  ArrayList<Med_Specification> mMSSData;
     private ArrayList<JobModel> mCurrentProcessor;
+    private Context mContext;
     ArrayList<MedScheduleItem> tempSchedule = new ArrayList<>();
     private ResourceModel resourceModel;
+    private SQLiteDatabase mDb;
+    SQLiteOpenHelper db;
     private ArrayList<ResourceModel> resourceModelMeds;
 
     String[][] tempMedItemArray = new String[20][20];
@@ -103,11 +115,12 @@ public  class ODATSchedular {
         this.feasible = feasible;
     }
 
-    public  ResourceModel createODATSchedule(ArrayList<Med_Specification> MSSData, ArrayList<Prescription> PresData,HashMap<String ,String> userPreferences)
+    public  ResourceModel createODATSchedule(ArrayList<Med_Specification> MSSData, ArrayList<Prescription> PresData, HashMap<String ,String> userPreferences, Context ctxt)
     {
 
         ArrayList<String> temp = new ArrayList<>();
         MedScheduleItem medItem = new MedScheduleItem();
+        mContext = ctxt;
 
         Medicine currentMedicine = new Medicine();
         this.resourceModel.setSchedule(tempSchedule);
@@ -119,12 +132,13 @@ public  class ODATSchedular {
              ) {
 
 
+
                 for (Medicine medicine : prescription.getMedicineArrayList()
                         ) {
 
                     currentMedicine = medicine;
                     medFromSpec = getMedSpecObject(MSSData, medicine.getMedName());
-                    this.resourceModel.setMed_Id(medFromSpec.getMed_id());
+                    //this.resourceModel.setMed_Id(medFromSpec.getMed_id());
                     this.resourceModel.setFeasible(true);
 
 
@@ -160,6 +174,11 @@ public  class ODATSchedular {
             }
 
 
+
+
+
+
+
         }
 
 
@@ -173,6 +192,7 @@ public  class ODATSchedular {
                 //medItem.setDuration(currentMedicine.getMedDuration());
 
                 tempSchedule.add(medItem);
+
             }
             else
             {
@@ -181,9 +201,44 @@ public  class ODATSchedular {
         }
 
 
-
         resourceModel.setSchedule(tempSchedule);
+
+
     return resourceModel;
+
+    }
+
+    private void insertScheduleToDB(Medicine med,MedScheduleItem scheduleItem)
+    {
+        db = new DbHelper((mContext));
+
+        Log.d("Insert Schedule in DB: ", "Entered into Insert Scedule");
+        mDb = db.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(DbContract.DbEntryMed_Schedule.COLUMN_TIME,scheduleItem.getScheduleTime());
+        cv.put(DbContract.DbEntryMed_Schedule.COLUMN_MED_NAME,med.getMedName());
+        cv.put(DbContract.DbEntryMed_Schedule.COLUMN_MED_DURATION,med.getMedDuration());
+        cv.put(DbContract.DbEntryMed_Schedule.COLUMN_MED_DOSE,med.getMedDose());
+
+
+        try
+        {
+            long result = mDb.insert(DbContract.DbEntryMed_Schedule.TABLE_NAME, null, cv);
+
+            if(result!=-1)
+            {
+                Toast.makeText(mContext,"Schedule Item successfully created",Toast.LENGTH_SHORT).show();
+            }
+
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG,"Exception inserting schedule data");
+        }
+
+
+
+
 
     }
 

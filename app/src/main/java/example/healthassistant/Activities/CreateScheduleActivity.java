@@ -86,6 +86,7 @@ public class CreateScheduleActivity extends AppCompatActivity {
         db = new DbHelper(getApplicationContext());
         mDb = db.getWritableDatabase();
 
+        mContext = this;
         String[] projection = {DbContract.DbEntryMed.COLUMN_MED_NAME};
         Cursor data = mDb.query(DbContract.DbEntryMed.TABLE_NAME, projection, null, null, null, null, null, null);
         if (!(data.getCount() > 0)) {
@@ -100,16 +101,22 @@ public class CreateScheduleActivity extends AppCompatActivity {
         getUserPreferences();
 
         ODATSchedular schedular = new ODATSchedular();
-        finalScheduleModel = schedular.createODATSchedule(MSS, prescriptions, mUserPreferences);
+        finalScheduleModel = schedular.createODATSchedule(MSS, prescriptions, mUserPreferences,mContext);
 
         //from prerna
         lv = (ListView) findViewById(R.id.listView);
         schedule = finalScheduleModel.getSchedule();
+
+
+
         lv.setAdapter(new CustomAdapter());
         lv.setBackgroundColor(Color.parseColor("#c60505"));
         ring();
 
     }
+
+
+
 
     public void ring() {
 

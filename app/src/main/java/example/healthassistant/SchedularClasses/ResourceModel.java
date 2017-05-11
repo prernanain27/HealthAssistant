@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ResourceModel {
 
     private Boolean feasible;
-    private String med_Id;
+
     private String duration;
 
     public String getDuration() {
@@ -33,13 +33,7 @@ public class ResourceModel {
         this.feasible = feasible;
     }
 
-    public String getMed_Id() {
-        return med_Id;
-    }
 
-    public void setMed_Id(String med_Id) {
-        this.med_Id = med_Id;
-    }
 
     public ArrayList<JobModel> getProcessor() {
         return processor;
@@ -70,10 +64,7 @@ public class ResourceModel {
 
     }
 
-    public ResourceModel(String medId)
-    {
-        this.med_Id = medId;
-    }
+
 
     public  void createResourceModel()
     {
