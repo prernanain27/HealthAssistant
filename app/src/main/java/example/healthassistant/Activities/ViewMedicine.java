@@ -10,6 +10,7 @@ import android.os.Bundle;
 //import android.support.v7.widget.Card;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ import example.healthassistant.DbHelper;
 import example.healthassistant.Models.Medicine;
 import example.healthassistant.R;
 
-public class ViewMedicine extends Activity {
+public class ViewMedicine extends AppCompatActivity {
 
     private Context mContext;
     private RelativeLayout mRelativeLayout;

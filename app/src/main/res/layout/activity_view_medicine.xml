@@ -34,7 +34,7 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="395dp"
+        android:layout_height="375dp"
         android:id="@+id/medicineList"></ListView>
 
     <android.support.design.widget.FloatingActionButton
@@ -46,7 +46,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:baselineAlignBottom="true"
-        android:layout_marginTop="16dp"
         app:srcCompat="@android:drawable/ic_input_add" />
 
 
