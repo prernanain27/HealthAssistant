@@ -104,8 +104,7 @@ public class CreateScheduleActivity extends AppCompatActivity {
 
         //from prerna
         lv = (ListView) findViewById(R.id.listView);
-        schedule = finalScheduleModel.getSchedule()
-        ;
+        schedule = finalScheduleModel.getSchedule();
         lv.setAdapter(new CustomAdapter());
         lv.setBackgroundColor(Color.parseColor("#c60505"));
         ring();
