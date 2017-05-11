@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -30,6 +34,8 @@ public class ViewPrescription extends AppCompatActivity {
     private SQLiteDatabase mDb;
     SQLiteOpenHelper db;
     ListView prescriptionListView;
+    ImageButton buttonDeletePres;
+    FloatingActionButton floatingActionButtonEdit;
     ArrayList<Prescription> viewPrescription = new ArrayList<Prescription>();
     private String[] medicineData = {
             "Medicine Name",
@@ -71,7 +77,8 @@ public class ViewPrescription extends AppCompatActivity {
         ViewMedicine viewMedicine = new ViewMedicine();
         prescriptionListView = (ListView) findViewById(R.id.prescriptionList);
         //populateListView();
-         viewPrescription.addAll(populatePrescriptionData());
+        buttonDeletePres = (ImageButton) findViewById(R.id.list_item_prescription_button);
+        viewPrescription.addAll(populatePrescriptionData());
         prescriptionListView.setAdapter(new PrescriptionAdapter());
         prescriptionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -88,9 +95,60 @@ public class ViewPrescription extends AppCompatActivity {
                 startActivity(viewMedicine);
             }
         });
+
+        prescriptionListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+                final String  selectedFromList = prescriptionListView.getItemAtPosition(position).toString();
+                Log.d("ViewPrescription" , "ListItem Child Count: " + prescriptionListView.getChildCount());
+                Log.d("ViewPresciption", "Selected Item position: " + position + " Selected Item: " + selectedFromList);
+                TextView textViewListItemDisease = (TextView) prescriptionListView.getChildAt(position).findViewById(R.id.list_item_disease_tv);
+                Log.d("ViewPrescription" , "ListItem Child Element: " + textViewListItemDisease.getText());
+                final String selectedFromListDisease = textViewListItemDisease.getText().toString();
+                    buttonDeletePres = (ImageButton) prescriptionListView.getChildAt(position).findViewById(R.id.list_item_prescription_button);
+                    buttonDeletePres.setVisibility(View.VISIBLE);
+                    buttonDeletePres.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            deletePrescription(selectedFromList, selectedFromListDisease);
+                            //prescriptionListView = (ListView) findViewById(R.id.prescriptionList);
+                            for(Prescription temp:viewPrescription){
+                                if(temp.getDisease() == selectedFromListDisease && temp.getPrescriptionName() ==selectedFromList ){
+                                    viewPrescription.remove(temp);
+                                }
+                            }
+
+                            //viewPrescription.retainAll(populatePrescriptionData());
+                            prescriptionListView.setAdapter(new PrescriptionAdapter());
+                            prescriptionListView.invalidateViews();
+                        }
+                    });
+                return true;
+            }
+        });
+
+
+
     }
 
+    private void deletePrescription(String prescriptionName, String diseaseName) {
+        String whereClause = DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME + "=?  and " + DbContract.DbEntryPrescription.COLUMN_DISEASE + "=?";
+        String[] whereArgs = {prescriptionName, diseaseName};
+        db = new DbHelper(getApplicationContext());
+        mDb = db.getWritableDatabase();
+        Cursor cursor = null;
 
+        try {
+            mDb.delete(DbContract.DbEntryPrescription.TABLE_NAME, whereClause, whereArgs);
+        } catch (Exception e) {
+            Log.d("ViewMedicine", "Get Medicine Data method: Exception Raised with a value of " + e);
+        }finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        db.close();
+    }
     private ArrayList<Prescription> populatePrescriptionData() {
         ArrayList<Prescription> prescriptionList = new ArrayList<Prescription>();
         db =  new DbHelper(getApplicationContext());
@@ -98,7 +156,7 @@ public class ViewPrescription extends AppCompatActivity {
         Cursor cursor = null;
         try {
 
-             cursor = mDb.query(true,DbContract.DbEntryPrescription.TABLE_NAME, PRESCRIPTION_COLUMNS, null, null, null, null, null, null);
+            cursor = mDb.query(true,DbContract.DbEntryPrescription.TABLE_NAME, PRESCRIPTION_COLUMNS, null, null, null, null, null, null);
             int indexDisease = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_DISEASE);
             int indexPrescription = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME);
             Log.d("GetPrescriptionData","PrescriptionName Index " + indexPrescription);
@@ -146,14 +204,15 @@ public class ViewPrescription extends AppCompatActivity {
             if (convertView == null) {
                 convertView = getLayoutInflater().inflate(R.layout.prescription_item, container, false);
             }
-            CheckBox checkBoxPrescription = (CheckBox) convertView.findViewById(R.id.list_item_prescription_checkbox);
+            buttonDeletePres = (ImageButton) convertView.findViewById(R.id.list_item_prescription_button);
             TextView textViewPrescription = (TextView) convertView.findViewById(R.id.list_item_prescription_tv);
             TextView textViewDisease = (TextView) convertView.findViewById(R.id.list_item_disease_tv);
-            checkBoxPrescription.setVisibility(View.INVISIBLE);
+            buttonDeletePres.setVisibility(View.INVISIBLE);
             textViewPrescription.setText(viewPrescription.get(position).getPrescriptionName());
             Log.d("viewPrescription", "PrescriptionName: " + viewPrescription.get(position).getPrescriptionName());
             textViewDisease.setText(viewPrescription.get(position).getDisease());
             Log.d("viewPrescription", "Disease: " + viewPrescription.get(position).getDisease());
+
             return convertView;
         }
     }

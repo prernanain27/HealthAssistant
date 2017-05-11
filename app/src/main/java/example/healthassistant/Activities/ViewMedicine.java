@@ -35,7 +35,6 @@ public class ViewMedicine extends Activity {
     private SQLiteDatabase mDb;
     SQLiteOpenHelper db;
     List<Medicine> viewMedicines = new ArrayList<Medicine>();
-
     ViewPrescription viewPrescription;
 
     @Override
@@ -68,7 +67,6 @@ public class ViewMedicine extends Activity {
         });
     }
 
-
     public  List<Medicine> getMedicineData(String prescriptionName, String disease) {
         Log.d("ViewMedicine","Entered Get Medicine Data Method");
         String whereClause = DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME + "=?  and " + DbContract.DbEntryPrescription.COLUMN_DISEASE + "=?";
@@ -78,7 +76,6 @@ public class ViewMedicine extends Activity {
         db =  new DbHelper(getApplicationContext());
         mDb = db.getWritableDatabase();
         Cursor cursor = null;
-
         try {
             cursor = mDb.query(DbContract.DbEntryPrescription.TABLE_NAME, viewPrescription.ALL_COLUMNS, whereClause, whereArgs, null, null, null);
             int indexMedName = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_MED_NAME);
@@ -110,7 +107,6 @@ public class ViewMedicine extends Activity {
                     times.add(cursor.getString(indexMedTime_AD));
                     med.setMedTime(times);
                     viewMedicines.add(med);
-
                     Log.d("GetMedicineData"," Inside Cursor Loop MedicineName Index: " + cursor.getString(indexMedName));
                 }
             }
@@ -119,41 +115,13 @@ public class ViewMedicine extends Activity {
         } finally {
             if (cursor != null) {
                 cursor.close();
+
             }
         }
         db.close();
         return viewMedicines;
     }
 
-   /* private String getDisease(String prescriptionName) {
-        String diseaseName = "";
-        String whereClause = DbContract.DbEntryPrescription.COLUMN_PRESCRIPTION_NAME + "=?";
-        String[] whereArgs = {prescriptionName};
-        mContext = getApplicationContext();
-        db =  new DbHelper(getApplicationContext());
-        mDb = db.getWritableDatabase();
-        Cursor cursor = null;
-        try {
-
-            cursor = mDb.query(DbContract.DbEntryPrescription.TABLE_NAME, viewPrescription.ALL_COLUMNS, whereClause, whereArgs, null, null, null);
-            int indexDisease = cursor.getColumnIndex(DbContract.DbEntryPrescription.COLUMN_DISEASE);
-            Log.d("getDisease","Disease Name Index " + indexDisease);
-            if (cursor.getCount() > 0) {
-                while (cursor.moveToNext()) {
-                    diseaseName = cursor.getString(indexDisease);
-                    Log.d("getDisease", diseaseName);
-                }
-            }
-        } catch (Exception e) {
-            Log.d("Populate List View", " exception details: " + e);
-        } finally {
-
-            db.close();
-
-        }
-        return diseaseName;
-    }
-*/
     private class MedicineAdapter extends BaseAdapter {
         @Override
         public int getCount() {
@@ -177,8 +145,6 @@ public class ViewMedicine extends Activity {
             }
 
             String[] medTime = viewMedicines.get(position).getMedTime().toArray(new String[0]);
-            /*((TextView) convertView.findViewById(R.id.list_item_med_tv))
-                    .setText(getItem(position));*/
 
             TextView tv = (TextView) convertView.findViewById(R.id.list_item_med_tv) ;
             TextView tv1 = (TextView) convertView.findViewById(R.id.list_item_med_tv_heading) ;
