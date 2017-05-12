@@ -150,8 +150,8 @@ public class ViewMedicine extends AppCompatActivity {
             TextView tv = (TextView) convertView.findViewById(R.id.list_item_med_tv) ;
             TextView tv1 = (TextView) convertView.findViewById(R.id.list_item_med_tv_heading) ;
 
-            tv1.setText("Medicine Name:" + "\n" + "Medicine Time:" + "\n" +
-                    "Medicine Dose:" + "\n" + "Medicine Type:");
+            tv1.setText("Name:" + "\n" + "Time:" + "\n" +
+                    "Dose:" + "\n" + "Type:");
             tv.setText(viewMedicines.get(position).getMedName() + "\n" + getMedTimeString(medTime) + "\n" +
                     viewMedicines.get(position).getMedDose() + "\n" + viewMedicines.get(position).getMedType());
             return convertView;

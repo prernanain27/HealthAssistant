@@ -239,7 +239,9 @@ public class ViewScheduleActivity extends AppCompatActivity {
 
             }*/
 
-            tv.setText(schedule.get(position).getScheduleTime());
+
+          String temp =  get12HourTime(schedule.get(position).getScheduleTime().substring(0,5));
+            tv.setText(temp);
 
            /* for (String s : schedule.get(position).getMedName().split("_")) {
                 //medicine = medicine + s + "\n";
@@ -262,6 +264,30 @@ public class ViewScheduleActivity extends AppCompatActivity {
             tv1.setText(schedule.get(position).getMedName());
             tv2.setText(schedule.get(position).getDose());
             return convertView;
+        }
+
+        private String get12HourTime(String input) {
+            String resultTime = "";
+
+            String closingTime = "2101";
+            //getInstance() will return the current millis, so changes will be made relative to the current day and time
+            Calendar time = Calendar.getInstance();
+            // Calendar.HOUR_OF_DAY is in 24-hour format
+            time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(input.substring(0, 2)));
+
+            // time.get(Calendar.MINUTE) returns the exact minute integer e.g for 10:04 will show 10:4
+            // For display purposes only We could just return the last two substring or format Calender.MINUTE as shown below
+            time.set(Calendar.MINUTE, Integer.parseInt(input.substring(3, 5)));
+            String minute = String.format("%02d", time.get(Calendar.MINUTE));
+
+            // time.get(Calendar.AM_PM) returns integer 0 or 1 so let's set the right String value
+            int amOrPm = time.get(Calendar.AM_PM);
+
+            String AM_PM = amOrPm == 0 ? "AM" : "PM";
+
+            resultTime = time.get(Calendar.HOUR)+":"+minute+" "+ AM_PM;
+            return resultTime;
+
         }
     }
 
