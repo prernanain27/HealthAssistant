@@ -8,7 +8,7 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
@@ -69,9 +69,13 @@
         <service
             android:name=".NotificationService1"
             android:exported="false" />
+        <service
+            android:name=".Daily_ScheduleNotification"
+            android:exported="false" />
 
-        <activity android:name=".Dialog_Appointment"
-            android:theme="@android:style/Theme.Dialog"/>
+        <activity
+            android:name=".Dialog_Appointment"
+            android:theme="@android:style/Theme.Dialog" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -112,7 +116,8 @@
             android:enabled="true"
             android:exported="true" />
 
-
+        <activity android:name=".Dialog_daily_medicine"
+            android:theme="@android:style/Theme.Dialog" ></activity>
     </application>
 
 </manifest>

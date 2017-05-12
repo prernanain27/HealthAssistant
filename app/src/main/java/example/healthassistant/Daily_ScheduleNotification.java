@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import example.healthassistant.Activities.Appointment_Scheduler;
+import example.healthassistant.Models.Med_Scedule;
 import example.healthassistant.Models.Med_Specification;
 import example.healthassistant.Models.Medicine;
 
@@ -97,14 +98,14 @@ public class Daily_ScheduleNotification extends IntentService {
 
 
         //1) access schedule table and populate list of med_schedule list
-        Cursor cursor = getAllRows(DbContract.DbEntryMed_Schedule.TABLE_NAME, Med_Specification.ALL_COLUMNS_MEDSPEC);
+        Cursor cursor = getAllRows(DbContract.DbEntryMed_Schedule.TABLE_NAME, Med_Scedule.ALL_COLUMNS);
         if(cursor.getCount()>0)
         {
-            do {
+            while (cursor.moveToNext()) {
                 text = text + cursor.getString(1).toString() + "\t" + cursor.getString(3).toString() + "\n";
 
                 updateLapsedForMedicine(cursor.getString(0).toString(), cursor.getString(1).toString(), cursor.getString(2).toString());
-            }while (cursor.moveToNext());
+            }
         }
         //2) update date lapsed field for all medicines
         Resources res = this.getResources();
@@ -118,7 +119,7 @@ public class Daily_ScheduleNotification extends IntentService {
                 .setAutoCancel(true)
                 .setPriority(8)
                 .setSound(soundUri)
-                .setContentTitle("DOCTOR's APPOINTMENT:")
+                .setContentTitle("Take the Medicines:")
                 .setContentText(text).build();
         notification.flags |= Notification.FLAG_AUTO_CANCEL | Notification.FLAG_SHOW_LIGHTS;
         notification.defaults |= Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE;
@@ -128,7 +129,8 @@ public class Daily_ScheduleNotification extends IntentService {
         notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, notification);
         Log.i("notif","Notifications sent.");
-        Intent i = new Intent(getBaseContext(),Dialog_Appointment.class);
+        Intent i = new Intent(getBaseContext(),Dialog_daily_medicine.class);
+        i.putExtra("data",text);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getApplication().startActivity(i);
     }

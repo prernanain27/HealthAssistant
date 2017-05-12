@@ -69,7 +69,6 @@ public class ViewScheduleActivity extends AppCompatActivity {
     public ListView lv;
     List<String> names;
     List<MedScheduleItem> schedule = new ArrayList<MedScheduleItem>();
-
     alarm[] a = new alarm[20];
 //In On Create..........
 
@@ -99,13 +98,13 @@ public class ViewScheduleActivity extends AppCompatActivity {
 
         schedule = prepareSchedule();
         lv = (ListView) findViewById(R.id.listView);
-        //schedule = finalScheduleModel.getSchedule();
+     //   schedule = finalScheduleModel.getSchedule();
 
 
 
         lv.setAdapter(new CustomAdapter());
         lv.setBackgroundColor(Color.parseColor("#c60505"));
-        //ring();
+        ring();
 
     }
 
@@ -338,7 +337,6 @@ public class ViewScheduleActivity extends AppCompatActivity {
             }
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmStartTime.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
             Log.d("Alarm", "Alarms set for everyday" + Integer.toString(hour) + Integer.toString(minutes));
-
         }
 
            }
@@ -732,7 +730,6 @@ public class ViewScheduleActivity extends AppCompatActivity {
             db.close();
             return cursor;
         }
-
         private void createJobModel() {
             Log.d(TAG, "CreateJobModel method entered");
             String whereClause = DbContract.DbEntryMed.COLUMN_ID + "=?";
@@ -745,4 +742,5 @@ public class ViewScheduleActivity extends AppCompatActivity {
 
         }
     }
+
 
