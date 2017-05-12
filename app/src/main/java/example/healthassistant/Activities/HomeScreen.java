@@ -126,13 +126,12 @@ public class HomeScreen extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_uninstall) {
-            Uri packageURI = Uri.parse("example.healthassistant.Activities");
+            Uri packageURI = Uri.parse("package:example.healthassistant");
             Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);
             startActivity(uninstallIntent);
             return true;
         }
         if (id == R.id.action_signout) {
-            Uri packageURI = Uri.parse("example.healthassistant.Activities");
             Intent signoutIntent = new Intent(getApplicationContext(),LoginActivity.class);
             startActivity(signoutIntent);
             return true;
